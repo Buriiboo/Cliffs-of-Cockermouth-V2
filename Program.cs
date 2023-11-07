@@ -4,6 +4,7 @@ class Program
     static void Main(string[] args)
     {
         int[,] grid = new int[3, 3];
+        bool[,] visited = new bool[3, 3];
         int playerRow = 1;
         int playerColumn = 1;
         bool isRunning = true;
@@ -13,7 +14,11 @@ class Program
         while (isRunning)
         {
             Console.Clear();
-            PrintGrid(grid, playerRow, playerColumn);
+            PrintGrid(grid, playerRow, playerColumn, visited);
+            if (!visited[playerRow, playerColumn]){
+            
+            visited[playerRow, playerColumn] = true;
+            }
 
             // Display available moves based on the player's current position
             Console.WriteLine("Available Doors:");
@@ -38,7 +43,7 @@ class Program
         }
     }
 
-    static void PrintGrid(int[,] grid, int playerRow, int playerColumn)
+    static void PrintGrid(int[,] grid, int playerRow, int playerColumn, bool[,] visited)
     {
         for (int i = 0; i < grid.GetLength(0); i++)
         {
@@ -47,16 +52,17 @@ class Program
                 if (i == playerRow && j == playerColumn){
                     Console.Write(" P "); // P represents the player
                 }
+                else if(!visited[i, j]){
+                    Console.Write(" . ");
+                }
                 else
                 {
-                    Console.Write(" . ");
+                    Console.Write(" - ");
                 }
             }
             Console.WriteLine();
         }
     }
-
-
 
     static void MovePlayer(ref int playerRow, ref int playerColumn, string command)
     {
@@ -77,9 +83,8 @@ class Program
             default:
                 Console.WriteLine("Invalid command.");
                 break;
-        }
+        }   
     }
-
 }
 
 //Caves
