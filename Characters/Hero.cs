@@ -14,7 +14,7 @@ class Hero : Character
     }
     public double Engage(Character enemy, Hero playerCharacter)
     {
-        return 
+        return
     }
     public void Dialog()
     {

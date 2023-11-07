@@ -1,13 +1,31 @@
 namespace Game{
-    class Minion : Character
+    public class Minions : Character
     {
-        public Minion(string name, double damage, double hp, int armor, int affinity) : base(name, damage, hp, armor, affinity)
+        public Minions(string name, int hp, double damage, int armor, int affinity)
+            : base(name, hp, damage, armor, affinity)
         {
+            // Any additional initializations specific to Minions can be done here
+        }
 
-        }
-        public void Engage()
+    }
+
+    public class Murlock : Minions
+    {
+        public Murlock(string name, int hp, double damage, int armor, int affinity)
+            : base(name, hp, damage, armor, affinity)
         {
-            //engage metod för minions
+            // Any additional initializations specific to Minions can be done here
         }
+
+    }
+
+    public class Undead : Minions
+    {
+        public Undead(string name, int hp, double damage, int armor, int affinity)
+            : base(name, hp, damage, armor, affinity)
+        {
+            // Any additional initializations specific to Minions can be done here
+        }
+
     }
 }
