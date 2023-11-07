@@ -1,6 +1,8 @@
+using System.Runtime.CompilerServices;
+
 class NPC : Character
 {
-    public NPC(double damage, double hp, int armor, int affinity) : base(damage, hp, armor, affinity)
+    public NPC(string name, double damage, double hp, int armor, int affinity) : base(name, damage, hp, armor, affinity)
     {
 
     }
