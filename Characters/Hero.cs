@@ -1,3 +1,4 @@
+
 class Hero : Character
 {
     public double Experience {get; set;}
@@ -8,9 +9,9 @@ class Hero : Character
         Experience = experience;
         Level = level;
     }
-    public void Engage()
+    public double Engage(Character enemy, Hero playerCharacter)
     {
-
+        return 
     }
     public void Dialog()
     {

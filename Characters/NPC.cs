@@ -6,6 +6,6 @@ class NPC : Character
     }
     public void Dialog()
     {
-
+        //npc dialog metod
     }
 }

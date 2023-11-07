@@ -1,3 +1,4 @@
+
 abstract class Character
 {
     public double Damage {get; set;}
