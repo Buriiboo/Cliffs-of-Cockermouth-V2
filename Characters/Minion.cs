@@ -1,11 +1,13 @@
-class Minion : Character
-{
-    public Minion(double damage, double hp, int armor, int affinity) : base(damage, hp, armor, affinity)
+namespace Game{
+    class Minion : Character
     {
+        public Minion(string name, double damage, double hp, int armor, int affinity) : base(name, damage, hp, armor, affinity)
+        {
 
-    }
-    public void Engage()
-    {
-
+        }
+        public void Engage()
+        {
+            //engage metod för minions
+        }
     }
 }
