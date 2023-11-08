@@ -7,8 +7,6 @@ using System.Xml.Xsl;
 >>>>>>> milton
 class Program
 {
-    
-
     static void Main(string[] args)
     {
         int[,] grid = new int[3, 3];

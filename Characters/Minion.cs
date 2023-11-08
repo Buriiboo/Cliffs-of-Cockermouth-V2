@@ -1,3 +1,4 @@
+
 namespace Game{
     public class Minions : Character
     {
@@ -18,6 +19,18 @@ namespace Game{
             // Any additional initializations specific to Minions can be done here
         }
 
+    }
+    public class MurlockBruiser : Murlock
+    {
+          public int BonusHealth { get; private set; }
+  
+          public MurlockBruiser(string name, int hp, double damage, int armor, int affinity)
+            : base(name, hp, damage, armor, affinity)
+        {
+
+        }
+
+        // MurlockBruiser-specific initialization, if any
     }
 
     public class Undead : Minions
