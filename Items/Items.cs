@@ -10,18 +10,13 @@ namespace Game{
             Name = name;
             Description = description;
         }
-        
-        public void UseItem(Hero hero, Character enemy, Item item)
-        {
-            
-        }
     }
     class Gear : Item
     {
         public string GearSlot {get; set;}
         public double Protection {get; set;}
         public bool HaveItem {get; set;}
-        public Gear(string name, string description, bool haveItem, string gearSlot, double protection) :base(name, description, haveItem)
+        public Gear(string name, string description, bool haveItem, string gearSlot, double protection) :base(name, description)
         {
             GearSlot = gearSlot;
             Protection = protection;
@@ -50,9 +45,23 @@ namespace Game{
         {
             Amount = amount;
         }
+        public void UseConsumable(Hero hero, Consumable consumable)
+        {
+            //använd men hur den används beror på om det är något som ger damage ller healtch etc
+            hero.RemoveInventory(consumable);
+        }
     }
     class Quest : Item
     {
-        
+        public bool HaveItem {get; set;}
+        public Quest(string name, string description, bool haveItem) :base(name, description)
+        {
+            HaveItem = haveItem;
+        }
+        public void UseQuest(Hero hero, Quest quest)
+        {
+            hero.RemoveInventory(quest);
+            //behöver visas också utan console
+        }
     }
 }

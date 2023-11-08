@@ -3,8 +3,6 @@ using System.Xml.Xsl;
 
 class Program
 {
-    
-
     static void Main(string[] args)
     {
         int[,] grid = new int[3, 3];
