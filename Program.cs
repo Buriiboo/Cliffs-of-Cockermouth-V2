@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-﻿﻿
-=======
-﻿using System.Security.Cryptography.X509Certificates;
+﻿﻿using System.Security.Cryptography.X509Certificates;
 using System.Xml.Xsl;
 
->>>>>>> milton
 class Program
 {
     static void Main(string[] args)
