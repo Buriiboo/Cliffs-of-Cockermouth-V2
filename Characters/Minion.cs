@@ -1,7 +1,7 @@
 namespace Game{
     public class Minions : Character
     {
-        public Minions(string name, int hp, double damage, int armor, int affinity)
+        public Minions(string name, double hp, double damage, int armor, int affinity)
             : base(name, hp, damage, armor, affinity)
         {
             // Any additional initializations specific to Minions can be done here
@@ -12,7 +12,7 @@ namespace Game{
 
     public class Murlock : Minions
     {
-        public Murlock(string name, int hp, double damage, int armor, int affinity)
+        public Murlock(string name, double hp, double damage, int armor, int affinity)
             : base(name, hp, damage, armor, affinity)
         {
             // Any additional initializations specific to Minions can be done here
@@ -22,7 +22,7 @@ namespace Game{
 
     public class Undead : Minions
     {
-        public Undead(string name, int hp, double damage, int armor, int affinity)
+        public Undead(string name, double hp, double damage, int armor, int affinity)
             : base(name, hp, damage, armor, affinity)
         {
             // Any additional initializations specific to Minions can be done here
@@ -31,18 +31,20 @@ namespace Game{
     }
     public class DefaultCharacters
     {
-    public static List<Character> GetDefaultCharacters()
+        public static List<Character> GetDefaultCharacters()
         {
             return new List<Character>
             {
-                new Hero("PlayerCharacter", 100, 15.0, 10, 1),
-
-                new Undead("SkeletonWarrior", 30, 12.0, 10, 1),
-                new Undead("SkeletonShieldWarrior", 45, 10.5, 10, 1),
-
-                new Murlock("MurlockWorker", 25, 15.0, 10, 1),
-                new Murlock("MurlockWarrior", 50, 15.0, 10, 1),
-
+            new Hero("Hero", 100, 15.0, 10, 1, 15, 50),
+            
+            new Undead("Undead", 30, 12.0, 10, 1),
+            new Undead("Undead", 45, 10.5, 10, 1),
+            
+            new Murlock("Murlock", 25, 15.0, 10, 1),
+            new Murlock("Murlock", 50, 15.0, 10, 1),
+            Murlock.CreateBruiser(),
+            //Så Kolla hur lite kod och hur lätt som helst
+            
             };
         }
     }
