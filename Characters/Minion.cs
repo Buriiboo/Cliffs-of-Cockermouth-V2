@@ -1,10 +1,12 @@
-namespace Game{
-    public class Minions : Character
+using CharacterBase;
+
+namespace MinionCreatorBase;
+{
+    class Minions : Character
     {
-        public Minions(string name, double hp, double damage, int armor, int affinity)
-            : base(name, hp, damage, armor, affinity)
+        public Minions(string name, double damage, double hp, int armor, int affinity) : base(name, damage, hp, armor, affinity)
         {
-            // Any additional initializations specific to Minions can be done here
+            abilityList = new List<Abilities>();
         }
 
     }
@@ -48,4 +50,5 @@ namespace Game{
             };
         }
     }
+   
 }
