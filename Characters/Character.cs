@@ -1,5 +1,5 @@
 
-abstract class Character
+public abstract class Character
 {
     public string Name {get; set;}
     public double Damage {get; set;}
