@@ -1,40 +1,45 @@
 
 using System.Configuration.Assemblies;
-using Game;
+using CharacterBase;
+using HeroCreatorBase;
+namespace HeroCreatorBase;
 
+using System.Security.Cryptography.X509Certificates;
+using Game;
 class Hero : Character
 {
     public double Experience {get; set;}
     public int Level {get; set;}
-    public List<Ability> inventory;
-    public Hero(string name, double hp, double damage, double experience, int level, int armor, int affinity) : base(name, damage, hp, armor, affinity)
+    public List<Item> inventory;
+    public Hero(string name, double hp, double damage, double experience, int level, int armor, int affinity) 
+        : base(name, damage, hp, armor, affinity)
     {
         Experience = experience;
         Level = level;
-        inventory = new List<Ability>();
+        inventory = new List<Item>();
     }
-    public double Engage(Undead enemy, Hero playerCharacter)
+    public double Engage(Character enemy, Hero playerCharacter)
     {
-        return enemy -= playerCharacter.Damage;
+        return enemy.HP -= playerCharacter.Damage;
     }
     public void Dialog()
     {
 
     }
-    public List<Ability> Inventory()
+    public List<Item> Inventory()
     {
         return inventory;
     }
-     public void AddInventory(Ability ability)
+    public void AddInventory(Item item)
     {
-        inventory.Add(ability);
+        inventory.Add(item);
     }
-    public void RemoveInventory(Ability ability)
+    public void RemoveInventory(Item item)
     {
-        inventory.Remove(ability);
+        inventory.Remove(item);
     }
     public void Map()
     {
-
+    
     }
 }

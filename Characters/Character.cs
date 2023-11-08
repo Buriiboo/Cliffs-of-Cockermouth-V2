@@ -1,3 +1,7 @@
+using Game;
+
+namespace CharacterBase;
+
 
 public abstract class Character
 {
@@ -6,7 +10,8 @@ public abstract class Character
     public double HP {get; set;}
     public int Armor {get; set;}
     public int Affinity {get; set;}
-    public List<Abilities> abilityList;
+    public List<Item> itemList;
+    
     public Character(string name, double damage, double hp, int armor, int affinity)
     {
         Name = name;
@@ -14,7 +19,7 @@ public abstract class Character
         HP = hp;
         Armor = armor;
         Affinity = affinity;
-        abilityList = new List<Abilities>();
+        itemList = new List<Item>();
     }
 }
 
