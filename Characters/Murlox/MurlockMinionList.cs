@@ -1,26 +1,29 @@
 using System;
-using Game;
-
-class Murlock : Minion
+using CharacterBase;
+using MinionCreatorBase;
+namespace MurlockCreator
 {
-    public Murlock(string name, int hp, double damage, int armor, int affinity)
-        : base(name, damage, hp, armor, affinity)
+    public class Murlock : Minion
     {
-
-    }
-}
-
-public class MurlockList
-{
-    public List<Murlock> Murlocks { get; }
-
-    public MurlockList()
-    {
-        Murlocks = new List<Murlock>
+        public Murlock(string name, int hp, double damage, int armor, int affinity)
+            : base(name, damage, hp, armor, affinity)
         {
-            new Murlock("Murlock1", 100, 20, 5, 1),
-            new Murlock("Murlock2", 80, 15, 4, 2),
-            // Add more Murlock instances as needed
-        };
+
+        }
+    }
+
+    public class MurlockList
+    {
+        public List<Murlock> Murlock { get; }
+
+        public MurlockList()
+        {
+            Murlock = new List<Murlock>
+            {
+                new Murlock("Murlock1", 100, 20, 5, 1),
+                new Murlock("Murlock2", 80, 15, 4, 2),
+                
+            };
+        }
     }
 }

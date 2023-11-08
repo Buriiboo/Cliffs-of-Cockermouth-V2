@@ -1,3 +1,4 @@
+namespace CharacterBase;
 
 abstract class Character
 {
