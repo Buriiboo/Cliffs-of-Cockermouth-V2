@@ -1,6 +1,6 @@
 using CharacterBase;
 using Game;
-
+using HeroCreatorBase;
 
 namespace MinionCreatorBase;
 
@@ -58,7 +58,7 @@ public class DefaultCharacters
         
         new Murlock("Murlock", 25, 15.0, 10, 1),
         new Murlock("Murlock", 50, 15.0, 10, 1),
-        Murlock.CreateBruiser(),
+        //Murlock.CreateBruiser(),
         //Så Kolla hur lite kod och hur lätt som helst
         
         };

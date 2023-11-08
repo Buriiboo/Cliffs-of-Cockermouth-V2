@@ -1,7 +1,5 @@
 using Game;
-
 namespace CharacterBase;
-
 
 public abstract class Character
 {
@@ -22,8 +20,3 @@ public abstract class Character
         itemList = new List<Item>();
     }
 }
-
-
-
-
-

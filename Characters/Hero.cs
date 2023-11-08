@@ -1,12 +1,11 @@
 
 using System.Configuration.Assemblies;
 using CharacterBase;
-using HeroCreatorBase;
-namespace HeroCreatorBase;
-
 using System.Security.Cryptography.X509Certificates;
 using Game;
-class Hero : Character
+namespace HeroCreatorBase;
+
+public class Hero : Character
 {
     public double Experience {get; set;}
     public int Level {get; set;}
