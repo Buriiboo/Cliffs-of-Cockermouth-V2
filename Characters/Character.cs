@@ -1,4 +1,5 @@
-using Game;
+using GameLogic;
+using Items;
 
 namespace CharacterBase;
 

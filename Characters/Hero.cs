@@ -1,11 +1,12 @@
 
 using System.Configuration.Assemblies;
 using CharacterBase;
-using HeroCreatorBase;
+using System.Security.Cryptography.X509Certificates;
+using GameLogic;
+using Items;
+
 namespace HeroCreatorBase;
 
-using System.Security.Cryptography.X509Certificates;
-using Game;
 public class Hero : Character
 {
     public double Experience {get; set;}
@@ -22,7 +23,7 @@ public class Hero : Character
     {
         return enemy.HP -= playerCharacter.Damage;
     }
-    public void Dialog()
+    public void Dialogue()
     {
 
     }

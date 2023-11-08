@@ -1,7 +1,7 @@
 
 using System.Reflection.Metadata.Ecma335;
 using HeroCreatorBase;
-namespace Game;
+namespace Items;
     public abstract class Item
     {
         public string Name {get; set;}
