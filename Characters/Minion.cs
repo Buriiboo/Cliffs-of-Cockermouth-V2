@@ -4,17 +4,22 @@ using HeroCreatorBase;
 
 namespace MinionCreatorBase;
 
-public class Minions : Character
+public class Minion : Character
 {
-    public Minions(string name, double damage, double hp, int armor, int affinity) : base(name, damage, hp, armor, affinity)
+    public Minion(string name, double damage, double hp, int armor, int affinity) : base(name, damage, hp, armor, affinity)
     {
         itemList = new List<Item>();
     }
-
+    public Hero Attack(Hero hero, Minion minion)
+    {
+        hero.HP -= minion.Damage;
+        return hero;
+    }
+    
 }
 
 
-public class Murlock : Minions
+public class Murlock : Minion
 {
     public Murlock(string name, double hp, double damage, int armor, int affinity)
         : base(name, hp, damage, armor, affinity)
@@ -36,7 +41,7 @@ public class MurlockBruiser : Murlock
     // MurlockBruiser-specific initialization, if any
 }
 
-public class Undead : Minions
+public class Undead : Minion
 {
     public Undead(string name, double hp, double damage, int armor, int affinity)
         : base(name, hp, damage, armor, affinity)

@@ -59,7 +59,7 @@ namespace Game;
         {
             HaveItem = haveItem;
         }
-        public void UseQuest(Hero hero, Quest quest)
+        public void UseQuest(Hero hero, Quest quest) // behövs bool? man kan bara ta ur det från hero inventory när man har använt de
         {
             hero.RemoveInventory(quest);
             //behöver visas också utan console

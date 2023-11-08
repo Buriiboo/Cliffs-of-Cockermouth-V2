@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 using System.Xml.Xsl;
 using CharacterBase;
+using HeroCreatorBase;
 using MinionCreatorBase;
 
 namespace Main
@@ -42,6 +43,7 @@ namespace Main
                 }
             }
         }
+        
 
         static void PrintGrid(int[,] grid, int playerRow, int playerColumn, bool[,] visitedRooms)
         {
@@ -114,6 +116,7 @@ namespace Main
             }
         }
     }
+    
 
     //Caves
     //S B M

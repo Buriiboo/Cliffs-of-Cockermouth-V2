@@ -3,6 +3,7 @@ using System.Configuration.Assemblies;
 using CharacterBase;
 using System.Security.Cryptography.X509Certificates;
 using Game;
+using MinionCreatorBase;
 namespace HeroCreatorBase;
 
 public class Hero : Character
@@ -25,6 +26,7 @@ public class Hero : Character
     {
 
     }
+    
     public List<Item> Inventory()
     {
         return inventory;
