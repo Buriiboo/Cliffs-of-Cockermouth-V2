@@ -1,10 +1,13 @@
 namespace AbilityBase
 {
-    public class Abilities
+    abstract class Abilities
     {
-        name
-        damage
-        //mana?
-        effect
+        string Name {get; set;}
+        string Description {get; set;}
+        string Damage {get; set;}
+        string Effect {get; set;}
+        
+       
+        
     }
 }
