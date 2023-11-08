@@ -17,9 +17,9 @@ public class Hero : Character
         Level = level;
         inventory = new List<Item>();
     }
-    public double Engage(Character enemy, Hero playerCharacter)
+    public double Engage(Character enemy, Hero hero)
     {
-        return enemy.HP -= playerCharacter.Damage;
+        return enemy.HP -= hero.Damage;
     }
     public void Dialog()
     {

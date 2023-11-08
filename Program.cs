@@ -7,8 +7,6 @@ namespace Main
 {
     class Program
     {
-        
-
         static void Main(string[] args)
         {
             int[,] grid = new int[3, 3];
@@ -77,7 +75,7 @@ namespace Main
                     }
                     else
                     {
-                        Console.Write(" . ");
+                        Console.Write(" - ");
                     }
                 }
                 Console.WriteLine();
@@ -115,7 +113,6 @@ namespace Main
                 playerColumn = newColumn;
             }
         }
-
     }
 
     //Caves
