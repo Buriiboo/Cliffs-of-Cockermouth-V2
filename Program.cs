@@ -1,10 +1,10 @@
-<<<<<<< HEAD
-﻿﻿
-=======
-﻿using System.Security.Cryptography.X509Certificates;
+﻿﻿﻿using System.Security.Cryptography.X509Certificates;
 using System.Xml.Xsl;
 
->>>>>>> milton
+namespace Main;
+{
+
+
 class Program
 {
     
@@ -16,6 +16,40 @@ class Program
         int playerRow = 2;
         int playerColumn = 1;
         bool isRunning = true;
+
+
+        bool runMain = true;
+        while (runMain)
+        {
+
+            Console.WriteLine("|| ===================== ||");
+            Console.WriteLine("|| CLIFFS OF COCKERMOUTH ||");
+            Console.WriteLine("|| ======================||");
+            Console.WriteLine("|| 1) New game           ||");
+            Console.WriteLine("|| 2) Load game          ||");     
+            Console.WriteLine("|| 3) ?????????          ||");
+            Console.WriteLine("|| 4) Exit               || ");
+            Console.WriteLine("|| ===================== ||");
+            string choice = Console.ReadLine();
+            
+            switch(choice)
+            {
+                case "1":
+                    //character creator -> name, class, 
+                    game.Start();
+                    
+                    break;
+                case "2":
+                    
+                    break;
+                case "3":
+                    //????
+                                   
+                    break;
+                case "4":
+                    return;
+            }
+        }
 
         while (isRunning)
         {
@@ -211,3 +245,14 @@ IndexPlats[2][2]
 3. Environmenten populerar med olika typers encounters och visuellt visar det på kartan?
 
 */
+
+public class CharacterCreator
+{
+
+}
+
+public class Battle(Hero hero Minions minion)
+        
+        {   
+        }
+}
