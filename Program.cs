@@ -1,4 +1,5 @@
-﻿﻿﻿using System.Security.Cryptography.X509Certificates;
+﻿﻿using System.Runtime.InteropServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Xml.Xsl;
 using CharacterBase;
 using MinionCreatorBase;
@@ -6,305 +7,153 @@ using MinionCreatorBase;
 namespace Main;
 {
 
-
-class Program
-{
     class Program
     {
+         static void Main(string[] args)
+         {
         
 
 
-        bool runMain = true;
-        while (runMain)
-        {
-
-            Console.WriteLine("|| ===================== ||");
-            Console.WriteLine("|| CLIFFS OF COCKERMOUTH ||");
-            Console.WriteLine("|| ======================||");
-            Console.WriteLine("|| 1) New game           ||");
-            Console.WriteLine("|| 2) Load game          ||");     
-            Console.WriteLine("|| 3) ?????????          ||");
-            Console.WriteLine("|| 4) Exit               || ");
-            Console.WriteLine("|| ===================== ||");
-            string choice = Console.ReadLine();
-            
-            switch(choice)
+            bool runMain = true;
+            while (runMain)
             {
-                case "1":
-                    //character creator -> name, class, 
-                    game.Start();
-                    
-                    break;
-                case "2":
-                    
-                    break;
-                case "3":
-                    //????
-                                   
-                    break;
-                case "4":
-                    return;
-            }
-        }
 
-        while (isRunning)
-        {
-            int[,] grid = new int[3, 3];
-            bool[,] visitedRooms = new bool[3, 3]; // This array keeps track of visited rooms
-            int playerRow = 2;
-            int playerColumn = 1;
-            bool isRunning = true;
-
-            while (isRunning)
-            {
-                Console.Clear();
-                PrintGrid(grid, playerRow, playerColumn,visitedRooms);
-
-                // Display available moves based on the player's current position
-                Console.WriteLine("Available Doors:");
-                if (playerRow > 0) Console.Write("(Up)".PadRight(4));
-                if (playerRow < grid.GetLength(0) - 1) Console.Write("(down)".PadRight(4));
-                if (playerColumn > 0) Console.Write("(left)".PadRight(4));
-                if (playerColumn < grid.GetLength(1) - 1) Console.Write("(right)".PadRight(4));
-                Console.WriteLine("");
-                Console.WriteLine("Enter 'exit' to quit.");
-                Console.Write("Move: ");
-
-                string command = Console.ReadLine();
-
-                if (command.ToLower() == "exit")
+                Console.WriteLine("|| ===================== ||");
+                Console.WriteLine("|| CLIFFS OF COCKERMOUTH ||");
+                Console.WriteLine("|| ======================||");
+                Console.WriteLine("|| 1) New game           ||");
+                Console.WriteLine("|| 2) Load game          ||");     
+                Console.WriteLine("|| 3) ?????????          ||");
+                Console.WriteLine("|| 4) Exit               || ");
+                Console.WriteLine("|| ===================== ||");
+                string choice = Console.ReadLine();
+                
+                switch(choice)
                 {
-                    isRunning = false;
-                }
-                else
-                {
-                    MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms,grid);
+                    case "1":
+                        //character creator -> name, class, 
+                        Game.Start();
+                        
+                        break;
+                    case "2":
+                        
+                        break;
+                    case "3":
+                        //????
+                                    
+                        break;
+                    case "4":
+                        return;
                 }
             }
-        }
-
-        static void PrintGrid(int[,] grid, int playerRow, int playerColumn, bool[,] visitedRooms)
-        {
-            for (int i = 0; i < grid.GetLength(0); i++)
-            {
-                for (int j = 0; j < grid.GetLength(1); j++)
-                {
-                    if (i == playerRow && j == playerColumn){
-                        Console.Write(" P ");               // P represents the player
-                    }
-                    else if (i == 0 && j == 1)
-                    {
-                        Console.Write(" B ");               // B represents Boss
-                    }
-                    else if(i == 0 && j == 0 && !visitedRooms[i, j])
-                    {
-                        System.Console.Write(" S ");        //S represents Secret
-                    }
-                    else if (i == 0 && j == 2 && !visitedRooms[i, j])
-                    {
-                        System.Console.Write(" R ");        //R represents Roaming
-        
-                    }
-                    else if (i == 2 && j == 2)
-                    {
-                        System.Console.Write(" M ");        //M represents Merchant
-                    }
-                    else if(!visitedRooms[i, j])
-                    {
-                        Console.Write(" . ");
-                    }
-                    else
-                    {
-                        Console.Write(" . ");
-                    }
-                }
-                Console.WriteLine();
-            }
-        }
-
-
-        static void MovePlayer(ref int playerRow, ref int playerColumn, string command,bool[,] visitedRooms, int[,] grid)
-        {
-            int newRow = playerRow;
-            int newColumn = playerColumn;
-
-            switch (command.ToLower())
-            {
-                case "up":
-                    newRow -= 1;
-                    break;
-                case "down":
-                    newRow += 1;
-                    break;
-                case "left":
-                    newColumn -= 1;
-                    break;
-                case "right":
-                    newColumn += 1;
-                    break;
-                default:
-                    Console.WriteLine("Invalid command.");
-                    return; // Early return if the command is invalid
-            }
-            if (newRow >= 0 && newRow < grid.GetLength(0) && newColumn >= 0 && newColumn < grid.GetLength(1))
-            {
-                visitedRooms[playerRow, playerColumn] = true; // Mark the old room as visited
-                playerRow = newRow;
-                playerColumn = newColumn;
-            }
-        }
-
+      
+         }
     }
 
-    //Caves
-    //S B M
-    //R . .
-    //. . .
-
-    //Forest/Courtyard
-    // S . . B .
-    // . R . . .
-    // . . . M .
-    // P . . R .
-
-    //Castle
-    //. R R . M . B
-
-    /*
-                    //Visual Boss + Secret and Roaming
-
-                    else if(i == SecretRow && j == SecretRow || i == RoamingRow && j == RoamingRow)
-                    {
-                        Console.Write(" ? "); // P represents the player
-                    }
-                    else if (i == BossRow && j == BossRow)
-                    {
-                        Console.Write(" B "); // P represents the player
-                    }
+}
 
 
-                        static void PopulateGrid(int[,] grid, int playerRow, int playerColumn)
-        {
-            for (int i = 0; i < grid.GetLength(0); i++)
+
+
+
+
+
+
+
+
+
+
+
+        //Caves
+        //S B M
+        //R . .
+        //. . .
+
+        //Forest/Courtyard
+        // S . . B .
+        // . R . . .
+        // . . . M .
+        // P . . R .
+
+        //Castle
+        //. R R . M . B
+
+        /*
+                        //Visual Boss + Secret and Roaming
+
+                        else if(i == SecretRow && j == SecretRow || i == RoamingRow && j == RoamingRow)
+                        {
+                            Console.Write(" ? "); // P represents the player
+                        }
+                        else if (i == BossRow && j == BossRow)
+                        {
+                            Console.Write(" B "); // P represents the player
+                        }
+
+
+                            static void PopulateGrid(int[,] grid, int playerRow, int playerColumn)
             {
-                for (int j = 0; j < grid.GetLength(1); j++)
+                for (int i = 0; i < grid.GetLength(0); i++)
                 {
-                    if (i == playerRow && j == playerColumn)
+                    for (int j = 0; j < grid.GetLength(1); j++)
                     {
-                        break;
-                    }
-                    else if(i==1&&j==1)
-                    {
-                    //   GenerateEncounterBoss();
-                    }
-                    else if(Secret==false || MerchantGenerated == false || Roaming == false){
-                        if(Secret == false){
-                            GeneratedSecret();
-                            Secret==true;
-                        }
-                        else if (Merchant == false)
+                        if (i == playerRow && j == playerColumn)
                         {
-                            MerchantGenerated();
-                            Merchant == true;
+                            break;
                         }
-                        else if (Roaming == false)
+                        else if(i==1&&j==1)
                         {
-                            RoamingGenerated();
-                            Roaming == true;
+                        //   GenerateEncounterBoss();
                         }
+                        else if(Secret==false || MerchantGenerated == false || Roaming == false){
+                            if(Secret == false){
+                                GeneratedSecret();
+                                Secret==true;
+                            }
+                            else if (Merchant == false)
+                            {
+                                MerchantGenerated();
+                                Merchant == true;
+                            }
+                            else if (Roaming == false)
+                            {
+                                RoamingGenerated();
+                                Roaming == true;
+                            }
 
+                        }
+                        else
+                        {
+                            GenerateEncounter();
+                        }
                     }
-                    else
-                    {
-                        GenerateEncounter();
-                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
             }
-        }
 
-    Prototyp för rum + environment.
+        Prototyp för rum + environment.
 
-    Position = Index i 2D Array = [1][2] 
-    Open South door(down)
+        Position = Index i 2D Array = [1][2] 
+        Open South door(down)
 
-    Isthisempty==False;
-    Grid[1][2]=False;
+        Isthisempty==False;
+        Grid[1][2]=False;
 
 
-    IndexPlats[2][2]
-        if(Grid[1][2]==True)
-        {
-            Encounter();
-            Console.WriteLine("Something happens")
-            NextRoom();
-        }
-        else
+        IndexPlats[2][2]
+            if(Grid[1][2]==True)
             {
+                Encounter();
+                Console.WriteLine("Something happens")
                 NextRoom();
             }
-
-    1. Rum vi passerat räknas som Isthisempty==True;
-    2. Rum laddar en encounter framgångsrikt.
-    3. Environmenten populerar med olika typers encounters och visuellt visar det på kartan?
-
-*/
-
-public class CharacterCreator
-{
-
-}
-public void Battle()
-        {   
-           
-        
-            pickItem.PickItems(playerCharacter);
-            Console.Clear();
-            
-            Console.WriteLine($"{playerCharacter.Name}!!!");
-            
-            do
-            {
-                double attackMultiplier = 1;
-                randomMonster.Damage = monsterDamage;
-                
-                //här vill jag ha kod som gör att man kan välja att slå med item från playerinv eller slå med hand
-                Console.WriteLine("Vill du [1]:Attackera eller [2]Försvara dig?");
-                int choice = int.Parse(Console.ReadLine());
-                if(choice == 1){
-                    Console.WriteLine($"Vad vill du använda för att attackera med?");
-                    int nr = int.Parse(Console.ReadLine()) - 1;
-                    Console.WriteLine(action.Attack(randomMonster, playerCharacter, nr));
-                    playerCharacter.Damage = playerDamage;
-                }
-                else if(choice == 2){
-                    Console.WriteLine(action.Defence(randomMonster, playerCharacter, attackMultiplier));
-                }
-                
-                //Få välja om man vill attackera eller defence. Sedan så att defence kan ge parry och därmer 2x damage och tar 0.5x av damage
-
-                
-            }while (randomMonster.Health > 0 && playerCharacter.Health > 0);
-
-            if (playerCharacter.Health <= 0)
-            {
-                Console.WriteLine($"Game over! {randomMonster.Name} defeated {playerCharacter.Name}.");
-                Console.ReadLine();
-            }
-            else if (randomMonster.Health <= 0)
-            {
-                Console.WriteLine($"Congratulations! {playerCharacter.Name} defeated {randomMonster.Name}.");
-                playerCharacter.Experience += 150;
-                Console.WriteLine($"You gained {playerCharacter.Experience} exp!");
-
-                if (playerCharacter.Experience >= 100)
+            else
                 {
-                    playerCharacter.Level++;
-                    Console.WriteLine("Level up!!");
-                    Console.WriteLine($"{playerCharacter.Name}'s level increased to {playerCharacter.Level}");
+                    NextRoom();
                 }
 
-                Console.ReadLine();
-            }
-            
-        }
+        1. Rum vi passerat räknas som Isthisempty==True;
+        2. Rum laddar en encounter framgångsrikt.
+        3. Environmenten populerar med olika typers encounters och visuellt visar det på kartan?
+
+    */

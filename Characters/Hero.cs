@@ -6,7 +6,7 @@ namespace HeroCreatorBase;
 
 using System.Security.Cryptography.X509Certificates;
 using Game;
-class Hero : Character
+public class Hero : Character
 {
     public double Experience {get; set;}
     public int Level {get; set;}
