@@ -1,6 +1,7 @@
 
 using System.Reflection.Metadata.Ecma335;
-namespace Game{
+using HeroCreatorBase;
+namespace Game;
     public abstract class Item
     {
         public string Name {get; set;}
@@ -64,4 +65,4 @@ namespace Game{
             //behöver visas också utan console
         }
     }
-}
+
