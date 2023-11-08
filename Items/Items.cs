@@ -1,26 +1,16 @@
 
 using System.Reflection.Metadata.Ecma335;
 namespace Game{
-    class Item
+    public abstract class Item
     {
         public string Name {get; set;}
         public string Description {get; set;}
-        public Item(string name, string description, bool haveItem)
+        public Item(string name, string description)
         {
             Name = name;
             Description = description;
         }
-        public void ReciveItem(Item item, Hero hero)
-        {
-            hero.AddInventory(item);
-        }
-        public void ViewIems(Hero hero)
-        {
-            foreach(Item item in hero.inventory)
-            {
-                Console.WriteLine($"Name: {item.Name}\n Description: {item.Description}");
-            }
-        }
+        
         public void UseItem(Hero hero, Character enemy, Item item)
         {
             
@@ -52,5 +42,17 @@ namespace Game{
             HaveItem = false;
             hero.HP -= gear.Protection;
         }
+    }
+    class Consumable : Item
+    {
+        public int Amount {get; set;}
+        public Consumable(string name, string description, int amount) :base(name, description)
+        {
+            Amount = amount;
+        }
+    }
+    class Quest : Item
+    {
+        
     }
 }
