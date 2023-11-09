@@ -13,13 +13,12 @@ namespace MainMenu{
 
     class Program
     {
-         static void Main(string[] args)
-         {
-            
+        static void Main(string[] args)
+        {  
             Game game = new Game();
+            List<Character> stageOneEnemies = game.StageOne();
             
-
-
+        
 
             bool runMain = true;
             while (runMain)
@@ -39,7 +38,7 @@ namespace MainMenu{
                 {
                     case "1":
                         Hero hero = game.CreateHero();
-                        game.MainGameLoop();
+                         game.MainGameLoop(hero, stageOneEnemies);
                         break;
                     case "2":
                         //load game

@@ -34,7 +34,7 @@ namespace GameLogic
 
        
 
-        public void MainGameLoop()
+        public void MainGameLoop(Hero hero, List<Character> enemyList)
         {
             int[,] grid = new int[3, 3];
             bool[,] visitedRooms = new bool[3, 3]; // This array keeps track of visited rooms
@@ -46,6 +46,14 @@ namespace GameLogic
             {
                 Console.Clear();
                 PrintGrid(grid, playerRow, playerColumn,visitedRooms);
+
+                // Check if the player is in a special room (e.g., a room with an enemy)
+                if (IsSpecialRoom(playerRow, playerColumn))
+                {
+                    Minions randomEnemy = GetRandomEnemy(enemyList);
+                    Console.WriteLine($"You encounter an enemy! Prepare for battle!");
+                    Battle(hero, randomEnemy);
+                }
 
                 // Display available moves based on the player's current position
                 Console.WriteLine("Available Doors:");
@@ -143,6 +151,13 @@ namespace GameLogic
 
         }
 
+        private bool IsSpecialRoom(int row, int column)
+        {
+            // Check if the player is in a special room (e.g., a room with an enemy)
+            // You can define your criteria for special rooms here.
+            return row == 0 && column == 1; // Example: Special room at row 0, column 1
+        }
+
         private double CalculatePlayerDamage(Hero hero)
             {
                 //kan lägga till crit, riposte osv
@@ -207,14 +222,22 @@ namespace GameLogic
             } while (isBattleActive);
 
         }
-        public Character GetRandomEnemy(List<Character> enemyList) //hämtar en random enemy från kallad lista
+        public Minions GetRandomEnemy(List<Character> enemyList)
         {
             int randomIndex = random.Next(0, enemyList.Count);
 
             // Return the selected random enemy
-            return enemyList[randomIndex];
+            return (Minions)enemyList[randomIndex];
         }
 
+        public List<Character> StageOne()
+        {
+            List<Character> stageOneEnemies = murlockList.Murlocks.Cast<Character>().ToList();
+
+            // Other stage-specific logic...
+
+            return stageOneEnemies;
+        }
     }
 }
 
