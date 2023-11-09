@@ -148,7 +148,7 @@ namespace GameLogic
                 //kan lägga till crit, riposte osv
                     return hero.Damage;
             }
-            private double CalculateEnemyDamage(Minions randomEnemy)
+        private double CalculateEnemyDamage(Minions randomEnemy)
             {
                     
                     return randomEnemy.Damage;
