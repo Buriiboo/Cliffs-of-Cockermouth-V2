@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography.X509Certificates;
 using System.Xml.Xsl;
 using CharacterBase;
+using Game;
 using HeroCreatorBase;
 using MinionCreatorBase;
 
@@ -10,7 +11,18 @@ namespace Main
     {
         static void Main(string[] args)
         {
-            int[,] grid = new int[3, 3];
+            List<Character> characters = DefaultCharacters.GetDefaultCharacters();
+            Hero player = characters.OfType<Hero>().FirstOrDefault();
+            Minion enemy = characters.OfType<Minion>().FirstOrDefault();
+            Battle battle = new Battle();
+            
+            Item arrow = new ThrowWeapons("Arrow", "description", 3, 3);
+            player.AddInventory(arrow);
+            while(player.HP > 0 && enemy.HP > 0){
+            battle.Engagement(player, enemy);
+            Console.WriteLine($"Enemy hp: {enemy.HP} Player damage: {player.Damage}\nPlayer hp: {player.HP} Enemy damage: {enemy.Damage}");
+            }
+            /*int[,] grid = new int[3, 3];
             bool[,] visitedRooms = new bool[3, 3]; // This array keeps track of visited rooms
             int playerRow = 2;
             int playerColumn = 1;
@@ -19,7 +31,8 @@ namespace Main
             while (isRunning)
             {
                 Console.Clear();
-                PrintGrid(grid, playerRow, playerColumn,visitedRooms);
+
+               /* PrintGrid(grid, playerRow, playerColumn,visitedRooms);
 
                 // Display available moves based on the player's current position
                 Console.WriteLine("Available Doors:");
@@ -40,11 +53,11 @@ namespace Main
                 else
                 {
                     MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms,grid);
-                }
+                }*/
             }
         }
         
-
+/*
         static void PrintGrid(int[,] grid, int playerRow, int playerColumn, bool[,] visitedRooms)
         {
             for (int i = 0; i < grid.GetLength(0); i++)
@@ -116,7 +129,7 @@ namespace Main
             }
         }
     }
-    
+*/
 
     //Caves
     //S B M

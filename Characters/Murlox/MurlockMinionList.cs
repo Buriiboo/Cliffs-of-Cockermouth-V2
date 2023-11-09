@@ -4,7 +4,7 @@ using MinionCreatorBase;
 
 namespace MurlockCreator
 {
-    public class Murlock : Minions
+    public class Murlock : Minion
     {
         public Murlock(string name, int hp, double damage, int armor, int affinity)
             : base(name, damage, hp, armor, affinity)

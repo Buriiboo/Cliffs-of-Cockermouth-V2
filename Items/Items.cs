@@ -1,5 +1,6 @@
 
 using System.Reflection.Metadata.Ecma335;
+using CharacterBase;
 using HeroCreatorBase;
 namespace Game;
     public abstract class Item
@@ -62,7 +63,19 @@ namespace Game;
         public void UseQuest(Hero hero, Quest quest) // behövs bool? man kan bara ta ur det från hero inventory när man har använt de
         {
             hero.RemoveInventory(quest);
-            //behöver visas också utan console
+        }
+    }
+    class ThrowWeapons : Consumable
+    {
+        public double Damage {get; set;}
+        public ThrowWeapons(string name, string description, int amount, double damage) : base(name, description, amount)
+        {
+            Damage = damage;
+        }
+        public void UseItem(Character other)
+        {
+            Amount -= 1;
+
         }
     }
 

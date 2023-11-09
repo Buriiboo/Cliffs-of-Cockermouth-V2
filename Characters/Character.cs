@@ -21,26 +21,24 @@ public abstract class Character
         Affinity = affinity;
         itemList = new List<Item>();
     }
-    public Minion Attack(Hero hero, Minion minion)
+    public void Attack(Character other, Character player)
     {
-        minion.HP -= hero.Damage;
-        return minion;
+        other.HP -= Damage;
     }
-    public Hero Defence(Hero hero, Minion minion)
+    public void Defence(Character other)
     {
-        hero.HP -= minion.Damage*0.25;
-        return hero;
+        HP -= other.Damage*0.25;
     }
 }
 class Battle{
-    public void Engagement(Hero hero, Minion minion)
+    public void Engagement(Character player, Character other)
     {
         Console.WriteLine("[A]ttack or [D]efense");
         string choice = Console.ReadLine().ToLower();
         if(choice == "a")
-            hero.Attack(hero, minion);
+            player.Attack(other, player);
         else if(choice == "d")
-            hero.Defence(hero, minion);
+            player.Defence(other);
         
     }
 }
