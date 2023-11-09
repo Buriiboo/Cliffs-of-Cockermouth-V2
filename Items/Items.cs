@@ -12,7 +12,11 @@ namespace Game;
             Name = name;
             Description = description;
         }
+    public override string ToString()
+    {
+        return $"{Name}: {Description}";
     }
+}
     class Gear : Item
     {
         public string GearSlot {get; set;}

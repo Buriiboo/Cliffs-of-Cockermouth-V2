@@ -1,3 +1,4 @@
+using System.Security;
 using Game;
 using HeroCreatorBase;
 using MinionCreatorBase;
@@ -10,7 +11,6 @@ public abstract class Character
     public double HP {get; set;}
     public int Armor {get; set;}
     public int Affinity {get; set;}
-    public List<Item> itemList;
     
     public Character(string name, double damage, double hp, int armor, int affinity)
     {
@@ -19,26 +19,32 @@ public abstract class Character
         HP = hp;
         Armor = armor;
         Affinity = affinity;
-        itemList = new List<Item>();
     }
     public void Attack(Character other, Character player)
     {
-        other.HP -= Damage;
+        other.HP -= player.Damage;
     }
-    public void Defence(Character other)
+
+    public void Defence(Character other, Character player)
     {
-        HP -= other.Damage*0.25;
+        player.HP -= other.Damage*0.25;
     }
 }
 class Battle{
-    public void Engagement(Character player, Character other)
+    public void Engagement(Hero player, Character other)
     {
-        Console.WriteLine("[A]ttack or [D]efense");
+        Console.WriteLine("[A]ttack [D]efense [I]nventory");
         string choice = Console.ReadLine().ToLower();
         if(choice == "a")
             player.Attack(other, player);
         else if(choice == "d")
-            player.Defence(other);
+            player.Defence(other, player);
+        else if(choice == "i"){
+            player.ShowInventory();
+            int ItemChoice = int.Parse(Console.ReadLine());
+            
+
+        }
         
     }
 }

@@ -8,7 +8,7 @@ public class Minion : Character
 {
     public Minion(string name, double damage, double hp, int armor, int affinity) : base(name, damage, hp, armor, affinity)
     {
-        itemList = new List<Item>();
+        
     }
     public Hero Attack(Hero hero, Minion minion)
     {

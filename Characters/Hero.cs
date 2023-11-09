@@ -26,10 +26,15 @@ public class Hero : Character
     {
 
     }
-    
     public List<Item> Inventory()
     {
         return inventory;
+    }
+    public void ShowInventory()
+    {
+        for(int i = 0; i < inventory.Count; i++){
+            Console.WriteLine($"{i + 1}: {inventory[i]}");
+        }
     }
     public void AddInventory(Item item)
     {

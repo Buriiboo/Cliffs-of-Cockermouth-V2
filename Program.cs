@@ -15,8 +15,8 @@ namespace Main
             Hero player = characters.OfType<Hero>().FirstOrDefault();
             Minion enemy = characters.OfType<Minion>().FirstOrDefault();
             Battle battle = new Battle();
-            
-            Item arrow = new ThrowWeapons("Arrow", "description", 3, 3);
+
+            Item arrow = new ThrowWeapons("Arrow", "Sharp", 3, 3);
             player.AddInventory(arrow);
             while(player.HP > 0 && enemy.HP > 0){
             battle.Engagement(player, enemy);
