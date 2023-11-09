@@ -20,14 +20,21 @@ public abstract class Character
         Armor = armor;
         Affinity = affinity;
     }
-    public void Attack(Character other, Character player)
+    public void Attack(Character other)
     {
-        other.HP -= player.Damage;
+        other.HP -= Damage;
+    }
+    public void ItemAttack(Character other, Hero player, ThrowWeapons item)
+    {
+        other.HP -= item.Damage;
+        item.Amount -= 1;
+        if(item.Amount == 0)
+            player.RemoveInventory(item);
     }
 
-    public void Defence(Character other, Character player)
+    public void Defence(Character other)
     {
-        player.HP -= other.Damage*0.25;
+        HP -= other.Damage*0.25;
     }
 }
 class Battle{
@@ -36,15 +43,20 @@ class Battle{
         Console.WriteLine("[A]ttack [D]efense [I]nventory");
         string choice = Console.ReadLine().ToLower();
         if(choice == "a")
-            player.Attack(other, player);
+            player.Attack(other);
         else if(choice == "d")
-            player.Defence(other, player);
+            player.Defence(other);
         else if(choice == "i"){
-            player.ShowInventory();
-            int ItemChoice = int.Parse(Console.ReadLine());
-            
-
+            if(player.Inventory().Count > 0){
+                player.ShowInventory();
+                int ItemChoice = int.Parse(Console.ReadLine());
+                Item item = player.Inventory()[ItemChoice - 1];
+                if(item is ThrowWeapons throwWeapons)
+                    player.ItemAttack(other, player, throwWeapons);
+            }
+            else
+                Console.WriteLine("Your inventory is empty!");
         }
-        return $"Enemy hp: {other.HP} Player damage: {player.Damage}\nPlayer hp: {player.HP} Enemy damage: {other.Damage}";
+        return $"Enemy hp: {other.HP} \nPlayer damage: {player.Damage}\nPlayer hp: {player.HP} \nEnemy damage: {other.Damage}";
     }
 }

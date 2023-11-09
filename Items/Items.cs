@@ -44,7 +44,7 @@ namespace Game;
             hero.HP -= gear.Protection;
         }
     }
-    class Consumable : Item
+    public class Consumable : Item
     {
         public int Amount {get; set;}
         public Consumable(string name, string description, int amount) :base(name, description)
@@ -69,7 +69,7 @@ namespace Game;
             hero.RemoveInventory(quest);
         }
     }
-    class ThrowWeapons : Consumable
+    public class ThrowWeapons : Consumable
     {
         public double Damage {get; set;}
         public ThrowWeapons(string name, string description, int amount, double damage) : base(name, description, amount)
