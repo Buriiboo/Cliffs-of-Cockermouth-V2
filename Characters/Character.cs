@@ -31,7 +31,7 @@ public abstract class Character
     }
 }
 class Battle{
-    public void Engagement(Hero player, Character other)
+    public string Engagement(Hero player, Character other)
     {
         Console.WriteLine("[A]ttack [D]efense [I]nventory");
         string choice = Console.ReadLine().ToLower();
@@ -45,6 +45,6 @@ class Battle{
             
 
         }
-        
+        return $"Enemy hp: {other.HP} Player damage: {player.Damage}\nPlayer hp: {player.HP} Enemy damage: {other.Damage}";
     }
 }

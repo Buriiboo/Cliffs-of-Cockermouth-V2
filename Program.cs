@@ -19,8 +19,7 @@ namespace Main
             Item arrow = new ThrowWeapons("Arrow", "Sharp", 3, 3);
             player.AddInventory(arrow);
             while(player.HP > 0 && enemy.HP > 0){
-            battle.Engagement(player, enemy);
-            Console.WriteLine($"Enemy hp: {enemy.HP} Player damage: {player.Damage}\nPlayer hp: {player.HP} Enemy damage: {enemy.Damage}");
+            Console.WriteLine(battle.Engagement(player, enemy));
             }
             /*int[,] grid = new int[3, 3];
             bool[,] visitedRooms = new bool[3, 3]; // This array keeps track of visited rooms
