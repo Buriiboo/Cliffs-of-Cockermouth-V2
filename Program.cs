@@ -15,13 +15,15 @@ namespace Main
             Hero player = characters.OfType<Hero>().FirstOrDefault();
             Minion enemy = characters.OfType<Minion>().FirstOrDefault();
             Battle battle = new Battle();
-
+            
             Item arrow = new ThrowWeapons("Arrow", "Sharp", 3, 3);
             player.AddInventory(arrow);
             while(player.HP > 0 && enemy.HP > 0){
-            Console.WriteLine(battle.Engagement(player, enemy));
+                Console.WriteLine(battle.Engagement(player, enemy));
             }
-            /*int[,] grid = new int[3, 3];
+        
+        
+            int[,] grid = new int[3, 3];
             bool[,] visitedRooms = new bool[3, 3]; // This array keeps track of visited rooms
             int playerRow = 2;
             int playerColumn = 1;
@@ -31,7 +33,7 @@ namespace Main
             {
                 Console.Clear();
 
-               /* PrintGrid(grid, playerRow, playerColumn,visitedRooms);
+                PrintGrid(grid, playerRow, playerColumn,visitedRooms);
 
                 // Display available moves based on the player's current position
                 Console.WriteLine("Available Doors:");
@@ -51,12 +53,12 @@ namespace Main
                 }
                 else
                 {
-                    MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms,grid);
-                }*/
+                    MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+                }
             }
         }
         
-/*
+
         static void PrintGrid(int[,] grid, int playerRow, int playerColumn, bool[,] visitedRooms)
         {
             for (int i = 0; i < grid.GetLength(0); i++)
@@ -128,7 +130,7 @@ namespace Main
             }
         }
     }
-*/
+
 
     //Caves
     //S B M

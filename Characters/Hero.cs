@@ -4,6 +4,7 @@ using CharacterBase;
 using System.Security.Cryptography.X509Certificates;
 using Game;
 using MinionCreatorBase;
+using System.Security;
 namespace HeroCreatorBase;
 
 public class Hero : Character
@@ -35,6 +36,19 @@ public class Hero : Character
         for(int i = 0; i < inventory.Count; i++){
             Console.WriteLine($"{i + 1}: {inventory[i]}");
         }
+    }
+    public void HandelInventory(Hero player, Character other)
+    {
+        if(player.Inventory().Count == 0){
+            Console.WriteLine("Your inventory is empty!");
+            return;
+        }
+        player.ShowInventory();
+        int ItemChoice = int.Parse(Console.ReadLine());
+        Item item = player.Inventory()[ItemChoice - 1];
+        if(item is ThrowWeapons throwWeapons)
+            player.ItemAttack(other, player, throwWeapons);
+        
     }
     public void AddInventory(Item item)
     {

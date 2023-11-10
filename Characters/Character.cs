@@ -42,21 +42,17 @@ class Battle{
     {
         Console.WriteLine("[A]ttack [D]efense [I]nventory");
         string choice = Console.ReadLine().ToLower();
-        if(choice == "a")
-            player.Attack(other);
-        else if(choice == "d")
-            player.Defence(other);
-        else if(choice == "i"){
-            if(player.Inventory().Count > 0){
-                player.ShowInventory();
-                int ItemChoice = int.Parse(Console.ReadLine());
-                Item item = player.Inventory()[ItemChoice - 1];
-                if(item is ThrowWeapons throwWeapons)
-                    player.ItemAttack(other, player, throwWeapons);
+        switch(choice){
+            case "a": 
+                player.Attack(other);
+                break;
+            case "d":
+                player.Defence(other);
+                break;
+            case "i":
+                player.HandelInventory(player, other);
+                break;
             }
-            else
-                Console.WriteLine("Your inventory is empty!");
-        }
         return $"Enemy hp: {other.HP} \nPlayer damage: {player.Damage}\nPlayer hp: {player.HP} \nEnemy damage: {other.Damage}";
     }
 }
