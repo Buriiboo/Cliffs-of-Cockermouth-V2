@@ -146,6 +146,13 @@ namespace GameLogic
                     visitedRooms[playerRow, playerColumn] = true; // Mark the old room as visited
                     playerRow = newRow;
                     playerColumn = newColumn;
+                    
+                    if(!visitedRooms[newRow, newColumn])
+                    {
+                    Battle battle = new Battle();
+                    visitedRooms[playerRow, playerColumn] = true; // Mark the old room as visited
+                    battle.TriggerBattle(player, other);
+                    }
                 }
             }
 

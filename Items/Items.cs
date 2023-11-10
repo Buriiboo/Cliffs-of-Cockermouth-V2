@@ -2,6 +2,7 @@
 using System.Reflection.Metadata.Ecma335;
 using HeroCreatorBase;
 namespace Items;
+
     public abstract class Item
     {
         public string Name {get; set;}
@@ -10,6 +11,10 @@ namespace Items;
         {
             Name = name;
             Description = description;
+        }
+        public override string ToString()
+        {
+            return $"{Name}: {Description}";
         }
     }
     class Gear : Item
@@ -64,5 +69,19 @@ namespace Items;
             hero.RemoveInventory(quest);
             //behöver visas också utan console
         }
+         public class ThrowWeapons : Consumable
+        {
+            public double Damage {get; set;}
+            public ThrowWeapons(string name, string description, int amount, double damage) : base(name, description, amount)
+            {
+                Damage = damage;
+            }
+            public void UseItem(Character other)
+            {
+                Amount -= 1;
+
+            }
+        }
     }
+
 
