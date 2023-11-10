@@ -30,7 +30,7 @@ namespace MainMenu{
                 Console.WriteLine("|| 1) New game           ||");
                 Console.WriteLine("|| 2) Load game          ||");     
                 Console.WriteLine("|| 3) ?????????          ||");
-                Console.WriteLine("|| 4) Exit               || ");
+                Console.WriteLine("|| 4) Exit               ||");
                 Console.WriteLine("|| ===================== ||");
                 string choice = Console.ReadLine();
                 
