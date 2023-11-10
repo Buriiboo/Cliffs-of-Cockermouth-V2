@@ -55,4 +55,10 @@ class Battle{
             }
         return $"Enemy hp: {other.HP} \nPlayer damage: {player.Damage}\nPlayer hp: {player.HP} \nEnemy damage: {other.Damage}";
     }
+    public void TriggerBattle(Hero player, Character other)
+    {
+        while(player.HP > 0 && other.HP > 0){
+                Console.WriteLine(Engagement(player, other));
+            }
+    }
 }

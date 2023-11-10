@@ -13,15 +13,10 @@ namespace Main
         {
             List<Character> characters = DefaultCharacters.GetDefaultCharacters();
             Hero player = characters.OfType<Hero>().FirstOrDefault();
-            Minion enemy = characters.OfType<Minion>().FirstOrDefault();
-            Battle battle = new Battle();
+            
             
             Item arrow = new ThrowWeapons("Arrow", "Sharp", 3, 3);
             player.AddInventory(arrow);
-            while(player.HP > 0 && enemy.HP > 0){
-                Console.WriteLine(battle.Engagement(player, enemy));
-            }
-        
         
             int[,] grid = new int[3, 3];
             bool[,] visitedRooms = new bool[3, 3]; // This array keeps track of visited rooms
@@ -31,8 +26,9 @@ namespace Main
 
             while (isRunning)
             {
+                
                 Console.Clear();
-
+                Minion enemy = DefaultCharacters.GetRandomMinion(DefaultCharacters.GetDefaultCharacters());
                 PrintGrid(grid, playerRow, playerColumn,visitedRooms);
 
                 // Display available moves based on the player's current position
@@ -53,7 +49,7 @@ namespace Main
                 }
                 else
                 {
-                    MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+                    MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid, player, enemy);
                 }
             }
         }
@@ -99,7 +95,7 @@ namespace Main
         }
 
 
-        static void MovePlayer(ref int playerRow, ref int playerColumn, string command,bool[,] visitedRooms, int[,] grid)
+        static void MovePlayer(ref int playerRow, ref int playerColumn, string command,bool[,] visitedRooms, int[,] grid, Hero player, Character other)
         {
             int newRow = playerRow;
             int newColumn = playerColumn;
@@ -124,9 +120,14 @@ namespace Main
             }
             if (newRow >= 0 && newRow < grid.GetLength(0) && newColumn >= 0 && newColumn < grid.GetLength(1))
             {
-                visitedRooms[playerRow, playerColumn] = true; // Mark the old room as visited
                 playerRow = newRow;
                 playerColumn = newColumn;
+                if(!visitedRooms[newRow, newColumn]){
+                    Battle battle = new Battle();
+                    visitedRooms[playerRow, playerColumn] = true; // Mark the old room as visited
+                    battle.TriggerBattle(player, other);
+                }
+                
             }
         }
     }

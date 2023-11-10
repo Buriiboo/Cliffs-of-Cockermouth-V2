@@ -68,5 +68,12 @@ public class DefaultCharacters
         
         };
     }
+    public static Minion GetRandomMinion(List<Character> characters)
+    {
+        List<Minion> minions = characters.OfType<Minion>().ToList();
+        Random random = new Random();
+        int index = random.Next(minions.Count);
+        return minions[index];
+    }
 }
    
