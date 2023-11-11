@@ -122,10 +122,13 @@ namespace Main
             {
                 playerRow = newRow;
                 playerColumn = newColumn;
-                if(!visitedRooms[newRow, newColumn]){
+                if(!visitedRooms[newRow, newColumn] || newRow != 2 && newColumn != 2){
                     Battle battle = new Battle();
                     visitedRooms[playerRow, playerColumn] = true; // Mark the old room as visited
                     battle.TriggerBattle(player, other);
+                }
+                else if(newRow == 2 && newColumn == 2){
+                    //encounter med merchant
                 }
                 
             }
