@@ -4,7 +4,7 @@ using CharacterBase;
 using Game;
 using HeroCreatorBase;
 using MinionCreatorBase;
-
+using NpcCreatorBase;
 namespace Main
 {
     class Program
@@ -13,10 +13,13 @@ namespace Main
         {
             List<Character> characters = DefaultCharacters.GetDefaultCharacters();
             Hero player = characters.OfType<Hero>().FirstOrDefault();
+            Merchant merchant = characters.OfType<Merchant>().FirstOrDefault();
             
             
             Item arrow = new ThrowWeapons("Arrow", "Sharp", 3, 3);
             player.AddInventory(arrow);
+            merchant.AddInventory(arrow);
+
         
             int[,] grid = new int[3, 3];
             bool[,] visitedRooms = new bool[3, 3]; // This array keeps track of visited rooms
@@ -49,7 +52,7 @@ namespace Main
                 }
                 else
                 {
-                    MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid, player, enemy);
+                    MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid, player, enemy, merchant);
                 }
             }
         }
@@ -95,7 +98,7 @@ namespace Main
         }
 
 
-        static void MovePlayer(ref int playerRow, ref int playerColumn, string command,bool[,] visitedRooms, int[,] grid, Hero player, Character other)
+        static void MovePlayer(ref int playerRow, ref int playerColumn, string command,bool[,] visitedRooms, int[,] grid, Hero player, Character other, Merchant merchant)
         {
             int newRow = playerRow;
             int newColumn = playerColumn;
@@ -122,14 +125,15 @@ namespace Main
             {
                 playerRow = newRow;
                 playerColumn = newColumn;
-                if(!visitedRooms[newRow, newColumn] || newRow != 2 && newColumn != 2){
+                if(playerRow == 2 && playerColumn == 2){
+                    merchant.EncounterMerchant();
+                }
+                else if(!visitedRooms[newRow, newColumn]){
                     Battle battle = new Battle();
                     visitedRooms[playerRow, playerColumn] = true; // Mark the old room as visited
                     battle.TriggerBattle(player, other);
                 }
-                else if(newRow == 2 && newColumn == 2){
-                    //encounter med merchant
-                }
+                
                 
             }
         }
