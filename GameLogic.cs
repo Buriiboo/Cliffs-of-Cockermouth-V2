@@ -96,8 +96,6 @@ namespace ClassMinionsFunction
         }
 
 
-
-
         public static void PlayerTurn(Hero hero, List<Minions> spawnedMinions)
         {
             

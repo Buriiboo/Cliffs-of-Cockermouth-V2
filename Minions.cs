@@ -118,6 +118,20 @@ namespace ClassMinionsFunction
             return new MurlockEliteBruiser(hp, damage, armor, affinity, minionLevel, experienceGiven);
         }
 
+        public static MurlockKing CreateMurlockKing()
+        {
+            // Predefined stats for MurlockBruiser
+            int hp = 150;
+            double damage = 25;
+            int armor = 5;
+            int affinity = 2;
+            int minionLevel = 10;
+            int experienceGiven = 100;
+
+            // Return a new instance of MurlockBruiser with the predefined stats
+            return new MurlockKing(hp, damage, armor, affinity, minionLevel, experienceGiven);
+        }
+
     }
 
     public class MurlockWorker : Murlock
@@ -143,6 +157,7 @@ namespace ClassMinionsFunction
 
         // MurlockBruiser-specific initialization, if any
     }
+
     public class MurlockEliteBruiser : Murlock
     {
 
@@ -154,6 +169,56 @@ namespace ClassMinionsFunction
 
         // MurlockBruiser-specific initialization, if any
     }
+
+    public class MurlockKing : Murlock
+    {
+
+        public MurlockKing(int hp, double damage, int armor, int affinity, int minionlevel, int experiencegiven)
+            : base(hp, damage, armor, affinity, minionlevel, experiencegiven)
+        {
+
+        }
+        public int Attack(List<Minions> spawnedMinions, Character target)
+        {
+            if(this.HP>this.MaxHP/2){
+                    
+                double effectiveDamage = this.Damage - target.Armor;
+                if (effectiveDamage < 0)
+                {
+                    effectiveDamage = 0;
+                }
+                if (target.HP - effectiveDamage < 0)
+                {
+                    effectiveDamage = target.HP;
+                    target.HP = 0;
+                }
+                else
+                {
+                    target.HP -= (int)effectiveDamage;
+                }
+                return (int)effectiveDamage;
+            }
+            else if(this.HP <= this.MaxHP / 2)
+            {
+                HealingWave(spawnedMinions);
+                return 0;
+
+            }
+            return 0;
+        }
+
+        public void HealingWave(List<Minions> spawnedMinions)
+        {
+            foreach (var minion in spawnedMinions)
+            {
+                minion.HP = Math.Min(minion.HP + 20, minion.MaxHP); // Ensure HP doesn't exceed MaxHP
+            }
+
+        }
+
+    }
+
+
 
 
 
@@ -167,6 +232,8 @@ namespace ClassMinionsFunction
         }
 
     }
+
+
 
 
 
