@@ -28,13 +28,31 @@ namespace ClassMinionsFunction
             int minLevel = Math.Max(1, heroLevel - 1); 
             int maxLevel = heroLevel + 1; 
 
-            var randomMinions = allMinions
+            spawnedMinions = allMinions
                 .Where(x => x.MinionLevel >= minLevel && x.MinionLevel <= maxLevel)
                 .OrderBy(x => rng.Next())
                 .Take(numberToTake)
                 .ToList();
 
-            return randomMinions;
+            return spawnedMinions;
+        }
+
+        public static List<Minions> Boss()
+        {
+            List<Minions> bossGroup = new List<Minions>();
+
+            // Add one MurlockKing.
+            Minions MurlockKing = Murlock.CreateMurlockKing();
+            bossGroup.Add(MurlockKing);
+
+            // Add two MurlockEliteBruisers.
+            for (int i = 0; i < 2; i++)
+            {
+                Minions MurlockEliteBruiser = Murlock.CreateEliteBruiser();
+                bossGroup.Add(MurlockEliteBruiser);
+            }
+
+            return bossGroup;
         }
 
 

@@ -187,6 +187,10 @@ namespace ClassMinionsFunction
             List<Minions> newMinions = Minions.SpawnMinion(allMinions, heroes.First().Level, 3);
             spawnedMinions.AddRange(newMinions);
 
+            System.Console.WriteLine($"Totalt exp gathered from battle:{experienceGained} CurrentHeroLevel:{heroes.First().Level}");
+            System.Console.WriteLine("EndRoundExecuted!");
+            Console.ReadKey();
+
             // Add additional logic here if you need to spawn new characters or perform other end-of-round tasks
         }
 

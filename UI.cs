@@ -96,7 +96,7 @@ namespace ClassMinionsFunction
             for(int i = 0; i<message.Length;i++){
             Console.Write(message[i]);
             
-            Thread.Sleep(50);
+            Thread.Sleep(25);
             }
             System.Console.WriteLine("");
         }

@@ -33,8 +33,8 @@ namespace ClassMinionsFunction
         public static Hero CreateHero()
         {
         
-            int hp = 100;
-            double damage = 25;
+            int hp = 500;
+            double damage = 50;
             int armor = 3;
             int affinity = 50;
             int level = 1;

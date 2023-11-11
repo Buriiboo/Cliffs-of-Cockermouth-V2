@@ -32,6 +32,7 @@ namespace ClassMinionsFunction
             return new List<Character>
             {
                 Hero.CreateHero(),
+                Murlock.CreateMurlockKing(),
                 Murlock.CreateWorker(),
                 Murlock.CreateWorker(),
                 Murlock.CreateWorker(),
