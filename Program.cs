@@ -1,48 +1,39 @@
-﻿using System.Security.Cryptography.X509Certificates;
-using System.Xml.Xsl;
-using CharacterBase;
-using Game;
-using HeroCreatorBase;
-using MinionCreatorBase;
-using NpcCreatorBase;
-namespace Main
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            List<Character> characters = DefaultCharacters.GetDefaultCharacters();
-            Hero player = characters.OfType<Hero>().FirstOrDefault();
-            Merchant merchant = characters.OfType<Merchant>().FirstOrDefault();
-            
-            
-            Item arrow = new ThrowWeapons("Arrow", "Sharp", 3, 3);
-            player.AddInventory(arrow);
-            merchant.AddInventory(arrow);
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using Microsoft.VisualBasic;
 
-        
+
+namespace ClassMinionsFunction{
+class Program
+{
+    static void Main(string[] args)
+    {
+
             int[,] grid = new int[3, 3];
             bool[,] visitedRooms = new bool[3, 3]; // This array keeps track of visited rooms
+
             int playerRow = 2;
             int playerColumn = 1;
             bool isRunning = true;
 
-            while (isRunning)
-            {
-                
-                Console.Clear();
-                Minion enemy = DefaultCharacters.GetRandomMinion(DefaultCharacters.GetDefaultCharacters());
-                PrintGrid(grid, playerRow, playerColumn,visitedRooms);
+            
+            List<Character> characters = Character.GetDefaultCharacters();
+            List<Abilities> abilities2 = Abilities.GetAbilities();
+            List<Minions> allMinions = Character.GetDefaultCharacters().OfType<Minions>().ToList();
+            
+            List<Hero> heroes = Character.GetDefaultCharacters().OfType<Hero>().ToList();
+            List<Minions> SpawnMinion = Minions.SpawnMinion(allMinions, heroes.First().Level, 3);
 
-                // Display available moves based on the player's current position
-                Console.WriteLine("Available Doors:");
-                if (playerRow > 0) Console.Write("(Up)".PadRight(4));
-                if (playerRow < grid.GetLength(0) - 1) Console.Write("(down)".PadRight(4));
-                if (playerColumn > 0) Console.Write("(left)".PadRight(4));
-                if (playerColumn < grid.GetLength(1) - 1) Console.Write("(right)".PadRight(4));
-                Console.WriteLine("");
-                Console.WriteLine("Enter 'exit' to quit.");
-                Console.Write("Move: ");
+
+
+            while (isRunning == true)
+            {
+                Console.Clear();
+    
+                UI.PrintGrid(grid, playerRow, playerColumn, visitedRooms);
+                UI.PlayerMovement(grid, playerRow, playerColumn);
 
                 string command = Console.ReadLine();
 
@@ -50,187 +41,45 @@ namespace Main
                 {
                     isRunning = false;
                 }
+                else if(playerRow==2&&playerColumn==1){
+                    UI.Secret("The way forward was shut...");
+                    UI.Secret("But on the door there was an inscription and it read thus:");
+                    UI.Secret("Speak the word friend and you may enter.");
+                    GameLogic.SecretScenario(heroes);
+                }
+                else if (playerRow == 2 && playerColumn == 2)
+                {
+                    //Insert logic for Merchant
+                    GameLogic.SecretScenario(heroes);
+                }
+                else if (playerRow == 0 && playerColumn == 2)
+                {
+                    //Insert logic for Roaming
+                    GameLogic.SecretScenario(heroes);
+                }
+                else if (playerRow == 0 && playerColumn == 1)
+                {
+                    //Insert logic for BossBattle
+                }
                 else
                 {
-                    MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid, player, enemy, merchant);
+                    List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, heroes.First().Level, 3);
+                    GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+                    GameLogic.BattleEncounter(heroes.First(), Minions.SpawnMinion(allMinions, heroes.First().Level, 3));
+                    GameLogic.EndRound(spawnedMinions, allMinions, heroes);
+                    foreach (var minions in allMinions)
+                    {
+                        System.Console.WriteLine(minions.HP);
+                    }
+    
                 }
             }
-        }
-        
-
-        static void PrintGrid(int[,] grid, int playerRow, int playerColumn, bool[,] visitedRooms)
-        {
-            for (int i = 0; i < grid.GetLength(0); i++)
-            {
-                for (int j = 0; j < grid.GetLength(1); j++)
-                {
-                    if (i == playerRow && j == playerColumn){
-                        Console.Write(" P ");               // P represents the player
-                    }
-                    else if (i == 0 && j == 1)
-                    {
-                        Console.Write(" B ");               // B represents Boss
-                    }
-                    else if(i == 0 && j == 0 && !visitedRooms[i, j])
-                    {
-                        System.Console.Write(" S ");        //S represents Secret
-                    }
-                    else if (i == 0 && j == 2 && !visitedRooms[i, j])
-                    {
-                        System.Console.Write(" R ");        //R represents Roaming
-        
-                    }
-                    else if (i == 2 && j == 2)
-                    {
-                        System.Console.Write(" M ");        //M represents Merchant
-                    }
-                    else if(!visitedRooms[i, j])
-                    {
-                        Console.Write(" . ");
-                    }
-                    else
-                    {
-                        Console.Write(" - ");
-                    }
-                }
-                Console.WriteLine();
-            }
-        }
 
 
-        static void MovePlayer(ref int playerRow, ref int playerColumn, string command,bool[,] visitedRooms, int[,] grid, Hero player, Character other, Merchant merchant)
-        {
-            int newRow = playerRow;
-            int newColumn = playerColumn;
 
-            switch (command.ToLower())
-            {
-                case "up":
-                    newRow -= 1;
-                    break;
-                case "down":
-                    newRow += 1;
-                    break;
-                case "left":
-                    newColumn -= 1;
-                    break;
-                case "right":
-                    newColumn += 1;
-                    break;
-                default:
-                    Console.WriteLine("Invalid command.");
-                    return; // Early return if the command is invalid
-            }
-            if (newRow >= 0 && newRow < grid.GetLength(0) && newColumn >= 0 && newColumn < grid.GetLength(1))
-            {
-                playerRow = newRow;
-                playerColumn = newColumn;
-                if(playerRow == 2 && playerColumn == 2){
-                    merchant.EncounterMerchant();
-                }
-                else if(!visitedRooms[newRow, newColumn]){
-                    Battle battle = new Battle();
-                    visitedRooms[playerRow, playerColumn] = true; // Mark the old room as visited
-                    battle.TriggerBattle(player, other);
-                }
-                
-                
-            }
-        }
-    }
-
-
-    //Caves
-    //S B M
-    //R . .
-    //. . .
-
-    //Forest/Courtyard
-    // S . . B .
-    // . R . . .
-    // . . . M .
-    // P . . R .
-
-    //Castle
-    //. R R . M . B
-
-    /*
-                    //Visual Boss + Secret and Roaming
-
-                    else if(i == SecretRow && j == SecretRow || i == RoamingRow && j == RoamingRow)
-                    {
-                        Console.Write(" ? "); // P represents the player
-                    }
-                    else if (i == BossRow && j == BossRow)
-                    {
-                        Console.Write(" B "); // P represents the player
-                    }
-
-
-                        static void PopulateGrid(int[,] grid, int playerRow, int playerColumn)
-        {
-            for (int i = 0; i < grid.GetLength(0); i++)
-            {
-                for (int j = 0; j < grid.GetLength(1); j++)
-                {
-                    if (i == playerRow && j == playerColumn)
-                    {
-                        break;
-                    }
-                    else if(i==1&&j==1)
-                    {
-                    //   GenerateEncounterBoss();
-                    }
-                    else if(Secret==false || MerchantGenerated == false || Roaming == false){
-                        if(Secret == false){
-                            GeneratedSecret();
-                            Secret==true;
-                        }
-                        else if (Merchant == false)
-                        {
-                            MerchantGenerated();
-                            Merchant == true;
-                        }
-                        else if (Roaming == false)
-                        {
-                            RoamingGenerated();
-                            Roaming == true;
-                        }
-
-                    }
-                    else
-                    {
-                        GenerateEncounter();
-                    }
-                }
-                Console.WriteLine();
-            }
-        }
-
-    Prototyp för rum + environment.
-
-    Position = Index i 2D Array = [1][2] 
-    Open South door(down)
-
-    Isthisempty==False;
-    Grid[1][2]=False;
-
-
-    IndexPlats[2][2]
-        if(Grid[1][2]==True)
-        {
-            Encounter();
-            Console.WriteLine("Something happens")
-            NextRoom();
-        }
-        else
-            {
-                NextRoom();
             }
 
-    1. Rum vi passerat räknas som Isthisempty==True;
-    2. Rum laddar en encounter framgångsrikt.
-    3. Environmenten populerar med olika typers encounters och visuellt visar det på kartan?
+    
+}
 
-    */
 }
