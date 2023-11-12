@@ -51,6 +51,18 @@ public class Undead : Minion
     }
 
 }
+public class Boss : Minion
+{
+    public double CriticalDamage {get; set;}
+    public Boss(string name, double damage, double hp, int armor, int affinity, double criticalDamage) : base(name, damage, hp, armor, affinity)
+    {
+        CriticalDamage = criticalDamage;
+    }
+    public void BossCritical(Hero player, Boss boss)
+    {
+        player.HP -= boss.CriticalDamage + boss.Damage;
+    }
+}
 public class DefaultCharacters
 {
     public static List<Character> GetDefaultCharacters()
@@ -66,6 +78,7 @@ public class DefaultCharacters
         new Murlock("Murlock", 50, 15.0, 10, 1),
 
         new Merchant("Merchant", 3, 25, 5, 2),
+        new Boss("Boss", 7, 25, 10, 0, 6),
         //Murlock.CreateBruiser(),
         //Så Kolla hur lite kod och hur lätt som helst
         

@@ -14,6 +14,7 @@ namespace Main
             List<Character> characters = DefaultCharacters.GetDefaultCharacters();
             Hero player = characters.OfType<Hero>().FirstOrDefault();
             Merchant merchant = characters.OfType<Merchant>().FirstOrDefault();
+            Boss boss = characters.OfType<Boss>().FirstOrDefault();
             
             
             Item arrow = new ThrowWeapons("Arrow", "Sharp", 3, 3);
@@ -52,7 +53,7 @@ namespace Main
                 }
                 else
                 {
-                    MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid, player, enemy, merchant);
+                    MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid, player, enemy, merchant, boss);
                 }
             }
         }
@@ -98,7 +99,7 @@ namespace Main
         }
 
 
-        static void MovePlayer(ref int playerRow, ref int playerColumn, string command,bool[,] visitedRooms, int[,] grid, Hero player, Character other, Merchant merchant)
+        static void MovePlayer(ref int playerRow, ref int playerColumn, string command,bool[,] visitedRooms, int[,] grid, Hero player, Character other, Merchant merchant, Boss boss)
         {
             int newRow = playerRow;
             int newColumn = playerColumn;
@@ -133,7 +134,15 @@ namespace Main
                     visitedRooms[playerRow, playerColumn] = true; // Mark the old room as visited
                     battle.TriggerBattle(player, other);
                 }
-                
+                else if(newRow == 0 && newColumn == 1){
+                    Battle battle = new Battle();
+                    Random random = new Random();
+                    int nr = random.Next(1, 5);
+                    if(nr == 3)
+                        boss.BossCritical(player, boss);
+                    else
+                        battle.TriggerBattle(player, boss);
+                }
                 
             }
         }
