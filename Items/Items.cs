@@ -79,7 +79,6 @@ namespace Game;
         public void UseItem(Character other)
         {
             Amount -= 1;
-
         }
     }
 

@@ -58,8 +58,4 @@ public class Hero : Character
     {
         inventory.Remove(item);
     }
-    public void Map()
-    {
-    
-    }
 }

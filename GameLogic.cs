@@ -68,18 +68,17 @@ public class GameLogic
         }
         if (newRow >= 0 && newRow < grid.GetLength(0) && newColumn >= 0 && newColumn < grid.GetLength(1))
         {
+            Battle battle = new Battle();
             playerRow = newRow;
             playerColumn = newColumn;
             if(playerRow == 2 && playerColumn == 2){
                 merchant.EncounterMerchant();
             }
             else if(!visitedRooms[newRow, newColumn]){
-                Battle battle = new Battle();
                 visitedRooms[playerRow, playerColumn] = true; // Mark the old room as visited
                 battle.TriggerBattle(player, other);
             }
             else if(newRow == 0 && newColumn == 1){
-                Battle battle = new Battle();
                 Random random = new Random();
                 int nr = random.Next(1, 5);
                 if(nr == 3)

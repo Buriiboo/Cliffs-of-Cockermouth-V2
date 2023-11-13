@@ -32,7 +32,7 @@ namespace Main
                 
                 Console.Clear();
                 Minion enemy = DefaultCharacters.GetRandomMinion(DefaultCharacters.GetDefaultCharacters());
-                gameLogic.PrintGrid(grid, playerRow, playerColumn,visitedRooms);
+                gameLogic.PrintGrid(grid, playerRow, playerColumn, visitedRooms);
 
                 // Display available moves based on the player's current position
                 Console.WriteLine("Available Doors:");
