@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MinionBase;
 
-namespace ClassMinionsFunction
+namespace CharacterBase
 {
     public class Character
     {
@@ -31,7 +32,7 @@ namespace ClassMinionsFunction
         {
             return new List<Character>
             {
-                Hero.CreateHero(),
+                HeroBase.Hero.CreateHero(),
                 Murlock.CreateMurlockKing(),
                 Murlock.CreateWorker(),
                 Murlock.CreateWorker(),

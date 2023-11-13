@@ -2,8 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HeroBase;
+using MinionBase;
+using UserInterface;
 
-namespace ClassMinionsFunction
+namespace Game
 {
     public class GameLogic
     {
