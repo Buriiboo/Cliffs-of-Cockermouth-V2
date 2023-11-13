@@ -77,23 +77,21 @@ public class GameLogic
                 other = characters.OfType<Merchant>().FirstOrDefault();
                 other.Encounter(player);
             }
+
             else if(newRow == 0 && newColumn == 1){
                 Console.WriteLine("BOSSFIGHT");
                 other = characters.OfType<Boss>().FirstOrDefault();
-                Battle(player, other);
+                while(player.HP > 0 && other.HP > 0){
+                    Console.WriteLine(player.Engagement(other));
+                }
             }
             else if(!visitedRooms[newRow, newColumn]){
                 visitedRooms[playerRow, playerColumn] = true; // Mark the old room as visited
                 other = DefaultCharacters.GetRandomMinion(DefaultCharacters.GetDefaultCharacters());
-                Battle(player, other);
+                while(player.HP > 0 && other.HP > 0){
+                    Console.WriteLine(player.Engagement(other));
+                }
             }
-            
         }
-    }
-    public void Battle(Hero player, Character other)
-    {
-        while(player.HP > 0 && other.HP > 0)
-            Console.WriteLine(player.Engagement(other));
-        
     }
 }
