@@ -8,6 +8,7 @@ using CharacterBase;
 using AbilityBase;
 using MinionBase;
 using UserInterface;
+using Game;
 
 
 namespace MainMenu

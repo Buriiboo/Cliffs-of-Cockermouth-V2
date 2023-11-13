@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using HeroBase;
 using MinionBase;
 using UserInterface;
+using AbilityBase;
 
 namespace Game
 {
