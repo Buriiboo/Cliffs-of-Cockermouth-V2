@@ -51,23 +51,16 @@ namespace Game;
         {
             Amount = amount;
         }
-        public void UseConsumable(Hero hero, Consumable consumable)
-        {
-            //använd men hur den används beror på om det är något som ger damage ller healtch etc
-            hero.RemoveInventory(consumable);
-        }
+        
     }
-    class Quest : Item
+    public class Quest : Item
     {
         public bool HaveItem {get; set;}
         public Quest(string name, string description, bool haveItem) :base(name, description)
         {
             HaveItem = haveItem;
         }
-        public void UseQuest(Hero hero, Quest quest) // behövs bool? man kan bara ta ur det från hero inventory när man har använt de
-        {
-            hero.RemoveInventory(quest);
-        }
+        
     }
     public class ThrowWeapons : Consumable
     {
@@ -76,9 +69,22 @@ namespace Game;
         {
             Damage = damage;
         }
-        public void UseItem(Character other)
+        
+    }
+    public class UseItems
+    {
+        public void UseQuest(Hero hero, Quest quest) // behövs bool? man kan bara ta ur det från hero inventory när man har använt de
         {
-            Amount -= 1;
+            hero.RemoveInventory(quest);
+        }
+        public void UseThrowItem(ThrowWeapons throwWeapons)
+        {
+            throwWeapons.Amount -= 1;
+        }
+        public void UseConsumable(Hero hero, Consumable consumable)
+        {
+            //använd men hur den används beror på om det är något som ger damage ller healtch etc
+            hero.RemoveInventory(consumable);
         }
     }
 

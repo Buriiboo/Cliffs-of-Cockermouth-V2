@@ -12,14 +12,12 @@ namespace Main
         static void Main(string[] args)
         {
             GameLogic gameLogic = new GameLogic();
-            List<Character> characters = DefaultCharacters.GetDefaultCharacters();
-            Hero player = characters.OfType<Hero>().FirstOrDefault();
-            Merchant merchant = characters.OfType<Merchant>().FirstOrDefault();
-            Boss boss = characters.OfType<Boss>().FirstOrDefault();
+            
+            Hero player = new Hero("Hero", 100, 15.0, 10, 1, 15, 50);
             
             Item arrow = new ThrowWeapons("Arrow", "Sharp", 3, 3);
             player.AddInventory(arrow);
-            merchant.AddInventory(arrow);
+            
 
             int[,] grid = new int[3, 3];
             bool[,] visitedRooms = new bool[3, 3]; // This array keeps track of visited rooms
@@ -27,11 +25,9 @@ namespace Main
             int playerColumn = 1;
             bool isRunning = true;
 
-            while (isRunning)
+            while (player.HP > 0 || isRunning)
             {
-                
-                Console.Clear();
-                Minion enemy = DefaultCharacters.GetRandomMinion(DefaultCharacters.GetDefaultCharacters());
+                //Console.Clear();
                 gameLogic.PrintGrid(grid, playerRow, playerColumn, visitedRooms);
 
                 // Display available moves based on the player's current position
@@ -52,8 +48,7 @@ namespace Main
                 }
                 else
                 {
-                    gameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid, player, 
-                    enemy, merchant, boss);
+                    gameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid, player);
                 }
             }
         }

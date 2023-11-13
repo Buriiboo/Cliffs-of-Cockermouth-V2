@@ -11,10 +11,10 @@ public class Minion : Character
     {
         
     }
-    public Hero Attack(Hero hero, Minion minion)
+    public override void Encounter(Hero player)
     {
-        hero.HP -= minion.Damage;
-        return hero;
+        player.HP -= Damage;
+        HP -= player.Damage;
     }
     
 }
@@ -27,6 +27,7 @@ public class Murlock : Minion
     {
         // Any additional initializations specific to Minions can be done here
     }
+    
 
 }
 public class MurlockBruiser : Murlock
@@ -53,14 +54,25 @@ public class Undead : Minion
 }
 public class Boss : Minion
 {
+    
     public double CriticalDamage {get; set;}
     public Boss(string name, double damage, double hp, int armor, int affinity, double criticalDamage) : base(name, damage, hp, armor, affinity)
     {
         CriticalDamage = criticalDamage;
     }
-    public void BossCritical(Hero player, Boss boss)
+    public void BossCritical(Hero player)
     {
-        player.HP -= boss.CriticalDamage + boss.Damage;
+        player.HP -= CriticalDamage + Damage;
+    }
+    public override void Encounter(Hero player)
+    {
+        Random random = new Random();
+        int nr = random.Next(1, 5);
+        if(nr == 3)
+            BossCritical(player);
+        else
+            HP -= player.Damage;
+            player.HP -= Damage;
     }
 }
 public class DefaultCharacters
@@ -69,7 +81,7 @@ public class DefaultCharacters
     {
         return new List<Character>
         {
-        new Hero("Hero", 100, 15.0, 10, 1, 15, 50),
+        
         
         new Undead("Undead", 30, 12.0, 10, 1),
         new Undead("Undead", 45, 10.5, 10, 1),

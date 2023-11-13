@@ -2,6 +2,7 @@ using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
 using CharacterBase;
 using Game;
+using HeroCreatorBase;
 namespace NpcCreatorBase
 {
 
@@ -11,7 +12,7 @@ namespace NpcCreatorBase
         {
 
         }
-        public void Dialog()
+        public override void Encounter(Hero player)
         {
             //npc dialog metod
         }
@@ -34,17 +35,19 @@ public class Merchant : Character
             Console.WriteLine($"{i + 1}: {inventory[i]}");
         }
     }
-    public void EncounterMerchant()
+    public override void Encounter(Hero player)
     {
-        Console.WriteLine("Hi!\n[S]ee what merchant has for sale\n[E]xit");
-        string choice = Console.ReadLine().ToLower();
-        switch(choice){
-            case "s":
-                ShowInventory();
-                Thread.Sleep(1000);
-                break;
-            case "e":
-                return;
+        while(true){
+            Console.WriteLine("Hi!\n[S]ee what merchant has for sale\n[E]xit");
+            string choice = Console.ReadLine().ToLower();
+            switch(choice){
+                case "s":
+                    ShowInventory();
+                    Thread.Sleep(3000);
+                    break;
+                case "e":
+                    return;
+            }
         }
     }
 }

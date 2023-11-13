@@ -1,5 +1,5 @@
 using HeroCreatorBase;
-
+/*
 namespace AbilityBase
 {
     public abstract class AbilityBase
@@ -53,3 +53,4 @@ namespace AbilityBase
     }
 
 }
+*/

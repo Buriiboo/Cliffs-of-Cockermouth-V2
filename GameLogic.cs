@@ -4,7 +4,7 @@ using Game;
 using HeroCreatorBase;
 
 public class GameLogic
-{
+{Character other;
     public void PrintGrid(int[,] grid, int playerRow, int playerColumn, bool[,] visitedRooms)
         {
             for (int i = 0; i < grid.GetLength(0); i++)
@@ -43,10 +43,12 @@ public class GameLogic
             Console.WriteLine();
             }
         }
-    public void MovePlayer(ref int playerRow, ref int playerColumn, string command,bool[,] visitedRooms, int[,] grid, Hero player, Character other, Merchant merchant, Boss boss)
+    public void MovePlayer(ref int playerRow, ref int playerColumn, string command,bool[,] visitedRooms, int[,] grid, Hero player)
     {
         int newRow = playerRow;
         int newColumn = playerColumn;
+        List<Character> characters = DefaultCharacters.GetDefaultCharacters();
+        
 
         switch (command.ToLower())
         {
@@ -68,24 +70,30 @@ public class GameLogic
         }
         if (newRow >= 0 && newRow < grid.GetLength(0) && newColumn >= 0 && newColumn < grid.GetLength(1))
         {
-            Battle battle = new Battle();
             playerRow = newRow;
             playerColumn = newColumn;
-            if(playerRow == 2 && playerColumn == 2){
-                merchant.EncounterMerchant();
+        
+            if(newRow == 2 && newColumn == 2){
+                other = characters.OfType<Merchant>().FirstOrDefault();
+                other.Encounter(player);
+            }
+            else if(newRow == 0 && newColumn == 1){
+                Console.WriteLine("BOSSFIGHT");
+                other = characters.OfType<Boss>().FirstOrDefault();
+                Battle(player, other);
             }
             else if(!visitedRooms[newRow, newColumn]){
                 visitedRooms[playerRow, playerColumn] = true; // Mark the old room as visited
-                battle.TriggerBattle(player, other);
+                other = DefaultCharacters.GetRandomMinion(DefaultCharacters.GetDefaultCharacters());
+                Battle(player, other);
             }
-            else if(newRow == 0 && newColumn == 1){
-                Random random = new Random();
-                int nr = random.Next(1, 5);
-                if(nr == 3)
-                    boss.BossCritical(player, boss);
-                else
-                    battle.TriggerBattle(player, boss);
-            }
+            
         }
+    }
+    public void Battle(Hero player, Character other)
+    {
+        while(player.HP > 0 && other.HP > 0)
+            Console.WriteLine(player.Engagement(other));
+        
     }
 }

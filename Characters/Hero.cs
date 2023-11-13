@@ -6,26 +6,42 @@ using Game;
 using MinionCreatorBase;
 using System.Security;
 namespace HeroCreatorBase;
-
-public class Hero : Character
+public class Hero
 {
+    public string Name {get; set;}
+    public double HP {get; set;}
+    public double Damage {get; set;}
+    public int Armor {get; set;}
+    public int Affinity {get; set;}
     public double Experience {get; set;}
     public int Level {get; set;}
     public List<Item> inventory;
-    public Hero(string name, double hp, double damage, double experience, int level, int armor, int affinity) 
-        : base(name, damage, hp, armor, affinity)
+    public Hero(string name, double hp, double damage, double experience, int level, int armor, int affinity)
     {
+        Name = name;
+        HP = hp;
+        Damage = damage;
+        Armor = armor;
+        Affinity = affinity;
         Experience = experience;
         Level = level;
         inventory = new List<Item>();
     }
-    public double Engage(Character enemy, Hero hero)
+    public void Attack(Character other)
     {
-        return enemy.HP -= hero.Damage;
+        other.HP -= Damage;
+        HP -= other.Damage;
     }
-    public void Dialog()
+    public void Defence(Character other)
     {
-
+        HP -= other.Damage*0.25;
+    }
+    public void ItemAttack(Character other, ThrowWeapons item)
+    {
+        other.HP -= item.Damage;
+        item.Amount -= 1;
+        if(item.Amount == 0)
+            RemoveInventory(item);
     }
     public List<Item> Inventory()
     {
@@ -37,17 +53,17 @@ public class Hero : Character
             Console.WriteLine($"{i + 1}: {inventory[i]}");
         }
     }
-    public void HandelInventory(Hero player, Character other)
+    public void HandelInventory(Character other)
     {
-        if(player.Inventory().Count == 0){
+        if(Inventory().Count == 0){
             Console.WriteLine("Your inventory is empty!");
             return;
         }
-        player.ShowInventory();
+        ShowInventory();
         int ItemChoice = int.Parse(Console.ReadLine());
-        Item item = player.Inventory()[ItemChoice - 1];
+        Item item = Inventory()[ItemChoice - 1];
         if(item is ThrowWeapons throwWeapons)
-            player.ItemAttack(other, player, throwWeapons);
+            ItemAttack(other, throwWeapons);
         
     }
     public void AddInventory(Item item)
@@ -57,5 +73,23 @@ public class Hero : Character
     public void RemoveInventory(Item item)
     {
         inventory.Remove(item);
+    }
+
+    public string Engagement(Character other)
+    {
+        Console.WriteLine("[A]ttack [D]efense [I]nventory");
+        string choice = Console.ReadLine().ToLower();
+        switch(choice){
+            case "a": 
+                Attack(other);
+                break;
+            case "d":
+                Defence(other);
+                break;
+            case "i":
+                HandelInventory(other);
+                break;
+            }
+        return $"Enemy hp: {other.HP} \nPlayer damage: {Damage}\nPlayer hp: {HP} \nEnemy damage: {other.Damage}";
     }
 }
