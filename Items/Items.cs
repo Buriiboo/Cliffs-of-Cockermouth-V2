@@ -1,29 +1,32 @@
 
 using System.Reflection.Metadata.Ecma335;
+using System.Security;
 using CharacterBase;
 using HeroCreatorBase;
+using Microsoft.VisualBasic;
 namespace Game;
     public abstract class Item
     {
         public string Name {get; set;}
         public string Description {get; set;}
+        public abstract void UseItem(Character other);
         public Item(string name, string description)
         {
             Name = name;
             Description = description;
         }
-    public override string ToString()
-    {
-        return $"{Name}: {Description}";
     }
-}
-    class Gear : Item
+    class Gear
     {
+        public string Name {get; set;}
+        public string Description {get; set;}
         public string GearSlot {get; set;}
         public double Protection {get; set;}
         public bool HaveItem {get; set;}
-        public Gear(string name, string description, bool haveItem, string gearSlot, double protection) :base(name, description)
+        public Gear(string name, string description, bool haveItem, string gearSlot, double protection)
         {
+            Name = name;
+            Description = description;
             GearSlot = gearSlot;
             Protection = protection;
             HaveItem = haveItem;
@@ -44,7 +47,7 @@ namespace Game;
             hero.HP -= gear.Protection;
         }
     }
-    public class Consumable : Item
+    public abstract class Consumable : Item
     {
         public int Amount {get; set;}
         public Consumable(string name, string description, int amount) :base(name, description)
@@ -52,15 +55,23 @@ namespace Game;
             Amount = amount;
         }
         
+
     }
-    public class Quest : Item
+    public class Quest
     {
+        public string Name {get; set;}
+        public string Description {get; set;}
         public bool HaveItem {get; set;}
-        public Quest(string name, string description, bool haveItem) :base(name, description)
+        public Quest(string name, string description, bool haveItem)
         {
+            Name = name;
+            Description = description;
             HaveItem = haveItem;
         }
-        
+        public void ShowQuest()
+        {
+
+        }
     }
     public class ThrowWeapons : Consumable
     {
@@ -69,22 +80,12 @@ namespace Game;
         {
             Damage = damage;
         }
+        public override void UseItem(Character other)
+        {
+            Amount -= 1;
+            other.HP -= Damage;
+        }
         
     }
-    public class UseItems
-    {
-        public void UseQuest(Hero hero, Quest quest) // behövs bool? man kan bara ta ur det från hero inventory när man har använt de
-        {
-            hero.RemoveInventory(quest);
-        }
-        public void UseThrowItem(ThrowWeapons throwWeapons)
-        {
-            throwWeapons.Amount -= 1;
-        }
-        public void UseConsumable(Hero hero, Consumable consumable)
-        {
-            //använd men hur den används beror på om det är något som ger damage ller healtch etc
-            hero.RemoveInventory(consumable);
-        }
-    }
+    
 

@@ -27,22 +27,6 @@ public class Hero
         Level = level;
         inventory = new List<Item>();
     }
-    public void Attack(Character other)
-    {
-        other.HP -= Damage;
-        HP -= other.Damage;
-    }
-    public void Defence(Character other)
-    {
-        HP -= other.Damage*0.25;
-    }
-    public void ItemAttack(Character other, ThrowWeapons item)
-    {
-        other.HP -= item.Damage;
-        item.Amount -= 1;
-        if(item.Amount == 0)
-            RemoveInventory(item);
-    }
     public List<Item> Inventory()
     {
         return inventory;
@@ -61,11 +45,15 @@ public class Hero
         }
         ShowInventory();
         int ItemChoice = int.Parse(Console.ReadLine());
-        Item item = Inventory()[ItemChoice - 1];
-        if(item is ThrowWeapons throwWeapons)
-            ItemAttack(other, throwWeapons);
         
+        Item item = Inventory()[ItemChoice - 1];
+        if(item is ThrowWeapons throwWeapons){
+            item.UseItem(other);
+            if(throwWeapons.Amount == 0)
+                RemoveInventory(item);
+        }
     }
+
     public void AddInventory(Item item)
     {
         inventory.Add(item);
@@ -81,10 +69,11 @@ public class Hero
         string choice = Console.ReadLine().ToLower();
         switch(choice){
             case "a": 
-                Attack(other);
+                other.HP -= Damage;
+                HP -= other.Damage;
                 break;
             case "d":
-                Defence(other);
+                HP -= other.Damage*0.25;
                 break;
             case "i":
                 HandelInventory(other);
