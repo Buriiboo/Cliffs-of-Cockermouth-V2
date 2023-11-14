@@ -226,6 +226,7 @@ namespace Game
         private int playerRow = 2;
         private int playerColumn = 1;
         private bool isRunning = true;
+        private List<Minions> spawnedMinions;
 
         public void RunMainGameLoop(List<Hero> heroes, List<Minions> allMinions)
         {
@@ -267,10 +268,11 @@ namespace Game
                 else if (playerRow == 0 && playerColumn == 1)
                 {
                     List<Minions> bossGroup = Minions.Boss();
-                    GameLogic.BattleEncounter(heroes.First(), Minions.Boss());
+                    GameLogic.BattleEncounter(heroes.First(), bossGroup);
                     GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
                     GameLogic.EndRound(spawnedMinions, allMinions, heroes, bossGroup);
                 }
+
                 else
                 {
                     List<Minions> bossGroup = Minions.Boss();
