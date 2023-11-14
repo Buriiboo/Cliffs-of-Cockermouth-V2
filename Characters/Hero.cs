@@ -45,7 +45,6 @@ public class Hero
         }
         ShowInventory();
         int ItemChoice = int.Parse(Console.ReadLine());
-        
         Item item = Inventory()[ItemChoice - 1];
         if(item is ThrowWeapons throwWeapons){
             item.UseItem(other);

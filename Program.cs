@@ -12,9 +12,7 @@ namespace Main
         static void Main(string[] args)
         {
             GameLogic gameLogic = new GameLogic();
-            
             Hero player = new Hero("Hero", 100, 15.0, 10, 1, 15, 50);
-            
             Item arrow = new ThrowWeapons("Arrow", "Sharp", 3, 3);
             player.AddInventory(arrow);
             

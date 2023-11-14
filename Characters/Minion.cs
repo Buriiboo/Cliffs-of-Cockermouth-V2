@@ -82,7 +82,6 @@ public class DefaultCharacters
         return new List<Character>
         {
         
-        
         new Undead("Undead", 30, 12.0, 10, 1),
         new Undead("Undead", 45, 10.5, 10, 1),
         
