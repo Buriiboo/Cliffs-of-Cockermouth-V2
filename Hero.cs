@@ -21,13 +21,14 @@ namespace HeroBase
         private const int TempHPIncrease = 5;
 
         public int TempArmorBuff { get; private set; } = 0;
+        public string HeroName {get; set;}
 
 
 
-        public Hero(int hp, double damage, int armor, int affinity,int level, int experience)
+        public Hero(string heroName, int hp, double damage, int armor, int affinity,int level, int experience)
             : base(hp, damage, armor, affinity)
         {
-
+            HeroName = heroName;
             Level = level;
             Experience = experience;
             // Any additional initializations specific to Minions can be done here
@@ -35,7 +36,10 @@ namespace HeroBase
 
         public static Hero CreateHero()
         {
-        
+            Console.Clear();
+            System.Console.WriteLine("Choose a name: ");
+            string heroName = Console.ReadLine();
+
             int hp = 500;
             double damage = 50;
             int armor = 3;
@@ -43,8 +47,7 @@ namespace HeroBase
             int level = 1;
             int experience = 1;
 
-    
-            return new Hero(hp, damage, armor, affinity, level, experience);
+            return new Hero(heroName, hp, damage, armor, affinity, level, experience);
         }
 
         public int Attack(Character target)

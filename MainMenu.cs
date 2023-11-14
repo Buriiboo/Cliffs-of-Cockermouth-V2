@@ -9,6 +9,7 @@ using AbilityBase;
 using MinionBase;
 using UserInterface;
 using Game;
+using Environment;
 
 
 namespace MainMenu
@@ -30,7 +31,11 @@ namespace MainMenu
                 List<Abilities> abilities2 = Abilities.GetAbilities();
                 List<Minions> allMinions = Character.GetDefaultCharacters().OfType<Minions>().ToList();
                 
-                List<Hero> heroes = Character.GetDefaultCharacters().OfType<Hero>().ToList();
+
+                List<Hero> heroes = new List<Hero>();
+                GameEnvironment game = new GameEnvironment();
+
+                //List<Hero> heroes = Character.GetDefaultCharacters().OfType<Hero>().ToList();
                 List<Minions> SpawnMinion = Minions.SpawnMinion(allMinions, heroes.First().Level, 3);
                 List<Minions> Boss = Minions.Boss();
 
@@ -54,8 +59,9 @@ namespace MainMenu
                     switch(choice)
                     {
                         case "1":
-                            //start HeroCreator
-                            //then start MainGameLoop
+
+                            HeroBase.Hero.CreateHero();
+                            game.RunGame();
                             break;
                         case "2":
                             //load game

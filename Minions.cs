@@ -13,12 +13,13 @@ namespace MinionBase
 
         
 
-        public Minions(int hp, double damage, int armor, int affinity, int minionlevel, int experiencegiven)
-            : base(hp, damage, armor, affinity)
-        {
-            MinionLevel = minionlevel;
-            ExperienceGiven = experiencegiven;
-        }
+    public Minions(int hp, double damage, int armor, int affinity, int minionlevel, int experiencegiven)
+        : base(hp, damage, armor, affinity)
+    {
+        MinionLevel = minionlevel;
+        ExperienceGiven = experiencegiven;
+    }
+
 
         public static List<Minions> SpawnMinion(List<Minions> allMinions, int heroLevel, int numberToTake)
         {
