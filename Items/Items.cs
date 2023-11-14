@@ -54,8 +54,6 @@ namespace Game;
         {
             Amount = amount;
         }
-        
-
     }
     public class Quest
     {
