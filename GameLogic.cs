@@ -6,11 +6,14 @@ using HeroBase;
 using MinionBase;
 using UserInterface;
 using AbilityBase;
+using GameRoom;
+using Game;
 
 namespace Game
 {
     public class GameLogic
     {
+
 
         public static void MovePlayer(ref int playerRow, ref int playerColumn, string command, bool[,] visitedRooms, int[,] grid)
         {
@@ -214,5 +217,64 @@ namespace Game
                 Console.WriteLine("Invalid input. Please enter a number within the specified range.");
             }
         }
+    }
+    public class RunMainGameLoop(List<Hero> heroes, List<Minions> allMinions)
+    {
+
+                    bool isRunning = true;
+
+                    while (isRunning)
+                    {
+                        Console.Clear();
+            
+                        UI.PrintGrid(grid, playerRow, playerColumn, visitedRooms);
+                        UI.PlayerMovement(grid, playerRow, playerColumn);
+
+                        string command = Console.ReadLine();
+
+                        if (command.ToLower() == "exit")
+                        {
+                            isRunning = false;
+                        }
+                        else if(playerRow== 2 &&playerColumn == 1)
+                        {
+                            UI.Secret("The way forward was shut...");
+                            UI.Secret("But on the door there was an inscription and it read thus:");
+                            UI.Secret("Speak the word friend and you may enter.");
+                            GameLogic.SecretScenario(heroes);
+                            GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+                        }
+                        else if (playerRow == 2 && playerColumn == 2)
+                        {
+                            //Insert logic for Merchant
+                            GameLogic.SecretScenario(heroes);
+                            GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+                        }
+                        else if (playerRow == 0 && playerColumn == 2)
+                        {
+                            //Insert logic for Roaming
+                            GameLogic.SecretScenario(heroes);
+                            GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+                        }
+                        else if (playerRow == 0 && playerColumn == 1)
+                        {
+                            GameLogic.BattleEncounter(heroes.First(), Minions.Boss());
+                            GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+                            GameLogic.EndRound(Boss, allMinions, heroes);
+                        }
+                        else
+                        {
+                            List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, heroes.First().Level, 3);
+                            GameLogic.BattleEncounter(heroes.First(), Minions.SpawnMinion(allMinions, heroes.First().Level, 3));
+                            GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+                            GameLogic.EndRound(spawnedMinions, allMinions, heroes);
+                            foreach (var minions in allMinions)
+                            {
+                                System.Console.WriteLine(minions.HP);
+                                Thread.Sleep(200);
+                            }
+            
+                        }
+                    }
     }
 }

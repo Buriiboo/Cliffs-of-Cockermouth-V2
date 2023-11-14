@@ -2,6 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HeroBase;
+using MinionBase;
+using UserInterface;
+using Game;
+
 
 namespace GameRoom
 {
@@ -86,4 +91,16 @@ namespace GameRoom
             }
         }
     }
+
+    public class Stage
+    {
+                int[,] grid = new int[3, 3];
+                bool[,] visitedRooms = new bool[3, 3]; // This array keeps track of visited rooms
+
+                int playerRow = 2;
+                int playerColumn = 1;
+               
+    }
+
+       
 }
