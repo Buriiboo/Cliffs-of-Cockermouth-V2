@@ -92,7 +92,7 @@ namespace GameRoom
         }
     }
 
-    public class Stage
+   /* public class Stage
     {
                 int[,] grid = new int[3, 3];
                 bool[,] visitedRooms = new bool[3, 3]; // This array keeps track of visited rooms
@@ -100,7 +100,7 @@ namespace GameRoom
                 int playerRow = 2;
                 int playerColumn = 1;
                
-    }
+    }*/
 
        
 }

@@ -20,18 +20,13 @@ namespace MainMenu
         static void Main(string[] args)
         {
 
-             
-                GameRoom.Stage stage = new GameRoom.Stage();
-                
-
-
                 List<Character> characters = Character.GetDefaultCharacters();
                 List<Abilities> abilities2 = Abilities.GetAbilities();
                 List<Minions> allMinions = Character.GetDefaultCharacters().OfType<Minions>().ToList();
-                
-
                 List<Hero> heroes = new List<Hero>();
+
                 GameEnvironment game = new GameEnvironment();
+                Stage stage = new Stage();
 
                 //List<Hero> heroes = Character.GetDefaultCharacters().OfType<Hero>().ToList();
                 List<Minions> SpawnMinion = Minions.SpawnMinion(allMinions, heroes.First().Level, 3);
@@ -59,7 +54,7 @@ namespace MainMenu
                         case "1":
 
                             HeroBase.Hero.CreateHero();
-                            Stage.RunMainGameLoop(heroes, allMinions);
+                            stage.RunMainGameLoop(heroes, allMinions);
                             break;
                         case "2":
                             //load game
@@ -68,7 +63,9 @@ namespace MainMenu
                             //????
                             break;
                         case "4":
-                            return;
+                            runMain = false;
+                            break;
+                           
                     }
                 
         

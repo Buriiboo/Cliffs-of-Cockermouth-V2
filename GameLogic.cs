@@ -170,7 +170,7 @@ namespace Game
             return choice;
         }
 
-        public static void EndRound(List<Minions> spawnedMinions, List<Minions> allMinions,List<Hero> heroes)
+        public static void EndRound(List<Minions> spawnedMinions, List<Minions> allMinions,List<Hero> heroes, List<Minions> bossGroup)
         {
 
             //Experience + restore minion
@@ -218,63 +218,73 @@ namespace Game
             }
         }
     }
-    public class RunMainGameLoop(List<Hero> heroes, List<Minions> allMinions)
+    public class Stage
     {
+        private int[,] grid = new int[3, 3];
+        private bool[,] visitedRooms = new bool[3, 3]; // This array keeps track of visited rooms
 
-                    bool isRunning = true;
+        private int playerRow = 2;
+        private int playerColumn = 1;
+        private bool isRunning = true;
 
-                    while (isRunning)
+        public void RunMainGameLoop(List<Hero> heroes, List<Minions> allMinions)
+        {
+            GameLogic gameLogic = new GameLogic();
+
+            while (isRunning)
+            {
+                Console.Clear();
+
+                UI.PrintGrid(grid, playerRow, playerColumn, visitedRooms);
+                UI.PlayerMovement(grid, playerRow, playerColumn);
+
+                string command = Console.ReadLine();
+
+                if (command.ToLower() == "exit")
+                {
+                    isRunning = false;
+                }
+                else if (playerRow == 2 && playerColumn == 1)
+                {
+                    UI.Secret("The way forward was shut...");
+                    UI.Secret("But on the door there was an inscription and it read thus:");
+                    UI.Secret("Speak the word friend and you may enter.");
+                    GameLogic.SecretScenario(heroes);
+                    GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+                }
+                else if (playerRow == 2 && playerColumn == 2)
+                {
+                    // Insert logic for Merchant
+                    GameLogic.SecretScenario(heroes);
+                    GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+                }
+                else if (playerRow == 0 && playerColumn == 2)
+                {
+                    // Insert logic for Roaming
+                    GameLogic.SecretScenario(heroes);
+                    GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+                }
+                else if (playerRow == 0 && playerColumn == 1)
+                {
+                    List<Minions> bossGroup = Minions.Boss();
+                    GameLogic.BattleEncounter(heroes.First(), Minions.Boss());
+                    GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+                    GameLogic.EndRound(spawnedMinions, allMinions, heroes, bossGroup);
+                }
+                else
+                {
+                    List<Minions> bossGroup = Minions.Boss();
+                    List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, heroes.First().Level, 3);
+                    GameLogic.BattleEncounter(heroes.First(), Minions.SpawnMinion(allMinions, heroes.First().Level, 3));
+                    GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+                    GameLogic.EndRound(spawnedMinions, allMinions, heroes, bossGroup);
+                    foreach (var minions in allMinions)
                     {
-                        Console.Clear();
-            
-                        UI.PrintGrid(grid, playerRow, playerColumn, visitedRooms);
-                        UI.PlayerMovement(grid, playerRow, playerColumn);
-
-                        string command = Console.ReadLine();
-
-                        if (command.ToLower() == "exit")
-                        {
-                            isRunning = false;
-                        }
-                        else if(playerRow== 2 &&playerColumn == 1)
-                        {
-                            UI.Secret("The way forward was shut...");
-                            UI.Secret("But on the door there was an inscription and it read thus:");
-                            UI.Secret("Speak the word friend and you may enter.");
-                            GameLogic.SecretScenario(heroes);
-                            GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
-                        }
-                        else if (playerRow == 2 && playerColumn == 2)
-                        {
-                            //Insert logic for Merchant
-                            GameLogic.SecretScenario(heroes);
-                            GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
-                        }
-                        else if (playerRow == 0 && playerColumn == 2)
-                        {
-                            //Insert logic for Roaming
-                            GameLogic.SecretScenario(heroes);
-                            GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
-                        }
-                        else if (playerRow == 0 && playerColumn == 1)
-                        {
-                            GameLogic.BattleEncounter(heroes.First(), Minions.Boss());
-                            GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
-                            GameLogic.EndRound(Boss, allMinions, heroes);
-                        }
-                        else
-                        {
-                            List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, heroes.First().Level, 3);
-                            GameLogic.BattleEncounter(heroes.First(), Minions.SpawnMinion(allMinions, heroes.First().Level, 3));
-                            GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
-                            GameLogic.EndRound(spawnedMinions, allMinions, heroes);
-                            foreach (var minions in allMinions)
-                            {
-                                System.Console.WriteLine(minions.HP);
-                                Thread.Sleep(200);
-                            }
-            
-                        }
+                        System.Console.WriteLine(minions.HP);
+                        Thread.Sleep(200);
                     }
+                }
+            }
+        }
     }
 }
