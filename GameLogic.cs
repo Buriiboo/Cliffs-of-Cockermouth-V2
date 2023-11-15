@@ -124,21 +124,18 @@ namespace Game
                     break;
 
                 case 4:
-                    int abilityChoice = 0;
-                    hero.SpellList(hero.Heroabilities);
-                    int minionIndex3 = SelectMinionToAttack(spawnedMinions);
+                    
+                    int abilityChoice = hero.SpellList(hero.Heroabilities);
+                    int minionIndex3 = SelectMinionToAttack
+                    (spawnedMinions);
+                   
 
                     // Check if the selected minion index is within the bounds of the spawnedMinions list
-                    if (minionIndex3 >= 0 && minionIndex3 < spawnedMinions.Count)
+                    if (minionIndex3 >= 0)
                     {
-    
-
-                        // You might also need to check if abilityChoice is within bounds
-                        if (abilityChoice > 0 && abilityChoice <= hero.Heroabilities.Count)
-                        {
-                            hero.Heroabilities[abilityChoice - 1].UseAbility(spawnedMinions[minionIndex3]);
-                        }
+                    hero.Heroabilities[abilityChoice-1].UseAbility(spawnedMinions[minionIndex3]);
                     }
+                    
                     break;
 
 

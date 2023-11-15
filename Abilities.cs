@@ -60,10 +60,11 @@ namespace Game
         }
         public override void UseAbility(Character target)
         {
-            Console.WriteLine("You throw a fireball!");
+            Console.WriteLine($"You throw a fireball! Dealing: {this.Power} damage");
             int tmp = (int)this.Power;
             target.HP -= tmp;
-            
+            Thread.Sleep(200);
+
         }
     }
 
@@ -78,9 +79,12 @@ namespace Game
 
         public override void UseAbility(Character target)
         {
-            Console.WriteLine("Ice Shard slices your opponent!");
+            Console.WriteLine($"You throw a Shard of Ice! Dealing: {this.Power} damage");
             int tmp = (int)this.Power;
             target.HP -= tmp;
+            Thread.Sleep(200);
+
+
         }
 
         public static IceShard CreateIceShard()
@@ -88,7 +92,7 @@ namespace Game
 
             string name = "IceShard";
             string description ="Ice as sharp as a dagger";
-            double power = 15;
+            double power = 20;
             int turns = 1;
 
             return new IceShard(name, description, power, turns);
@@ -106,7 +110,7 @@ namespace Game
 
         public override void UseAbility(Character target)
         {
-            Console.WriteLine("You Strike with Holy power!");
+            Console.WriteLine($"You Strike with Zeal Dealing: {this.Power} damage");
             int tmp = (int)this.Power;
             target.HP -= tmp;
         }
@@ -117,8 +121,9 @@ namespace Game
 
             string name = "Holy Strike";
             string description = "Only the most devout can strike True";
-            double power = 20;
+            double power = 35;
             int turns = 1;
+            Thread.Sleep(200);
 
             return new HolyStrike(name, description, power, turns);
         }
