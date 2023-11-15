@@ -29,6 +29,7 @@ namespace Game
             Level = level;
             Experience = experience;
             Heroabilities = new List<Abilities>();
+            inventory = new List<
             // Any additional initializations specific to Minions can be done here
         }
 
