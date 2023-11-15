@@ -37,7 +37,7 @@ public class Hero
             Console.WriteLine($"{i + 1}: {inventory[i].Name}");
         }
     }
-    public void HandelInventory(Character other)
+    public void HandelInventory(Character other) // det finns just nu bara för ThrowWeapons item för det är den enda sorten som har lagts till.
     {
         if(Inventory().Count == 0){
             Console.WriteLine("Your inventory is empty!");
@@ -75,7 +75,7 @@ public class Hero
                 HP -= other.Damage*0.25;
                 break;
             case "i":
-                HandelInventory(other);
+                HandelInventory(other); //här får man väälja ifall det ska vara item attack som ges istället för vanliga player damage. även välja vilket item man vill attackera med
                 break;
             }
         return $"Enemy hp: {other.HP} \nPlayer damage: {Damage}\nPlayer hp: {HP} \nEnemy damage: {other.Damage}";

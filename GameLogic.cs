@@ -68,29 +68,29 @@ public class GameLogic
                 Console.WriteLine("Invalid command.");
                 return; // Early return if the command is invalid
         }
-        if (newRow >= 0 && newRow < grid.GetLength(0) && newColumn >= 0 && newColumn < grid.GetLength(1))
+        if (newRow >= 0 && newRow < grid.GetLength(0) && newColumn >= 0 && newColumn < grid.GetLength(1)) // hela battle beroende på vart i gridden som man befinenr sig
         {
             playerRow = newRow;
             playerColumn = newColumn;
             
-            if(newRow == 2 && newColumn == 2){
+            if(newRow == 2 && newColumn == 2){ //är det en merchant så spawnar en merchant in i other och ingen battle startar och man hamnar i merchant encounter
                 other = characters.OfType<Merchant>().FirstOrDefault();
                 other.Encounter(player);
             }
-            else if(newRow == 0 && newColumn == 1){
+            else if(newRow == 0 && newColumn == 1){ //Här spawnar en boss in i other och det blir en boss encounter
                 Console.WriteLine("BOSSFIGHT");
                 visitedRooms[playerRow, playerColumn] = true;
                 other = characters.OfType<Boss>().FirstOrDefault();
                 while(player.HP > 0 && other.HP > 0)
                     Console.WriteLine(player.Encounter(other));
             }
-            else if(!visitedRooms[newRow, newColumn]){
+            else if(!visitedRooms[newRow, newColumn]){//Vanlig minion och det blir en minion encounter
                 visitedRooms[playerRow, playerColumn] = true; // Mark the old room as visited
                 other = DefaultCharacters.GetRandomMinion(DefaultCharacters.GetDefaultCharacters());
                 while(player.HP > 0 && other.HP > 0)
                     Console.WriteLine(player.Encounter(other));
             }
-        }
-        
+        } 
+
     }
 }
