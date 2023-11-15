@@ -1,4 +1,4 @@
-/*
+
 public class Merchant : Character
 {
     List<Item> inventory;
@@ -32,4 +32,3 @@ public class Merchant : Character
         }
     }
 }
-*/

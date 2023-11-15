@@ -1,4 +1,4 @@
-/*
+
 using System.Reflection.Metadata.Ecma335;
 using System.Security;
 using CharacterBase;
@@ -87,4 +87,3 @@ namespace Game;
     }
     
 
-*/
