@@ -57,9 +57,6 @@ namespace Game
                     System.Console.WriteLine($"New affinity: {hero.Affinity}!");
                 }
                   
-           
-
-            
             Console.ReadKey();
 
         }
@@ -106,14 +103,9 @@ namespace Game
                     }
                     
                     break;
-
-
             }
-            
-
 
         }
-
         public static int SelectMinionToAttack(List<Minions> spawnedMinions)
         {
             Console.WriteLine("Choose a minion to attack:");
