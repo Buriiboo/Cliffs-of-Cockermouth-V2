@@ -6,6 +6,7 @@ Inventory + Droprate/Acquiring method för att kunna ackumulera items.
 Inventory + Merchant encounter.
 Inventory + Effect.
 
+Brian
 Monster + Roaming.
 Hero + Leveling buffs.
 SecretBulder + Puzzles/Dilemma

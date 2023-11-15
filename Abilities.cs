@@ -26,16 +26,6 @@ namespace Game
 
 
 
-        public static List<Abilities> GetAbilities()
-        {
-            return new List<Abilities>
-            {
-               Fireball.CreateFireball(),
-               HolyStrike.CreateSmite(),
-               IceShard.CreateIceShard(),
-            };
-        }
-
        
 
     }
@@ -115,19 +105,23 @@ namespace Game
             target.HP -= tmp;
         }
 
-
-        public static HolyStrike CreateSmite()
+    }
+    public class FirstofDoom : Abilities
+    {
+        public FirstofDoom(string name, string description, double power, int turns)
+            : base(name, description, power, turns)
         {
+            // Any additional initializations specific to Murlock can be done here
+        }
 
-            string name = "Holy Strike";
-            string description = "Only the most devout can strike True";
-            double power = 35;
-            int turns = 1;
-            Thread.Sleep(200);
-
-            return new HolyStrike(name, description, power, turns);
+        public override void UseAbility(Character target)
+        {
+            Console.WriteLine($"You Strike with Chaos Dealing: {this.Power} damage");
+            int tmp = (int)this.Power;
+            target.HP -= tmp;
         }
 
     }
+
 
 }

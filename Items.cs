@@ -20,8 +20,7 @@ namespace Game
         {
             return new List<Item>
             {
-               HelmofDoom.CreateHelmofDoom(),
-               PlateofChaos.CreatePlateofChaos(),
+
 
             };
         }
@@ -111,21 +110,35 @@ namespace Game
         {
             // Any additional initializations specific to Murlock can be done here
         }
-
-        public static HelmofDoom CreateHelmofDoom()
+        public void EquipGear(Hero hero)
         {
+            if (HaveItem)
+            {
+                Console.WriteLine("You already have one on you!");
+            }
+            else
+            {
 
-            string name = "HelmOfDoom";
-            string description = "Heavy helm not for the faint of heart";
-            bool haveItem = true;
-            string gearSlot = "Helm";
+                HaveItem = true;
+                hero.Armor+=5;
+                hero.Damage+=5;
+                hero.Heroabilities.Add(new FirstofDoom("FistOfDoom","Strikes with Chaotic power",50,1));
+            }
+        }
 
-            return new HelmofDoom(name, description, haveItem, gearSlot);
+        public void UnEquipGear(Hero hero)
+        {
+            if (HaveItem)
+            {
+                HaveItem = false;
+                hero.Armor -= 5;
+                hero.Damage -= 5;
+            }
         }
 
 
 
-        
+
     }
     public class PlateofChaos : Gear
     {
@@ -135,15 +148,5 @@ namespace Game
             // Any additional initializations specific to Murlock can be done here
         }
 
-        public static PlateofChaos CreatePlateofChaos()
-        {
-
-            string name = "PlateOfChaos";
-            string description = "Strong Metal Plate";
-            bool haveItem = true;
-            string gearSlot = "Torso";
-
-            return new PlateofChaos(name, description, haveItem, gearSlot);
-        }
     }
 }

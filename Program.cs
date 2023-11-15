@@ -16,20 +16,21 @@ class Program
 
             hero.Heroabilities.AddRange(new Abilities[] 
             {
-                Fireball.CreateFireball(),
-                IceShard.CreateIceShard(),
-                HolyStrike.CreateSmite()
+                new Fireball("Fireball","A ball of fire",40,1),
+                new IceShard("IceShard","Ice as sharp as a dagger",20,1),
+                new HolyStrike("HolyStrike","a Zealous Strike",30,1)
+
             });
             hero.inventory.AddRange(new Item[]
            {
-                HelmofDoom.CreateHelmofDoom(),
-                PlateofChaos.CreatePlateofChaos()
-
+                new HelmofDoom("HelmOfDoom","Heavy helm not for the faint of heart",true,"Helm"),
+                new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",true,"Helm")
            });
 
 
+
             List<Character> characters = Character.GetDefaultCharacters();
-            List<Abilities> abilities = Abilities.GetAbilities();
+            //List<Abilities> abilities = Abilities.GetAbilities();
         
 
             List<Minions> allMinions = Character.GetDefaultCharacters().OfType<Minions>().ToList();
