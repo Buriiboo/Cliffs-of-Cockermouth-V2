@@ -12,9 +12,6 @@ class Program
     static void Main(string[] args)
     {
 
-            int[,] grid = new int[3, 3];
-            bool[,] visitedRooms = new bool[3, 3]; // This array keeps track of visited rooms
-
             int playerRow = 2;
             int playerColumn = 1;
             bool isRunning = true;
@@ -36,6 +33,7 @@ class Program
             
             List<Minions> SpawnMinion = Minions.SpawnMinion(allMinions, hero.Level, 3);
             List<Minions> Boss = Minions.Boss();
+            GameLogic.MainMenu();
             GameEnvironment gameEnvironment = new GameEnvironment();
             gameEnvironment.RunGame(allMinions, hero);
 
@@ -100,3 +98,4 @@ class Program
 }
 
 }
+

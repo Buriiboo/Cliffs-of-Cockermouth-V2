@@ -11,24 +11,43 @@ namespace Game
         public int PlayerRow { get; set; }
         public int PlayerColumn { get; set; }
 
-        public Room()
+        public Room(int playerRoomRow, int playerRoomCol)
         {
-            InitializeLayout();
+            InitializeLayout(playerRoomRow, playerRoomCol);
             PlayerRow = 6; // Starting position
             PlayerColumn = 3;
         }
 
-        private void InitializeLayout()
+        private void InitializeLayout(int playerRoomRow, int playerRoomCol)
         {
+            // Initialize the base layout
             Layout = new int[,] {
-                { 1, 1, 1, 0, 1, 1, 1 },
-                { 1, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 1 },
-                { 0, 0, 0, 0, 0, 0, 0 },
-                { 1, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 1 },
-                { 1, 1, 1, 0, 1, 1, 1 }
-            };
+        { 1, 1, 1, 0, 1, 1, 1 },
+        { 1, 0, 0, 0, 0, 0, 1 },
+        { 1, 0, 0, 0, 0, 0, 1 },
+        { 0, 0, 0, 0, 0, 0, 0 },
+        { 1, 0, 0, 0, 0, 0, 1 },
+        { 1, 0, 0, 0, 0, 0, 1 },
+        { 1, 1, 1, 0, 1, 1, 1 }
+    };
+
+            // Modify first row if player is in row 1
+            if (playerRoomRow == 1)
+            {
+                for (int col = 0; col < Layout.GetLength(1); col++)
+                {
+                    Layout[0, col] = 1; // Set all elements in the first row to 1
+                }
+            }
+
+            // Modify first column if player is in column 1
+            if (playerRoomCol == 1)
+            {
+                for (int row = 0; row < Layout.GetLength(0); row++)
+                {
+                    Layout[row, 0] = 1; // Set all elements in the first column to 1
+                }
+            }
         }
 
         public void MovePlayer(int rowChange, int colChange)
@@ -60,7 +79,7 @@ namespace Game
 
         public void Print()
         {
-            Console.WriteLine($"Current room: {PlayerRow},{PlayerColumn}");
+            Console.WriteLine($"Current Position: {PlayerRow},{PlayerColumn}");
             for (int row = 0; row < Layout.GetLength(0); row++)
             {
                 for (int col = 0; col < Layout.GetLength(1); col++)

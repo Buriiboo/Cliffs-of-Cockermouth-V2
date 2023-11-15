@@ -20,7 +20,6 @@ namespace Game
 
                 //Player turn
                 PlayerTurn(hero,spawnedMinions);
-    
 
                 foreach (var minion in spawnedMinions)
                 {
@@ -171,6 +170,46 @@ namespace Game
                     }
                 }
                 Console.WriteLine("Invalid input. Please enter a number within the specified range.");
+            }
+        }
+        public static void MainMenu()
+        {
+            bool runMain=true;
+            while (runMain)
+            {
+
+                Console.WriteLine("|| ===================== ||");
+                Console.WriteLine("|| CLIFFS OF COCKERMOUTH ||");
+                Console.WriteLine("|| ======================||");
+                Console.WriteLine("|| 1) New game           ||");
+                Console.WriteLine("|| 2) Load game          ||");
+                Console.WriteLine("|| 3) ?????????          ||");
+                Console.WriteLine("|| 4) Exit               ||");
+                Console.WriteLine("|| ===================== ||");
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        System.Console.WriteLine("Starting new game!");
+                        Thread.Sleep(1000);
+                        break;
+                    case "2":
+                        System.Console.WriteLine("Under construction!");
+                        Thread.Sleep(1000);
+                        //load game
+                        break;
+                    case "3":
+                        System.Console.WriteLine("Under construction!");
+                        Thread.Sleep(1000);
+                        break;
+                    case "4":
+                        System.Console.WriteLine("Exiting Menu");
+                        Thread.Sleep(1000);
+                        runMain = false;
+                        break;
+
+                }
             }
         }
     }

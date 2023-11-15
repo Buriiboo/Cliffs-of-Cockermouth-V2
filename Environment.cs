@@ -13,9 +13,9 @@ namespace Game
 
         public GameEnvironment()
         {
-            currentRoom = new Room();
             playerRoomRow = 3;
             playerRoomCol = 1;
+            currentRoom = new Room(playerRoomRow, playerRoomCol);
         }
 
         public void RunGame(List<Minions> allMinions, Hero hero)
