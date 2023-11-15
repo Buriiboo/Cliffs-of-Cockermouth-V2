@@ -1,5 +1,5 @@
 using HeroCreatorBase;
-/*
+
 namespace AbilityBase
 {
     public abstract class AbilityBase
@@ -13,7 +13,7 @@ namespace AbilityBase
             Description = description;
         }
 
-        public abstract void UseAbility();
+        public abstract void UseAbility(Hero player);
     }
 
     public class Fireball : AbilityBase
@@ -22,7 +22,7 @@ namespace AbilityBase
         {
         }
 
-        public override void UseAbility()
+        public override void UseAbility(Hero player)
         {
             Console.WriteLine($"Casts {Name}");
             
@@ -36,12 +36,12 @@ namespace AbilityBase
             remainingTurns = 5; // Set the initial number of turns
         }
 
-        public override void UseAbility()
+        public override void UseAbility(Hero player)
         {
             Console.WriteLine($"Casts {Name}");
             for (int i = 0; i < remainingTurns; i++)
             {
-                Hero.HP += 10; // Heal 10 HP each turn
+                player.HP += 10; // Heal 10 HP each turn
                 Console.WriteLine($"Turn {i + 1}: +10 HP");
                 if (remainingTurns > 0)
                 {
@@ -53,4 +53,3 @@ namespace AbilityBase
     }
 
 }
-*/

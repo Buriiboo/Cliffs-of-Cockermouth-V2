@@ -34,7 +34,7 @@ public class Hero
     public void ShowInventory()
     {
         for(int i = 0; i < inventory.Count; i++){
-            Console.WriteLine($"{i + 1}: {inventory[i]}");
+            Console.WriteLine($"{i + 1}: {inventory[i].Name}");
         }
     }
     public void HandelInventory(Character other)
@@ -62,7 +62,7 @@ public class Hero
         inventory.Remove(item);
     }
 
-    public string Engagement(Character other)
+    public string Encounter(Character other)
     {
         Console.WriteLine("[A]ttack [D]efense [I]nventory");
         string choice = Console.ReadLine().ToLower();
