@@ -174,25 +174,6 @@ namespace Game
         {
             inventory.Remove(item);
         }
-
-        public string Encounter(Character other)
-        {
-            Console.WriteLine("[A]ttack [D]efense [I]nventory");
-            string choice = Console.ReadLine().ToLower();
-            switch(choice){
-                case "a": 
-                    other.HP -= Damage;
-                    HP -= other.Damage;
-                    break;
-                case "d":
-                    HP -= other.Damage*0.25;
-                    break;
-                case "i":
-                    HandelInventory(other); //här får man väälja ifall det ska vara item attack som ges istället för vanliga player damage. även välja vilket item man vill attackera med
-                    break;
-                }
-            return $"Enemy hp: {other.HP} \nPlayer damage: {Damage}\nPlayer hp: {HP} \nEnemy damage: {other.Damage}";
-        }
     }
 }
         
