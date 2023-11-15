@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ClassMinionsFunction
+namespace Game
 {
     public class UI
     {
@@ -81,7 +81,7 @@ namespace ClassMinionsFunction
                 Console.WriteLine("------------------------------------------------------------------------------------------------------------");
 
                 Console.WriteLine("Hero's Turn:");
-                Console.WriteLine("1. Attack   2. Defend   3. Riposte  4.Fireball");
+                Console.WriteLine("1. Attack   2. Defend   3. Riposte  4.Spellbook");
             }
         }
 

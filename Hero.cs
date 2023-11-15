@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace ClassMinionsFunction
+namespace Game
 {
     public class Hero : Character
     {
+        public List<Abilities> Heroabilities;
         public int Level { get; set; }
         public int Experience { get; private set; }
 
@@ -27,22 +28,12 @@ namespace ClassMinionsFunction
 
             Level = level;
             Experience = experience;
+            Heroabilities = new List<Abilities>();
             // Any additional initializations specific to Minions can be done here
         }
 
-        public static Hero CreateHero()
-        {
         
-            int hp = 500;
-            double damage = 50;
-            int armor = 3;
-            int affinity = 50;
-            int level = 1;
-            int experience = 1;
 
-    
-            return new Hero(hp, damage, armor, affinity, level, experience);
-        }
 
         public int Attack(Character target)
         {
@@ -101,23 +92,26 @@ namespace ClassMinionsFunction
             return totalDamageDealt;
         }
 
-        public int Spell(Character target, Abilities offensive)
+        public int SpellList(List<Abilities> Heroabilities)
         {
-            double effectiveDamage = offensive.Power;
-            if (effectiveDamage < 0)
+
+            Console.WriteLine("Choose an ability:");
+            for (int i = 0; i < Heroabilities.Count; i++)
             {
-                effectiveDamage = 0;
+                Console.WriteLine($"{i + 1}. {Heroabilities[i].Name}");
             }
-            if (target.HP - effectiveDamage < 0)
+
+            while (true)
             {
-                effectiveDamage = target.HP;
-                target.HP = 0;
+                if (int.TryParse(Console.ReadLine(), out int choice) && choice > 0 && choice <= Heroabilities.Count)
+                {
+                    return choice;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input, please enter a number from the list.");
+                }
             }
-            else
-            {
-                target.HP -= (int)effectiveDamage;
-            }
-            return (int)effectiveDamage;
         }
 
 

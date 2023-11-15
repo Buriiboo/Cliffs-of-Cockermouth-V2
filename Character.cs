@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ClassMinionsFunction
+namespace Game
 {
     public class Character
     {
@@ -31,7 +31,6 @@ namespace ClassMinionsFunction
         {
             return new List<Character>
             {
-                Hero.CreateHero(),
                 Murlock.CreateMurlockKing(),
                 Murlock.CreateWorker(),
                 Murlock.CreateWorker(),

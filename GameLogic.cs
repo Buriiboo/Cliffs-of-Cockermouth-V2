@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ClassMinionsFunction
+namespace Game
 {
     public class GameLogic
     {
@@ -76,10 +76,9 @@ namespace ClassMinionsFunction
         }
 
 
-        public static void SecretScenario(List<Hero> heroes)
+        public static void SecretScenario(Hero hero)
         {
-            foreach (var hero in heroes)
-            {
+      
                 System.Console.WriteLine("What is your answer?");
                 string answer = Console.ReadLine()?.ToLower();
                 if (answer == "melon")
@@ -87,10 +86,11 @@ namespace ClassMinionsFunction
                     System.Console.WriteLine("Your token of friendship has elevated your affinity!");
                     hero.Affinity += 5;
                     System.Console.WriteLine($"New affinity: {hero.Affinity}!");
-                  
                 }
+                  
+           
 
-            }
+            
             Console.ReadKey();
 
         }
@@ -123,28 +123,25 @@ namespace ClassMinionsFunction
                     Console.WriteLine($"Total damage dealt by riposte: {totalDamageDealt}");
                     break;
 
-                case 4:                                                                           //Fireball logiken borde finnas i spells.
+                case 4:
+                    int abilityChoice = 0;
+                    hero.SpellList(hero.Heroabilities);
                     int minionIndex3 = SelectMinionToAttack(spawnedMinions);
-                    Abilities fireball = Offensive.CreateFireball();
-                    if (minionIndex3 >= 0)
+
+                    // Check if the selected minion index is within the bounds of the spawnedMinions list
+                    if (minionIndex3 >= 0 && minionIndex3 < spawnedMinions.Count)
                     {
-                        
-                        int damageDealt = hero.Spell(spawnedMinions[minionIndex3], fireball);
-                        UI.ShowDamageMessage($"Hero casts {fireball.Name} on {spawnedMinions[minionIndex3].Name} and deals {damageDealt} damage.");
-                    }
-                    if (minionIndex3 > 0)
-                    {
-                        int leftDamage = hero.Spell(spawnedMinions[minionIndex3 - 1], fireball);
-                        UI.ShowDamageMessage($"The fireball also hits adjecant {spawnedMinions[minionIndex3 - 1].Name}, dealing {leftDamage} damage.");
-                    }
-                    // Check if there's a minion after the targeted one
-                    if (minionIndex3 < spawnedMinions.Count - 1)
-                    {
-                        int rightDamage = hero.Spell(spawnedMinions[minionIndex3 + 1], fireball);
-                        UI.ShowDamageMessage($"The fireball also hits adjecant {spawnedMinions[minionIndex3 + 1].Name}, dealing {rightDamage} damage.");
+    
+
+                        // You might also need to check if abilityChoice is within bounds
+                        if (abilityChoice > 0 && abilityChoice <= hero.Heroabilities.Count)
+                        {
+                            hero.Heroabilities[abilityChoice - 1].UseAbility(spawnedMinions[minionIndex3]);
+                        }
                     }
                     break;
-                   
+
+
             }
             
 
@@ -163,7 +160,7 @@ namespace ClassMinionsFunction
             return choice;
         }
 
-        public static void EndRound(List<Minions> spawnedMinions, List<Minions> allMinions,List<Hero> heroes)
+        public static void EndRound(List<Minions> spawnedMinions, List<Minions> allMinions,Hero hero)
         {
 
             //Experience + restore minion
@@ -178,16 +175,15 @@ namespace ClassMinionsFunction
             }
             
             int experienceGained = totalExperience;
-            foreach (var hero in heroes)
-            {
+   
                 hero.AddExperience(experienceGained);
-            }
+         
 
             // Spawn new minions
-            List<Minions> newMinions = Minions.SpawnMinion(allMinions, heroes.First().Level, 3);
+            List<Minions> newMinions = Minions.SpawnMinion(allMinions, hero.Level, 3);
             spawnedMinions.AddRange(newMinions);
 
-            System.Console.WriteLine($"Totalt exp gathered from battle:{experienceGained} CurrentHeroLevel:{heroes.First().Level}");
+            System.Console.WriteLine($"Totalt exp gathered from battle:{experienceGained} CurrentHeroLevel:{hero.Level}");
             System.Console.WriteLine("EndRoundExecuted!");
             Console.ReadKey();
 
