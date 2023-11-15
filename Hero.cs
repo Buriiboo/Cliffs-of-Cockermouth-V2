@@ -14,7 +14,6 @@ namespace Game
         public int Experience { get; private set; }
 
         private const int BaseExperienceRequirement = 15; // Base experience for first level
-
         private const int TempArmorIncrease = 2;
         private const int TempHPIncrease = 5;
 

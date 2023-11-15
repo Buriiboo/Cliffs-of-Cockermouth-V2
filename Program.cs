@@ -36,15 +36,14 @@ class Program
             
             List<Minions> SpawnMinion = Minions.SpawnMinion(allMinions, hero.Level, 3);
             List<Minions> Boss = Minions.Boss();
+            GameEnvironment gameEnvironment = new GameEnvironment();
+            gameEnvironment.RunGame(allMinions, hero);
 
 
 
             while (isRunning == true)
             {
                 Console.Clear();
-    
-                UI.PrintGrid(grid, playerRow, playerColumn, visitedRooms);
-                UI.PlayerMovement(grid, playerRow, playerColumn);
 
                 string command = Console.ReadLine();
 
@@ -58,31 +57,31 @@ class Program
                     UI.Secret("But on the door there was an inscription and it read thus:");
                     UI.Secret("Speak the word friend and you may enter.");
                     GameLogic.SecretScenario(hero);
-                    GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+                   
                 }
                 else if (playerRow == 2 && playerColumn == 2)
                 {
                     GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
                     GameLogic.SecretScenario(hero);
-                    GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+
                 }
                 else if (playerRow == 0 && playerColumn == 2)
                 {
                     GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
                     GameLogic.SecretScenario(hero);
-                    GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+    
                 }
                 else if (playerRow == 0 && playerColumn == 1)
                 {
                     GameLogic.BattleEncounter(hero, Minions.Boss());
-                    GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+
                     GameLogic.EndRound(Boss, allMinions, hero);
                 }
                 else
                 {
                     List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, hero.Level, 3);
                     GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
-                    GameLogic.MovePlayer(ref playerRow, ref playerColumn, command, visitedRooms, grid);
+
                     GameLogic.EndRound(spawnedMinions, allMinions, hero);
                     foreach (var minions in allMinions)
                     {

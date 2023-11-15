@@ -8,36 +8,6 @@ namespace Game
     public class GameLogic
     {
 
-        public static void MovePlayer(ref int playerRow, ref int playerColumn, string command, bool[,] visitedRooms, int[,] grid)
-        {
-            int newRow = playerRow;
-            int newColumn = playerColumn;
-
-            switch (command.ToLower())
-            {
-                case "up":
-                    newRow -= 1;
-                    break;
-                case "down":
-                    newRow += 1;
-                    break;
-                case "left":
-                    newColumn -= 1;
-                    break;
-                case "right":
-                    newColumn += 1;
-                    break;
-                default:
-                    Console.WriteLine("Invalid command.");
-                    return; // Early return if the command is invalid
-            }
-            if (newRow >= 0 && newRow < grid.GetLength(0) && newColumn >= 0 && newColumn < grid.GetLength(1))
-            {
-                visitedRooms[playerRow, playerColumn] = true; // Mark the old room as visited
-                playerRow = newRow;
-                playerColumn = newColumn;
-            }
-        }
 
         public static void BattleEncounter(Hero hero, List<Minions> spawnedMinions)
         {
