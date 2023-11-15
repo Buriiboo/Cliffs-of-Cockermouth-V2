@@ -18,7 +18,6 @@ namespace Game
         private const int TempHPIncrease = 5;
 
         public int TempArmorBuff { get; private set; } = 0;
-        public List<Item> inventory;
 
 
 
@@ -140,41 +139,6 @@ namespace Game
             return BaseExperienceRequirement * (int)Math.Pow(2, level - 1);
         }
 
-    
-        public List<Item> Inventory()
-            {
-                return inventory;
-            }
-        public void ShowInventory()
-        {
-            for(int i = 0; i < inventory.Count; i++){
-                Console.WriteLine($"{i + 1}: {inventory[i].Name}");
-            }
-        }
-        public void HandelInventory(Character other) // det finns just nu bara för ThrowWeapons item för det är den enda sorten som har lagts till.
-        {
-            if(Inventory().Count == 0){
-                Console.WriteLine("Your inventory is empty!");
-                return;
-            }
-            ShowInventory();
-            int ItemChoice = int.Parse(Console.ReadLine());
-            Item item = Inventory()[ItemChoice - 1];
-            if(item is ThrowWeapons throwWeapons){
-                item.UseItem(other);
-                if(throwWeapons.Amount == 0)
-                    RemoveInventory(item);
-            }
-        }
-
-        public void AddInventory(Item item)
-        {
-            inventory.Add(item);
-        }
-        public void RemoveInventory(Item item)
-        {
-            inventory.Remove(item);
-        }
     }
 }
-
+        
