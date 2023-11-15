@@ -193,6 +193,7 @@ namespace Game
                     case "1":
                         System.Console.WriteLine("Starting new game!");
                         Thread.Sleep(1000);
+                        runMain = false;
                         break;
                     case "2":
                         System.Console.WriteLine("Under construction!");

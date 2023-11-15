@@ -12,10 +12,6 @@ class Program
 {
     static void Main(string[] args)
     {
-
-            int playerRow = 2;
-            int playerColumn = 1;
-            bool isRunning = true;
             Hero hero = new Hero(500,50,3,50,1,1);
 
             hero.Heroabilities.AddRange(new Abilities[] 
@@ -40,7 +36,20 @@ class Program
 
 
 
-            while (isRunning == true)
+
+
+
+
+            }
+
+    
+}
+
+}
+
+/*
+
+           while (isRunning == true)
             {
                 Console.Clear();
 
@@ -90,13 +99,4 @@ class Program
     
                 }
             }
-
-
-
-            }
-
-    
-}
-
-}
-
+            */

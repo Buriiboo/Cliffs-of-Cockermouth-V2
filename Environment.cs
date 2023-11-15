@@ -7,9 +7,9 @@ namespace Game
 {
     public class GameEnvironment
     {
-        private Room currentRoom;
-        private int playerRoomRow;
-        private int playerRoomCol;
+        public Room currentRoom;
+        public int playerRoomRow;
+        public int playerRoomCol;
 
         public GameEnvironment()
         {
@@ -26,6 +26,7 @@ namespace Game
                 Console.Clear();
                 Console.WriteLine($"Current room: {playerRoomRow},{playerRoomCol}");
                 currentRoom.Print();
+                Console.WriteLine("M=(Map)           I=(Inventory)");
                 Console.WriteLine("Use W, A, S, D to move. Press 'Q' to quit.");
 
                 char input = Console.ReadKey().KeyChar;
@@ -35,14 +36,20 @@ namespace Game
                     case 's': currentRoom.MovePlayer(1, 0); break;
                     case 'a': currentRoom.MovePlayer(0, -1); break;
                     case 'd': currentRoom.MovePlayer(0, 1); break;
+                //  case 'i'  Items.Inventory();                        Här har vi inventory funktioner som behöver in.
+                //  case 'm'  MapOverview();                            Översikt på rummen och funktion för det.
                     case 'q': isRunning = false; continue;
                 }
 
                 CheckRoomTransition();
-                if(playerRoomRow==2 && playerRoomCol==1){
+                currentRoom.InitializeLayout(playerRoomRow, playerRoomCol);
+                if (playerRoomRow==2 && playerRoomCol==1 && !currentRoom.IsInitialized)         //Initiera event på en rumsnivå!
+                {
                     List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, hero.Level, 3);
                     GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
+                    GameLogic.EndRound(spawnedMinions, allMinions, hero);
 
+                    currentRoom.IsInitialized = true;
                 }
                 
             }

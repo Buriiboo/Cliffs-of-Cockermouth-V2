@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Game
@@ -10,44 +11,121 @@ namespace Game
         public int[,] Layout { get; private set; }
         public int PlayerRow { get; set; }
         public int PlayerColumn { get; set; }
+        public bool IsInitialized { get; set; }
 
         public Room(int playerRoomRow, int playerRoomCol)
         {
             InitializeLayout(playerRoomRow, playerRoomCol);
-            PlayerRow = 6; // Starting position
+            PlayerRow = 5; // Starting position
             PlayerColumn = 3;
+            IsInitialized = false;
+
         }
 
-        private void InitializeLayout(int playerRoomRow, int playerRoomCol)
+        public void InitializeLayout(int playerRoomRow, int playerRoomCol)   //Välj Layout för ert rum
         {
-            // Initialize the base layout
-            Layout = new int[,] {
-        { 1, 1, 1, 0, 1, 1, 1 },
-        { 1, 0, 0, 0, 0, 0, 1 },
-        { 1, 0, 0, 0, 0, 0, 1 },
-        { 0, 0, 0, 0, 0, 0, 0 },
-        { 1, 0, 0, 0, 0, 0, 1 },
-        { 1, 0, 0, 0, 0, 0, 1 },
-        { 1, 1, 1, 0, 1, 1, 1 }
-    };
 
-            // Modify first row if player is in row 1
-            if (playerRoomRow == 1)
+            if (playerRoomRow == 1 && playerRoomCol == 1)
             {
-                for (int col = 0; col < Layout.GetLength(1); col++)
-                {
-                    Layout[0, col] = 1; // Set all elements in the first row to 1
-                }
+                Layout = new int[,] {
+                { 1, 1, 1, 1, 1, 1, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 0 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 1, 1, 0, 1, 1, 1 }};
+            }
+            if (playerRoomRow == 2 && playerRoomCol == 1)
+            {
+                Layout = new int[,] {
+                { 1, 1, 1, 0, 1, 1, 1 },
+                { 1, 2, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 0 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 1, 1, 0, 1, 1, 1 }};
+            }
+            if (playerRoomRow == 3 && playerRoomCol == 1)
+            {
+                Layout = new int[,] {
+                { 1, 1, 1, 0, 1, 1, 1 },
+                { 1, 2, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 0 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 1, 1, 1, 1, 1, 1 }};
+            }
+            if (playerRoomRow == 1 && playerRoomCol == 2)
+            {
+                Layout = new int[,] {
+                { 1, 1, 1, 1, 1, 1, 1 },
+                { 1, 2, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 0, 0, 0, 0, 0, 0, 0 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 1, 1, 0, 1, 1, 1 }};
+            }
+            if (playerRoomRow == 1 && playerRoomCol == 3)
+            {
+                Layout = new int[,] {
+                { 1, 1, 1, 1, 1, 1, 1 },
+                { 1, 2, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 0, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 1, 1, 0, 1, 1, 1 }};
+            }
+            if (playerRoomRow == 2 && playerRoomCol == 2)
+            {
+                Layout = new int[,] {
+                { 1, 1, 1, 0, 1, 1, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 0, 0, 0, 0, 0, 0, 0 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 1, 1, 0, 1, 1, 1 }};
+            }
+            if (playerRoomRow == 2 && playerRoomCol == 3)
+            {
+                Layout = new int[,] {
+                { 1, 1, 1, 0, 1, 1, 1 },
+                { 1, 2, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 0, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 1, 1, 0, 1, 1, 1 }};
+            }
+            if (playerRoomRow == 3 && playerRoomCol == 2)
+            {
+                Layout = new int[,] {
+                { 1, 1, 1, 0, 1, 1, 1 },
+                { 1, 2, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 0, 0, 0, 0, 0, 0, 0 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 1, 1, 1, 1, 1, 1 }};
+            }
+            if (playerRoomRow == 3 && playerRoomCol == 3)
+            {
+                Layout = new int[,] {
+                { 1, 1, 1, 0, 1, 1, 1 },
+                { 1, 2, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 0, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 1, 1, 1, 1, 1, 1 }};
             }
 
-            // Modify first column if player is in column 1
-            if (playerRoomCol == 1)
-            {
-                for (int row = 0; row < Layout.GetLength(0); row++)
-                {
-                    Layout[row, 0] = 1; // Set all elements in the first column to 1
-                }
-            }
+
         }
 
         public void MovePlayer(int rowChange, int colChange)
@@ -60,7 +138,11 @@ namespace Game
                 PlayerRow = newRow;
                 PlayerColumn = newCol;
             }
+            if(PlayerRow == 2 && PlayerColumn == 1){                            // Initera PlayerScenarios i rumHexNivå
+                System.Console.WriteLine("Greetings im a merchant!");
+            }
         }
+
 
         public bool IsWallWithOpening(int row, int col)
         {
@@ -96,6 +178,10 @@ namespace Game
                     {
                         Console.Write("# "); // Wall
                     }
+                    else if (Layout[row, col] == 2)
+                    {
+                        Console.Write("M "); // Merchant
+                    }
                     else
                     {
                         Console.Write(". "); // Empty space
@@ -105,6 +191,8 @@ namespace Game
             }
         }
     }
+
+
 
 
 
