@@ -133,6 +133,8 @@ namespace Game
                 HaveItem = false;
                 hero.Armor -= 5;
                 hero.Damage -= 5;
+                FirstofDoom abilityToRemove = new FirstofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1);
+                hero.Heroabilities.Remove(abilityToRemove);
             }
         }
 
