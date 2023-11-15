@@ -1,9 +1,6 @@
 
 using System.Reflection.Metadata.Ecma335;
 using System.Security;
-using CharacterBase;
-using HeroCreatorBase;
-using Microsoft.VisualBasic;
 namespace Game;
     public abstract class Item
     {

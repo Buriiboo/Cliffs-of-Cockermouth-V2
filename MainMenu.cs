@@ -3,17 +3,9 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using Microsoft.VisualBasic;
-using HeroBase;
-using CharacterBase;
-using AbilityBase;
-using MinionBase;
-using UserInterface;
-using Game;
-using Environment;
-using GameRoom;
 
 
-namespace MainMenu
+namespace Game
 {
     class Program
     {

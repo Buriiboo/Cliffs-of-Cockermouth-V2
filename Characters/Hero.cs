@@ -1,11 +1,9 @@
 
 using System.Configuration.Assemblies;
-using CharacterBase;
 using System.Security.Cryptography.X509Certificates;
 using Game;
-using MinionCreatorBase;
 using System.Security;
-namespace HeroCreatorBase;
+
 public class Hero
 {
     public string Name {get; set;}

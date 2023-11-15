@@ -1,4 +1,4 @@
-
+using Game;
 public class Merchant : Character
 {
     List<Item> inventory;

@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MinionBase;
 
-namespace CharacterBase
+
+namespace Game
 {
     public class Character
     {

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
-using CharacterBase;
-using MinionBase;
-using AbilityBase;
+using Game;
 
 
 namespace HeroBase

@@ -2,13 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HeroBase;
-using MinionBase;
-using UserInterface;
-using Game;
 
 
-namespace GameRoom
+
+namespace Game
 {
     public class Room
     {
