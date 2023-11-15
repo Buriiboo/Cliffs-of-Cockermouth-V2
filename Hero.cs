@@ -151,8 +151,9 @@ namespace Game
                 Console.WriteLine($"{i + 1}: {inventory[i].Name}");
             }
         }
-        public void HandelInventory(Character other) // det finns just nu bara för ThrowWeapons item för det är den enda sorten som har lagts till.
+        public void HandelInventory(Character other)                  //Gör om den till passiv/Gear och kopiera en liknade mixad med denna + Spellbook för battle version
         {
+            
             if(Inventory().Count == 0){
                 Console.WriteLine("Your inventory is empty!");
                 return;

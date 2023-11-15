@@ -73,15 +73,15 @@ namespace Game
 
     public class ThrowWeapons : Consumable
     {
-        public double Damage { get; set; }
-        public ThrowWeapons(string name, string description, int amount, double damage) : base(name, description, amount)
+        public int Damage { get; set; }
+        public ThrowWeapons(string name, string description, int amount, int damage) : base(name, description, amount)
         {
             Damage = damage;
         }
         public override void UseItem(Character other)
         {
             Amount -= 1;
-            other.HP -= Amount;
+            other.HP -= this.Damage;
         }
 
     }
