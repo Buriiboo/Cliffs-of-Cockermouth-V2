@@ -20,6 +20,12 @@ class Program
                 IceShard.CreateIceShard(),
                 HolyStrike.CreateSmite()
             });
+            hero.inventory.AddRange(new Item[]
+           {
+                HelmofDoom.CreateHelmofDoom(),
+                PlateofChaos.CreatePlateofChaos()
+
+           });
 
 
             List<Character> characters = Character.GetDefaultCharacters();

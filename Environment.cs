@@ -36,7 +36,7 @@ namespace Game
                     case 's': currentRoom.MovePlayer(1, 0); break;
                     case 'a': currentRoom.MovePlayer(0, -1); break;
                     case 'd': currentRoom.MovePlayer(0, 1); break;
-                //  case 'i'  Items.Inventory();                        Här har vi inventory funktioner som behöver in.
+                    case 'i': hero.ShowInventory(); Console.ReadKey(); break;
                 //  case 'm'  MapOverview();                            Översikt på rummen och funktion för det.
                     case 'q': isRunning = false; continue;
                 }

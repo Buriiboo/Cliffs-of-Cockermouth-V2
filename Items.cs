@@ -16,6 +16,16 @@ namespace Game
             Name = name;
             Description = description;
         }
+        public static List<Item> GetItems()
+        {
+            return new List<Item>
+            {
+               HelmofDoom.CreateHelmofDoom(),
+               PlateofChaos.CreatePlateofChaos(),
+
+            };
+        }
+
     }
 
     public abstract class Gear : Item
@@ -23,7 +33,7 @@ namespace Game
         public string GearSlot { get; set; }
         public bool HaveItem { get; set; }
         public override void UseItem(Character other){}
-        public Gear(string name, string description, bool haveItem, string gearSlot, int protection)
+        public Gear(string name, string description, bool haveItem, string gearSlot)
             : base(name, description) 
         {
             GearSlot = gearSlot;
@@ -76,7 +86,6 @@ namespace Game
 
     }
 
-
     public class Quest
     {
         public string Name { get; set; }
@@ -91,6 +100,50 @@ namespace Game
         public void ShowQuest()
         {
 
+        }
+    }
+
+
+    public class HelmofDoom : Gear
+    {
+        public HelmofDoom(string name, string description, bool haveItem, string gearSlot)
+            : base(name, description, haveItem, gearSlot)
+        {
+            // Any additional initializations specific to Murlock can be done here
+        }
+
+        public static HelmofDoom CreateHelmofDoom()
+        {
+
+            string name = "HelmOfDoom";
+            string description = "Heavy helm not for the faint of heart";
+            bool haveItem = true;
+            string gearSlot = "Helm";
+
+            return new HelmofDoom(name, description, haveItem, gearSlot);
+        }
+
+
+
+        
+    }
+    public class PlateofChaos : Gear
+    {
+        public PlateofChaos(string name, string description, bool haveItem, string gearSlot)
+            : base(name, description, haveItem, gearSlot)
+        {
+            // Any additional initializations specific to Murlock can be done here
+        }
+
+        public static PlateofChaos CreatePlateofChaos()
+        {
+
+            string name = "PlateOfChaos";
+            string description = "Strong Metal Plate";
+            bool haveItem = true;
+            string gearSlot = "Torso";
+
+            return new PlateofChaos(name, description, haveItem, gearSlot);
         }
     }
 }

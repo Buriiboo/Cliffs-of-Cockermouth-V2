@@ -143,6 +143,7 @@ namespace Game
          public List<Item> Inventory()
         {
             return inventory;
+    
         }
         public void ShowInventory()
         {
