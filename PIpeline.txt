@@ -1,0 +1,11 @@
+Henrik//Milton.
+
+Inventory + Funktionalitet i battles med connsumable.
+Inventory + Passiv funktionalitet från mapen för att equippa gear osv.
+Inventory + Droprate/Acquiring method för att kunna ackumulera items.
+Inventory + Merchant encounter.
+Inventory + Effect.
+
+Monster + Roaming.
+Hero + Leveling buffs.
+SecretBulder + Puzzles/Dilemma

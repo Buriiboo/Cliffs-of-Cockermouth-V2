@@ -33,9 +33,6 @@ namespace Game
 
         }
 
-        
-
-
         public int Attack(Character target)
         {
             double effectiveDamage = this.Damage - target.Armor;
