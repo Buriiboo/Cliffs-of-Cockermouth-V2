@@ -103,7 +103,8 @@ namespace Game
                     }
                     
                     break;
-              //  case 5:
+                case 5:
+                    int ItemChoice = hero.HandelBattleInventory(hero.Inventory)
                     //Steg 1.  Öppna Listan med Consumables.
                     //Steg 2.  Välja item från Consumable listan.
                     //Steg 3.  Ta indexet från ConsumableListan och lägg in i en Variebel. 

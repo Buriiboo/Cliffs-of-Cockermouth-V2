@@ -137,7 +137,7 @@ namespace Game
         {
             return BaseExperienceRequirement * (int)Math.Pow(2, level - 1);
         }
-         public List<Item> Inventory()
+        public List<Item> Inventory()
         {
             return inventory;
     
@@ -148,7 +148,23 @@ namespace Game
                 Console.WriteLine($"{i + 1}: {inventory[i].Name}");
             }
         }
-        public void HandelInventory(Character other)                  //Gör om den till passiv/Gear och kopiera en liknade mixad med denna + Spellbook för battle version
+        public void HandelInventory(Character other)//Gör om den till passiv/Gear och kopiera en liknade mixad med denna + Spellbook för battle version
+        {
+            
+            if(Inventory().Count == 0){
+                Console.WriteLine("Your inventory is empty!");
+                return;
+            }
+            ShowInventory();
+            int ItemChoice = int.Parse(Console.ReadLine());
+            Item item = Inventory()[ItemChoice - 1];
+            if(item is ThrowWeapons throwWeapons){
+                item.UseItem(other);
+                if(throwWeapons.Amount == 0)
+                    RemoveInventory(item);
+            }
+        }
+        public void HandelBattleInventory(Character other)
         {
             
             if(Inventory().Count == 0){
