@@ -91,6 +91,5 @@ public class GameLogic
                     Console.WriteLine(player.Encounter(other));
             }
         } 
-
     }
 }
