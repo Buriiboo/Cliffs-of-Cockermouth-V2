@@ -29,8 +29,8 @@ namespace Game
                 Console.Write(descriptionLength[i]);
                 Thread.Sleep(25);
             }
-        
-           
+            Console.ReadKey();
+
 
             List<string> branchKeys = Branches.Keys.ToList();
             int selectedIndex = 0;
@@ -72,12 +72,18 @@ namespace Game
 
             var selectedBranchKey = branchKeys[selectedIndex];
             var selectedBranch = Branches[selectedBranchKey];
+            int currentHeroAffinity = hero.Affinity;
 
             Console.WriteLine(selectedBranch.response);
-            selectedBranch.effect(hero);
+            Console.ReadKey();
             Console.WriteLine(selectedBranch.exitDialogue);
+            selectedBranch.effect(hero);
+            System.Console.WriteLine($"Hero Affinity change:{hero.Affinity- currentHeroAffinity}");
+            Thread.Sleep(1000);
+            System.Console.WriteLine($"Hero Affinity Currently:{hero.Affinity}");
+            Console.ReadKey();
         }
-        public static Scenario CreateExampleScenario()
+        public static Scenario Scenario1()
         {
             var branches = new Dictionary<string, (string response, Action<Hero> effect, string exitDialogue)>
         {
@@ -86,7 +92,7 @@ namespace Game
             { "Take the water pouch for yourself!",
               ("Despair fills it eyes...", hero => hero.Affinity += 10, "It lets out a growl and perishes") },
             { "Crush the filthy creature...",
-              ("You hear a crack as your foot is planted...", hero => hero.Affinity -= 5, "It lets out a gurgle and perishes") }
+              ("You hear a crack as your foot is planted...", hero => hero.Affinity -= 5, "It lets out a gurgle and perishes...") }
         };
 
             return new Scenario(
@@ -95,11 +101,6 @@ namespace Game
                 branches);
         }
 
-        private string GetUserChoice()
-        {
-            Console.WriteLine("Enter your choice: ");
-            return Console.ReadLine();
-        }
 
         // Implement other methods as needed
     }

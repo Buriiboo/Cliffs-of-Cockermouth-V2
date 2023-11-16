@@ -154,7 +154,7 @@ namespace Game
                     // Scenario logic here
                     Console.WriteLine("Test");
                     Thread.Sleep(2000);
-                    var scenario = Scenario.CreateExampleScenario();
+                    var scenario = Scenario.Scenario1();
                     scenario.Present(hero);
                 }
             }
