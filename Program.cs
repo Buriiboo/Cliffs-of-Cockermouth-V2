@@ -31,7 +31,8 @@ class Program
            {
                 new HelmofDoom("HelmOfDoom","Heavy helm not for the faint of heart",true,"Helm"),
                 new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",true,"Helm"),
-                new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 5, 15)
+                new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 5, 15),
+                new WaterPouch("WaterPounch", "Gives you 25hp", 2, 25)
            });
 
            hero.HeroConsumables = hero.inventory.OfType<Consumable>().ToList();

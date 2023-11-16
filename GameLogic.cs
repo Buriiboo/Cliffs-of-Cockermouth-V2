@@ -105,11 +105,16 @@ namespace Game
                     break;
                 case 5:
                     int itemChoice = hero.HandleBattleInventory(hero.HeroConsumables);
-                    int minionIndex4 = SelectMinionToAttack(spawnedMinions);
-
-                    if (minionIndex4 >= 0)
-                    {
-                        hero.HeroConsumables[itemChoice - 1].UseItem(spawnedMinions[minionIndex4]);
+                    Consumable selectedItem = hero.HeroConsumables[itemChoice - 1];
+                    if(selectedItem is WaterPouch waterPouch){
+                            waterPouch.UseItem(hero);
+                    }
+                    else{
+                        int minionIndex4 = SelectMinionToAttack(spawnedMinions);
+                        if (minionIndex4 >= 0)
+                        {
+                            hero.HeroConsumables[itemChoice - 1].UseItem(spawnedMinions[minionIndex4]);
+                        }
                     }
                     break;
 
