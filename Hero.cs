@@ -9,13 +9,13 @@ namespace Game
 {
     public class Hero : Character
     {
-        public List<Abilities> Heroabilities;
-        public List<Item> inventory;
+        public List<Abilities> Heroabilities;   //Aktiv abilities för spellist.
+        public List<Item> inventory;            //Inventory man har.
         public int Level { get; set; }
         public int Experience { get; private set; }
 
         private const int BaseExperienceRequirement = 15; // Base experience for first level
-        private const int TempArmorIncrease = 2;
+        private const int TempArmorIncrease = 2;       //Temp modifiers
         private const int TempHPIncrease = 5;
 
         public int TempArmorBuff { get; private set; } = 0;
@@ -25,7 +25,6 @@ namespace Game
         public Hero(int hp, double damage, int armor, int affinity,int level, int experience)
             : base(hp, damage, armor, affinity)
         {
-
             Level = level;
             Experience = experience;
             Heroabilities = new List<Abilities>();
@@ -33,7 +32,7 @@ namespace Game
 
         }
 
-        public int Attack(Character target)
+        public int Attack(Character target)     //Vanlig attack
         {
             double effectiveDamage = this.Damage - target.Armor;
             if (effectiveDamage < 0)
@@ -54,7 +53,7 @@ namespace Game
 
         public void Defend()
         {
-            // Increase armor temporarily for the battle encounter
+            // Increase armor temporarily for the battle encounter 
             this.Armor += TempArmorIncrease;
             TempArmorBuff += TempArmorIncrease;
 
@@ -62,7 +61,7 @@ namespace Game
             this.HP = Math.Min(this.HP + TempHPIncrease, this.MaxHP);
         }
 
-        public int Riposte(List<Minions> spawnMinion)
+        public int Riposte(List<Minions> spawnMinion)           //CounterAttack
         {
             int totalDamageDealt = 0;
 
@@ -90,7 +89,7 @@ namespace Game
             return totalDamageDealt;
         }
 
-        public int SpellList(List<Abilities> Heroabilities)
+        public int SpellList(List<Abilities> Heroabilities) //Välj en ability från spellist
         {
 
             Console.WriteLine("Choose an ability:");
@@ -119,7 +118,7 @@ namespace Game
             CheckForLevelUp();
         }
 
-        private void CheckForLevelUp()
+        private void CheckForLevelUp()  //Level upChecker
         {
             while (Experience >= ExperienceRequiredForLevel(Level))
             {
@@ -127,10 +126,10 @@ namespace Game
             }
         }
 
-        private void LevelUp()
+        public void LevelUp()   //Level up funktion
         {
-            Level++;
-            // Implement any additional logic needed when leveling up
+            Level++;         
+
         }
 
         private int ExperienceRequiredForLevel(int level)

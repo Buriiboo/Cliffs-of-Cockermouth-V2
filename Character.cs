@@ -8,7 +8,7 @@ namespace Game
     public class Character
     {
 
-        public int MaxHP { get; private set; }
+        public int MaxHP { get; set; }
         public string Name { get; private set; } // Name is now read-only outside the class
         public int HP { get; set; }
         public double Damage { get; set; }
