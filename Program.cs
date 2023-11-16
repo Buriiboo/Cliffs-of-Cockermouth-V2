@@ -29,8 +29,15 @@ class Program
             });
             hero.inventory.AddRange(new Item[]                                                         //Skapa startItems
            {
+<<<<<<< HEAD
                 new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",true,"Torso"),
                 new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 5, 15)
+=======
+                new HelmofDoom("HelmOfDoom","Heavy helm not for the faint of heart",true,"Helm"),
+                new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",true,"Helm"),
+                new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 5, 15),
+                new WaterPouch("WaterPounch", "Gives you 25hp", 2, 25)
+>>>>>>> fe87253f442b5b2a8a4f98025490e84513b24785
            });
 
            hero.HeroConsumables = hero.inventory.OfType<Consumable>().ToList();

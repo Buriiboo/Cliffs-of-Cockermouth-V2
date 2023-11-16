@@ -84,6 +84,23 @@ namespace Game
         }
 
     }
+    public class WaterPouch : Consumable
+    {
+        public int Heal {get; set;}
+        public WaterPouch(string name, string description, int amount, int heal) : base(name, description, amount)
+        {
+            Heal = heal;
+        }
+        public override void UseItem(Character other)
+        {
+            if (other is Hero hero)
+            {
+                hero.HP += Heal;
+            }
+            Amount -= 1;
+            
+        }
+    }
 
 /*
     public class WaterPouch : Consumable
