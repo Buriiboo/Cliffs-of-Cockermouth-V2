@@ -203,7 +203,9 @@ namespace Game
                 {
                     case "1":
                         System.Console.WriteLine("Starting new game!");
+                        Hero hero = Hero.CreateHero();
                         Thread.Sleep(1000);
+                        
                         runMain = false;
                         break;
                     case "2":
