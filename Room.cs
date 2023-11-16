@@ -128,7 +128,7 @@ namespace Game
 
         }
 
-        public void MovePlayer(int rowChange, int colChange)
+        public void MovePlayer(int rowChange, int colChange, int playerRoomRow, int playerRoomCol)
         {
             int newRow = PlayerRow + rowChange;
             int newCol = PlayerColumn + colChange;
@@ -138,11 +138,27 @@ namespace Game
                 PlayerRow = newRow;
                 PlayerColumn = newCol;
             }
-            if(PlayerRow == 2 && PlayerColumn == 1){                            // Initera PlayerScenarios i rumHexNivå
-                System.Console.WriteLine("Greetings im a merchant!");
-            }
+
+
+
+            checkForScenario(playerRoomRow, playerRoomCol);
         }
 
+
+        public void checkForScenario(int playerRoomRow, int playerRoomCol)
+        {
+            // First check if the player is in the specific room (row 3, column 1)
+            if (playerRoomRow == 3 && playerRoomCol == 1)
+            {
+                // Additional conditions for triggering the scenario
+                if (PlayerRow == 2 && PlayerColumn == 1) // Replace with your specific condition
+                {
+                    // Scenario logic here
+                    Console.WriteLine("Test");
+                    Thread.Sleep(2000);
+                }
+            }
+        }
 
         public bool IsWallWithOpening(int row, int col)
         {
@@ -155,6 +171,7 @@ namespace Game
                 {
                     return true;
                 }
+
             }
             return false;
         }

@@ -10,6 +10,7 @@ namespace Game
         public Room currentRoom;
         public int playerRoomRow;
         public int playerRoomCol;
+        
 
         public GameEnvironment()
         {
@@ -32,10 +33,10 @@ namespace Game
                 char input = Console.ReadKey().KeyChar;
                 switch (input)
                 {
-                    case 'w': currentRoom.MovePlayer(-1, 0); break;
-                    case 's': currentRoom.MovePlayer(1, 0); break;
-                    case 'a': currentRoom.MovePlayer(0, -1); break;
-                    case 'd': currentRoom.MovePlayer(0, 1); break;
+                    case 'w': currentRoom.MovePlayer(-1, 0, playerRoomRow, playerRoomCol); break;
+                    case 's': currentRoom.MovePlayer(1, 0, playerRoomRow, playerRoomCol); break;
+                    case 'a': currentRoom.MovePlayer(0, -1, playerRoomRow, playerRoomCol); break;
+                    case 'd': currentRoom.MovePlayer(0, 1, playerRoomRow, playerRoomCol); break;
                     case 'i': hero.ShowInventory(); Console.ReadKey(); break;
                 //  case 'm'  MapOverview();                            Översikt på rummen och funktion för det.
                     case 'q': isRunning = false; continue;
@@ -51,7 +52,17 @@ namespace Game
 
                     currentRoom.IsInitialized = true;
                 }
-                
+
+                if (playerRoomRow == 1 && playerRoomCol == 3 && !currentRoom.IsInitialized)         //Initiera event på en rumsnivå!
+                {
+                    List<Minions> spawnedMinions = Minions.Boss(); ;
+                    GameLogic.BattleEncounter(hero, Minions.Boss());
+                    GameLogic.EndRound(spawnedMinions, allMinions, hero); //How do i make this work?
+
+                    currentRoom.IsInitialized = true;
+                }
+
+
             }
         }
 

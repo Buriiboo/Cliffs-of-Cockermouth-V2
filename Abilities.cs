@@ -126,8 +126,18 @@ public class TouchOfDeath : Abilities
         {
             
         }
+    public static TouchOfDeath CreateTouchOfDeath()
+    {
 
-        public override void UseAbility(Character target)
+        string name = "Touch of Death";
+        string description = "Death touch";
+        double power = 300;
+        int turns = 1;
+
+        return new TouchOfDeath(name, description, power, turns);
+    }
+
+    public override void UseAbility(Character target)
         {
             Console.WriteLine($"You invoke the eternal sleep and drain your opponents lifeforce: {this.Power} damage");
             int tmp = (int)this.Power;
@@ -137,15 +147,6 @@ public class TouchOfDeath : Abilities
 
         }
 
-        public static TouchOfDeath CreateTouchOfDeath()
-        {
 
-            string name = "Touch of Death";
-            string description ="Death touch";
-            double power = 300;
-            int turns = 1;
-
-            return new TouchOfDeath(name, description, power, turns);
-        }
 
     }
