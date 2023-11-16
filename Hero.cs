@@ -147,6 +147,16 @@ namespace Game
                 Console.WriteLine($"{i + 1}: {inventory[i].Name}");
             }
         }
+
+        public void ShowBattleInventory()
+        {
+            var Consumables = inventory.OfType<Consumable>().ToList();
+            for (int i = 0; i < Consumables.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}: {Consumables[i].Name}");
+                System.Console.WriteLine("Outside of Array");
+            }
+        }
         public void HandelInventory(Character other)//Gör om den till passiv/Gear och kopiera en liknade mixad med denna + Spellbook för battle version
         {
             
@@ -170,8 +180,9 @@ namespace Game
                 Console.WriteLine("Your inventory is empty!");
                 return null;
             }
-            
-            ShowInventory();
+
+            ShowBattleInventory();
+
             int ItemChoice = int.Parse(Console.ReadLine());
             return Inventory()[ItemChoice - 1];
             

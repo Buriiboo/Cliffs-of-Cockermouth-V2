@@ -27,7 +27,7 @@ class Program
                 new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",true,"Helm")
            });
 
-
+        
             List<Character> characters = Character.GetDefaultCharacters();                               //Skapar en del av karaktärsobjekten vid start
             //List<Abilities> abilities = Abilities.GetAbilities();
         
