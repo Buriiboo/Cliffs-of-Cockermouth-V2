@@ -164,21 +164,19 @@ namespace Game
                     RemoveInventory(item);
             }
         }
-        public void HandelBattleInventory(Character other)
+        public Item HandleBattleInventory()
         {
             
             if(Inventory().Count == 0){
                 Console.WriteLine("Your inventory is empty!");
-                return;
+                return null;
             }
+            
             ShowInventory();
             int ItemChoice = int.Parse(Console.ReadLine());
-            Item item = Inventory()[ItemChoice - 1];
-            if(item is ThrowWeapons throwWeapons){
-                item.UseItem(other);
-                if(throwWeapons.Amount == 0)
-                    RemoveInventory(item);
-            }
+            return Inventory()[ItemChoice - 1];
+            
+            
         }
 
         public void AddInventory(Item item)
