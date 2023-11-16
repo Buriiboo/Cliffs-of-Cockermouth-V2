@@ -75,8 +75,9 @@ namespace Game
             int currentHeroAffinity = hero.Affinity;
 
             Console.WriteLine(selectedBranch.response);
-            Console.ReadKey();
+            Thread.Sleep(2000);
             Console.WriteLine(selectedBranch.exitDialogue);
+            Thread.Sleep(1000);
             selectedBranch.effect(hero);
             System.Console.WriteLine($"Hero Affinity change:{hero.Affinity- currentHeroAffinity}");
             Thread.Sleep(1000);
@@ -100,11 +101,66 @@ namespace Game
                 "The figure looks what seems to be a pouch of water just out of reach...",
                 branches);
         }
+        public static Scenario Scenario2()
+        {
+            var branches = new Dictionary<string, (string response, Action<Hero> effect, string exitDialogue)>
+    {
+        {"You have no need for pathetic Chaos tainted trinkets...",
+        ("Humming intensifies", hero => hero.Affinity += 10, "It feels disappointed")
+        },
+        {"This should Sell for a pretty penny..",
+        ("Humming intensifies", hero => hero.Affinity += 0, "It feels pleased")
+        },
+        {"Finally an artifact worthy of my splendour!",
+        ("Humming intensifies violently", hero => hero.Affinity -= 10, "It feels ecstatic!")
+        }
+    };
+            return new Scenario(
+                "It seems to be some sort of shrine... Ontop of it you see a Helm. The helm is pristine, but the surrounding air distorts around it",
+                "One thing is clear, this is no ordinary item and it reeks of Evil",
+                branches);
+        }
 
+        public void HandleBranchEffect(string branchChoice, Hero hero)
+        {
+            switch (branchChoice)
+            {
+                case "You have no need for pathetic Chaos tainted trinkets...":
+                    HandleBranch1Effect(hero);
+                    break;
+                case "This should Sell for a pretty penny..":
+                    HandleBranch2Effect(hero);
+                    break;
+                case "Finally an artifact worthy of my splendour!":
+                    HandleBranch3Effect(hero);
+                    break;
+                default:
+                    // Handle unknown branch choice
+                    break;
+            }
+        }
 
-        // Implement other methods as needed
+        private void HandleBranch1Effect(Hero hero)
+        { 
+            Console.WriteLine("Honorable");
+       
+        }
+
+        private void HandleBranch2Effect(Hero hero)
+        {
+            HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", true, "Helm");
+            hero.inventory.Add(helm);
+        }
+
+        private void HandleBranch3Effect(Hero hero)
+        {
+        
+            HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", true, "Helm");
+            hero.inventory.Add(helm);
+
+            helm.EquipGear(hero);
+        }
     }
-
 
 
 }

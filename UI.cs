@@ -33,6 +33,11 @@ namespace Game
             Console.WriteLine(message);
             Thread.Sleep(500);
         }
+        public static void ShowRollowingMessage(string message)
+        {
+            Console.WriteLine(message);
+            Thread.Sleep(50);
+        }
 
         public static void Secret(string message)
         {

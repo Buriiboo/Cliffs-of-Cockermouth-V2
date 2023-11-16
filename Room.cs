@@ -17,7 +17,7 @@ namespace Game
         {
             InitializeLayout(playerRoomRow, playerRoomCol);
             PlayerRow = 5; // Starting position
-            PlayerColumn = 3;
+            PlayerColumn = 1;
             IsInitialized = false;
 
         }
@@ -51,11 +51,11 @@ namespace Game
             {
                 Layout = new int[,] {
                 { 1, 1, 1, 0, 1, 1, 1 },
-                { 1, 2, 0, 0, 0, 0, 1 },
+                { 1, 1, 1, 0, 0, 0, 1 },
                 { 1, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 0 },
-                { 1, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 1, 0, 0, 0, 0 },
+                { 1, 0, 1, 0, 0, 0, 1 },
+                { 1, 0, 1, 0, 2, 0, 1 },
                 { 1, 1, 1, 1, 1, 1, 1 }};
             }
             if (playerRoomRow == 1 && playerRoomCol == 2)
@@ -128,7 +128,7 @@ namespace Game
 
         }
 
-        public void MovePlayer(int rowChange, int colChange, int playerRoomRow, int playerRoomCol, Hero hero)
+        public void MovePlayer(int rowChange, int colChange, int playerRoomRow, int playerRoomCol, Hero hero, List<Minions> allMinions)
         {
             int newRow = PlayerRow + rowChange;
             int newCol = PlayerColumn + colChange;
@@ -139,23 +139,38 @@ namespace Game
                 PlayerColumn = newCol;
             }
 
-            checkForScenario(playerRoomRow, playerRoomCol, hero);
+            checkForScenario(playerRoomRow, playerRoomCol, hero, allMinions);
         }
 
 
-        public void checkForScenario(int playerRoomRow, int playerRoomCol, Hero hero)
+        public void checkForScenario(int playerRoomRow, int playerRoomCol, Hero hero, List<Minions> allMinions)
         {
-            // First check if the player is in the specific room (row 3, column 1)
+
+            //First Room
             if (playerRoomRow == 3 && playerRoomCol == 1)
             {
-                // Additional conditions for triggering the scenario
-                if (PlayerRow == 2 && PlayerColumn == 1) // Replace with your specific condition
+              
+                if (PlayerRow == 2 && PlayerColumn == 1) 
                 {
-                    // Scenario logic here
-                    Console.WriteLine("Test");
-                    Thread.Sleep(2000);
+
                     var scenario = Scenario.Scenario1();
                     scenario.Present(hero);
+                }
+                if (PlayerRow == 2 && PlayerColumn == 2) 
+                {
+                    UI.ShowRollowingMessage("It seems that the entrance to the cliffs is guarded...");
+                    UI.ShowRollowingMessage("The feeble amphibiants swarm you...");
+                    List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, hero.Level, 3);
+                    GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
+                    GameLogic.EndRound(spawnedMinions, allMinions, hero);
+                }
+                if (PlayerRow == 5 && PlayerColumn == 3 || PlayerRow == 4 && PlayerColumn == 4 || PlayerRow == 5 && PlayerColumn == 5)
+                {
+
+                    var scenario = Scenario.Scenario2();
+                    scenario.Present(hero);
+
+
                 }
             }
         }
@@ -197,7 +212,7 @@ namespace Game
                     }
                     else if (Layout[row, col] == 2)
                     {
-                        Console.Write("M "); // Merchant
+                        Console.Write("O "); // Merchant
                     }
                     else
                     {

@@ -85,6 +85,24 @@ namespace Game
 
     }
 
+/*
+    public class WaterPouch : Consumable
+    {
+        public int Damage { get; set; }
+        public WaterPouch(string name, string description, int amount, int damage) : base(name, description, amount)
+        {
+            Damage = damage;
+        }
+        public override void UseItem(Character other,Hero hero)
+        {
+            Amount -= 1;
+            int tmp = Damage;
+            hero.HP += tmp;
+        }
+
+    }
+    */
+
     public class Quest
     {
         public string Name { get; set; }
@@ -119,6 +137,7 @@ namespace Game
             else
             {
                 HaveItem = true;
+                hero.Affinity-=5;
                 hero.Armor+=5;
                 hero.Damage+=5;
                 hero.Heroabilities.Add(new FistofDoom("FistOfDoom","Strikes with Chaotic power",50,1));

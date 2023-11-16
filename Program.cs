@@ -29,8 +29,7 @@ class Program
             });
             hero.inventory.AddRange(new Item[]                                                         //Skapa startItems
            {
-                new HelmofDoom("HelmOfDoom","Heavy helm not for the faint of heart",true,"Helm"),
-                new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",true,"Helm"),
+                new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",true,"Torso"),
                 new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 5, 15)
            });
 

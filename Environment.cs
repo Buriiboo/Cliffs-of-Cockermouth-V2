@@ -33,18 +33,19 @@ namespace Game
                 char input = Console.ReadKey().KeyChar;
                 switch (input)
                 {
-                    case 'w': currentRoom.MovePlayer(-1, 0, playerRoomRow, playerRoomCol,hero); break;
-                    case 's': currentRoom.MovePlayer(1, 0, playerRoomRow, playerRoomCol, hero); break;
-                    case 'a': currentRoom.MovePlayer(0, -1, playerRoomRow, playerRoomCol, hero); break;
-                    case 'd': currentRoom.MovePlayer(0, 1, playerRoomRow, playerRoomCol, hero); break;
+                    case 'w': currentRoom.MovePlayer(-1, 0, playerRoomRow, playerRoomCol,hero, allMinions); break;
+                    case 's': currentRoom.MovePlayer(1, 0, playerRoomRow, playerRoomCol, hero, allMinions); break;
+                    case 'a': currentRoom.MovePlayer(0, -1, playerRoomRow, playerRoomCol, hero, allMinions); break;
+                    case 'd': currentRoom.MovePlayer(0, 1, playerRoomRow, playerRoomCol, hero, allMinions); break;
                     case 'i': hero.ShowInventory(); Console.ReadKey(); break;
                 //  case 'm'  MapOverview();                            Översikt på rummen och funktion för det.
                     case 'q': isRunning = false; continue;
                 }
 
+                //Initiera event på en rumsnivå!
                 CheckRoomTransition();
                 currentRoom.InitializeLayout(playerRoomRow, playerRoomCol);
-                if (playerRoomRow==2 && playerRoomCol==1 && !currentRoom.IsInitialized)         //Initiera event på en rumsnivå!
+                if (playerRoomRow==2 && playerRoomCol==1 && !currentRoom.IsInitialized)         
                 {
                     List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, hero.Level, 3);
                     GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
