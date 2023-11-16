@@ -20,8 +20,8 @@ namespace Game
         {
             return new List<Item>
             {
-
-
+                new HelmofDoom("HelmOfDoom","Heavy helm not for the faint of heart",true,"Helm"),
+                new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",true,"Helm")
             };
         }
 
@@ -145,6 +145,5 @@ namespace Game
         {
             // Any additional initializations specific to Murlock can be done here
         }
-
     }
 }

@@ -24,7 +24,7 @@ namespace Game
                 Console.WriteLine("------------------------------------------------------------------------------------------------------------");
 
                 Console.WriteLine("Hero's Turn:");
-                Console.WriteLine("1. Attack   2. Defend   3. Riposte  4.Spellbook");
+                Console.WriteLine("1. Attack   2. Defend   3. Riposte  4.Spellbook  5.Item Inventory");
             }
         }
 

@@ -65,7 +65,7 @@ namespace Game
         public static void PlayerTurn(Hero hero, List<Minions> spawnedMinions)
         {
             
-            int choice = GetValidChoice(1, 5);
+            int choice = GetValidChoice(1, 6);
 
             switch(choice)
             {
@@ -99,11 +99,19 @@ namespace Game
                     // Check if the selected minion index is within the bounds of the spawnedMinions list
                     if (minionIndex3 >= 0)
                     {
-                    hero.Heroabilities[abilityChoice-1].UseAbility(spawnedMinions[minionIndex3]);
+                        hero.Heroabilities[abilityChoice-1].UseAbility(spawnedMinions[minionIndex3]);
                     }
                     
                     break;
-              //  case 5:
+                case 5:
+                    Item itemChoice = hero.HandleBattleInventory();
+                    int minionIndex4 = SelectMinionToAttack(spawnedMinions);
+                    itemChoice.UseItem(spawnedMinions[minionIndex4]);
+                    if(itemChoice is ThrowWeapons throwWeapons && throwWeapons.Amount == 0)
+                        hero.RemoveInventory(itemChoice);
+                    
+                    break;
+
                     //Steg 1.  Öppna Listan med Consumables.
                     //Steg 2.  Välja item från Consumable listan.
                     //Steg 3.  Ta indexet från ConsumableListan och lägg in i en Variebel. 
@@ -112,7 +120,6 @@ namespace Game
                     //int minionIndex4 = SelectMinionToAttack(spawnedMinions);
                     //Steg 5.  Använd Consumable metoden för Indexet i Spells på Indexet för Minons.
                     //hero.inventory[ConsumableChoice-1].UseItem(spawnedMinions[minionIndex3]);
-                    //break;
 
             }
 
