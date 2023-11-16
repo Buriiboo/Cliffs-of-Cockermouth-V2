@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 namespace Game
 {
     public class Hero : Character
-    {
+    {   
+        public string Name{get; set;}
         public List<Abilities> Heroabilities;   //Aktiv abilities för spellist.
         public List<Item> inventory;            //Inventory man har.
         public List<Consumable> HeroConsumables;
@@ -21,15 +22,35 @@ namespace Game
 
         public int TempArmorBuff { get; private set; } = 0;
 
-        public Hero(int hp, double damage, int armor, int affinity,int level, int experience)
+        public Hero(string name, int hp, double damage, int armor, int affinity,int level, int experience)
             : base(hp, damage, armor, affinity)
         {
+            Name = name;
             Level = level;
             Experience = experience;
             Heroabilities = new List<Abilities>();
             inventory = new List<Item>();
-
+            HeroConsumables = new List<Consumable>();
         }
+        
+        
+            public static Hero CreateHero()
+            {
+                Console.Clear();
+                Console.WriteLine("Choose a name: ");
+                string? name = Console.ReadLine();
+
+                // You can customize these initial values as needed
+                int initialHP = 500;
+                double initialDamage = 50;
+                int initialArmor = 3;
+                int initialAffinity = 50;
+                int initialLevel = 1;
+                int initialExperience = 1;
+
+                return new Hero(name, initialHP, initialDamage, initialArmor, initialAffinity, initialLevel, initialExperience);
+            }
+        
 
         public int Attack(Character target)     //Vanlig attack
         {
@@ -129,7 +150,6 @@ namespace Game
         public void LevelUp()   //Level up funktion
         {
             Level++;   
-            Experience = 0; // Reset experience to 0 when leveling up
 
             // Adjust attributes based on the leveling-up logic
             HP += 50;
