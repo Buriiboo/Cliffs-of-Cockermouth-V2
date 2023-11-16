@@ -12,8 +12,9 @@ class Program
 {
     static void Main(string[] args)
     {       
-            string name = "PlaceholderName";
+            string name = null;
             Hero hero = new Hero(name,500,50,3,50,1,1);
+            
             
 
             hero.Heroabilities.AddRange(new Abilities[]                                                  //Skapa startobjekt
