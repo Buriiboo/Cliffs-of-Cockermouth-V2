@@ -123,13 +123,24 @@ namespace Game
         {
             while (Experience >= ExperienceRequiredForLevel(Level))
             {
+                System.Console.WriteLine($"Current Experience: {Experience}, ExperienceRequiredForLevel({Level}): {ExperienceRequiredForLevel(Level)}");
                 LevelUp();
             }
         }
 
         public void LevelUp()   //Level up funktion
         {
-            Level++;         
+            Level++;   
+            Experience = 0; // Reset experience to 0 when leveling up
+
+            // Adjust attributes based on the leveling-up logic
+            HP += 50;
+            Damage += 10;
+            Armor += 2;
+            
+
+            Console.WriteLine($"{Name} leveled up to level {Level}!");
+            Console.WriteLine($"HP: {HP}, Damage: {Damage}, Armor: {Armor}");      
 
         }
 

@@ -19,6 +19,7 @@ class Program
                 new Fireball("Fireball","A ball of fire",40,1),
                 new IceShard("IceShard","Ice as sharp as a dagger",20,1),
                 new HolyStrike("HolyStrike","a Zealous Strike",30,1)
+                
 
             });
             hero.inventory.AddRange(new Item[]                                                         //Skapa startItems
