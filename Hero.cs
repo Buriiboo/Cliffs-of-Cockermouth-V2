@@ -21,8 +21,6 @@ namespace Game
 
         public int TempArmorBuff { get; private set; } = 0;
 
-
-
         public Hero(int hp, double damage, int armor, int affinity,int level, int experience)
             : base(hp, damage, armor, affinity)
         {
@@ -144,8 +142,47 @@ namespace Game
         }
         public void ShowInventory()
         {
-            for(int i = 0; i < inventory.Count; i++){
-                Console.WriteLine($"{i + 1}: {inventory[i].Name}");
+            bool inInventory = true;
+
+            while(inInventory){
+                System.Console.WriteLine("+++Inventory+++");
+                System.Console.WriteLine("1. Show All Items");
+                System.Console.WriteLine("2. Show Consumable");
+                System.Console.WriteLine("3. Handle Gear");
+            //  System.Console.WriteLine("4. Handle Gear");
+
+                int choice= int.Parse(Console.ReadLine());
+                switch(choice){
+
+                case 1:
+                    for(int i = 0; i < inventory.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}: {inventory[i].Name}");
+                        Console.WriteLine($" {inventory[i].Description}");
+                    }
+                    break;
+                case 2:
+                    for (int i = 0; i < HeroConsumables.Count; i++)
+                    {
+                        Console.WriteLine($"{i + 1}: {HeroConsumables[i].Name}");
+                        Console.WriteLine($" {HeroConsumables[i].Description}");
+                    }
+                    break;
+                /* case 3:                  Inventory.Gear
+                        
+                        for (int i = 0; i < Inventory.GetType(Gear).Count i++)
+                        {
+                            Console.WriteLine($"{i + 1}: {HeroConsumables[i].Name}");
+                            Console.WriteLine($" {HeroConsumables[i].Description}");
+                        }
+
+                        HandleGear();
+     
+                    break;
+                     */
+                }
+
+            
             }
         }
 
