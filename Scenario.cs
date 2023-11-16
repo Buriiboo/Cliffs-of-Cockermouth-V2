@@ -148,14 +148,14 @@ namespace Game
 
         private void HandleBranch2Effect(Hero hero)
         {
-            HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", true, "Helm");
+            HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm");
             hero.inventory.Add(helm);
         }
 
         private void HandleBranch3Effect(Hero hero)
         {
         
-            HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", true, "Helm");
+            HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm");
             hero.inventory.Add(helm);
 
             helm.EquipGear(hero);
