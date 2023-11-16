@@ -157,7 +157,7 @@ namespace Game
                
             }
         }
-        public void HandelInventory(Character other)//Gör om den till passiv/Gear och kopiera en liknade mixad med denna + Spellbook för battle version
+        public void HandelInventory(Character other)    //Gör om den till passiv/Gear och kopiera en liknade mixad med denna + Spellbook för battle version
         {
             
             if(inventory.Count == 0){
