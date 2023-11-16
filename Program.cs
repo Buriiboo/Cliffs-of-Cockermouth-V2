@@ -42,11 +42,6 @@ class Program
             gameEnvironment.RunGame(allMinions, hero);
 
 
-
-
-
-
-
             }
 
     

@@ -24,10 +24,6 @@ namespace Game
 
         }
 
-
-
-       
-
     }
 
         public class Fireball : Abilities
@@ -106,9 +102,9 @@ namespace Game
         }
 
     }
-    public class FirstofDoom : Abilities
+    public class FistofDoom : Abilities
     {
-        public FirstofDoom(string name, string description, double power, int turns)
+        public FistofDoom(string name, string description, double power, int turns)
             : base(name, description, power, turns)
         {
             // Any additional initializations specific to Murlock can be done here
