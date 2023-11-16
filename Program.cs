@@ -11,10 +11,17 @@ namespace Game
 class Program
 {
     static void Main(string[] args)
+<<<<<<< HEAD
     {
             Console.WriteLine("Choose a name: ");
             string? name = Console.ReadLine();
             Hero hero = new Hero(name, 500,50,3,50,1,1);
+=======
+    {       
+            string name = null;
+            Hero hero = new Hero(name,500,50,3,50,1,1);
+>>>>>>> 36e6e987bc9ee380ec2514bc96e6e34d332afa52
+            
             
 
             hero.Heroabilities.AddRange(new Abilities[]                                                  //Skapa startobjekt

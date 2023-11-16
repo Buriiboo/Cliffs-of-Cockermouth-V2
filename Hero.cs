@@ -38,7 +38,7 @@ namespace Game
             {
                 Console.Clear();
                 Console.WriteLine("Choose a name: ");
-                string? name = Console.ReadLine();
+                string name = Console.ReadLine();
 
                 // You can customize these initial values as needed
                 int initialHP = 500;
