@@ -21,14 +21,16 @@ class Program
                 new HolyStrike("HolyStrike","a Zealous Strike",30,1)
 
             });
-            hero.inventory.AddRange(new Item[]                                                           //Skapa startItems
+            hero.inventory.AddRange(new Item[]                                                         //Skapa startItems
            {
                 new HelmofDoom("HelmOfDoom","Heavy helm not for the faint of heart",true,"Helm"),
                 new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",true,"Helm"),
-                new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 2, 15)
+                new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 5, 15)
            });
 
-        
+           hero.HeroConsumables = hero.inventory.OfType<Consumable>().ToList();
+
+
             List<Character> characters = Character.GetDefaultCharacters();                               //Skapar en del av karaktärsobjekten vid start
             //List<Abilities> abilities = Abilities.GetAbilities();
         

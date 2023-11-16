@@ -11,6 +11,7 @@ namespace Game
     {
         public List<Abilities> Heroabilities;   //Aktiv abilities för spellist.
         public List<Item> inventory;            //Inventory man har.
+        public List<Consumable> HeroConsumables;
         public int Level { get; set; }
         public int Experience { get; private set; }
 
@@ -150,17 +151,16 @@ namespace Game
 
         public void ShowBattleInventory()
         {
-            var Consumables = inventory.OfType<Consumable>().ToList();
-            for (int i = 0; i < Consumables.Count; i++)
+            for (int i = 0; i < HeroConsumables.Count; i++)
             {
-                Console.WriteLine($"{i + 1}: {Consumables[i].Name}");
-                System.Console.WriteLine("Outside of Array");
+                Console.WriteLine($"{i + 1}: {HeroConsumables[i].Name} Amount:{HeroConsumables[i].Amount}");
+               
             }
         }
         public void HandelInventory(Character other)//Gör om den till passiv/Gear och kopiera en liknade mixad med denna + Spellbook för battle version
         {
             
-            if(Inventory().Count == 0){
+            if(inventory.Count == 0){
                 Console.WriteLine("Your inventory is empty!");
                 return;
             }
@@ -173,20 +173,23 @@ namespace Game
                     RemoveInventory(item);
             }
         }
-        public Item HandleBattleInventory()
+        public int HandleBattleInventory(List<Consumable> HeroConsumables)
         {
-            
-            if(Inventory().Count == 0){
-                Console.WriteLine("Your inventory is empty!");
-                return null;
-            }
 
             ShowBattleInventory();
-
-            int ItemChoice = int.Parse(Console.ReadLine());
-            return Inventory()[ItemChoice - 1];
-            
-            
+            Console.WriteLine("Choose an ability:");
+            while (true)
+            {
+                if (int.TryParse(Console.ReadLine(), out int choice) && choice > 0 && choice <= HeroConsumables.Count)
+                {
+                    return choice;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input, please enter a number from the list.");
+                }
+            }
+ 
         }
 
         public void AddInventory(Item item)

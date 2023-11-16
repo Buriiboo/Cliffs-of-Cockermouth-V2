@@ -104,12 +104,13 @@ namespace Game
                     
                     break;
                 case 5:
-                    Item itemChoice = hero.HandleBattleInventory();
+                    int itemChoice = hero.HandleBattleInventory(hero.HeroConsumables);
                     int minionIndex4 = SelectMinionToAttack(spawnedMinions);
-                    itemChoice.UseItem(spawnedMinions[minionIndex4]);
-                    if(itemChoice is ThrowWeapons throwWeapons && throwWeapons.Amount == 0)
-                        hero.RemoveInventory(itemChoice);
-                    
+
+                    if (minionIndex4 >= 0)
+                    {
+                        hero.HeroConsumables[itemChoice - 1].UseItem(spawnedMinions[minionIndex4]);
+                    }
                     break;
 
                     //Steg 1.  Öppna Listan med Consumables.
