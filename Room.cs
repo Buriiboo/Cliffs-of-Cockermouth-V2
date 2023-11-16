@@ -128,7 +128,7 @@ namespace Game
 
         }
 
-        public void MovePlayer(int rowChange, int colChange, int playerRoomRow, int playerRoomCol)
+        public void MovePlayer(int rowChange, int colChange, int playerRoomRow, int playerRoomCol, Hero hero)
         {
             int newRow = PlayerRow + rowChange;
             int newCol = PlayerColumn + colChange;
@@ -139,13 +139,11 @@ namespace Game
                 PlayerColumn = newCol;
             }
 
-
-
-            checkForScenario(playerRoomRow, playerRoomCol);
+            checkForScenario(playerRoomRow, playerRoomCol, hero);
         }
 
 
-        public void checkForScenario(int playerRoomRow, int playerRoomCol)
+        public void checkForScenario(int playerRoomRow, int playerRoomCol, Hero hero)
         {
             // First check if the player is in the specific room (row 3, column 1)
             if (playerRoomRow == 3 && playerRoomCol == 1)
@@ -156,6 +154,8 @@ namespace Game
                     // Scenario logic here
                     Console.WriteLine("Test");
                     Thread.Sleep(2000);
+                    var scenario = Scenario.CreateExampleScenario();
+                    scenario.Present(hero);
                 }
             }
         }

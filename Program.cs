@@ -12,9 +12,10 @@ class Program
 {
     static void Main(string[] args)
     {
-            Console.WriteLine("Choose a name: ");
+            Console.Write("Choose a name: ");
             string? name = Console.ReadLine();
             Hero hero = new Hero(name, 500,50,3,50,1,1);
+            
             
             
 
@@ -44,7 +45,7 @@ class Program
             List<Minions> SpawnMinion = Minions.SpawnMinion(allMinions, hero.Level, 3);                  //Sorterar en SpawnMinion 
             List<Minions> Boss = Minions.Boss();
 
-            GameLogic.MainMenu();                                                                        // Menyun mer UI jsut nu
+           // GameLogic.MainMenu();                                                                      // Menyun mer UI jsut nu
             GameEnvironment gameEnvironment = new GameEnvironment();                                     //Skapa levelförsta environment
             gameEnvironment.RunGame(allMinions, hero);                                                   // Kör Första environment
 

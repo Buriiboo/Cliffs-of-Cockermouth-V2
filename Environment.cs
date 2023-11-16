@@ -33,10 +33,10 @@ namespace Game
                 char input = Console.ReadKey().KeyChar;
                 switch (input)
                 {
-                    case 'w': currentRoom.MovePlayer(-1, 0, playerRoomRow, playerRoomCol); break;
-                    case 's': currentRoom.MovePlayer(1, 0, playerRoomRow, playerRoomCol); break;
-                    case 'a': currentRoom.MovePlayer(0, -1, playerRoomRow, playerRoomCol); break;
-                    case 'd': currentRoom.MovePlayer(0, 1, playerRoomRow, playerRoomCol); break;
+                    case 'w': currentRoom.MovePlayer(-1, 0, playerRoomRow, playerRoomCol,hero); break;
+                    case 's': currentRoom.MovePlayer(1, 0, playerRoomRow, playerRoomCol, hero); break;
+                    case 'a': currentRoom.MovePlayer(0, -1, playerRoomRow, playerRoomCol, hero); break;
+                    case 'd': currentRoom.MovePlayer(0, 1, playerRoomRow, playerRoomCol, hero); break;
                     case 'i': hero.ShowInventory(); Console.ReadKey(); break;
                 //  case 'm'  MapOverview();                            Översikt på rummen och funktion för det.
                     case 'q': isRunning = false; continue;

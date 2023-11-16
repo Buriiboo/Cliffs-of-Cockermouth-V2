@@ -15,7 +15,6 @@ namespace Game
         public List<Consumable> HeroConsumables;
         public int Level { get; set; }
         public int Experience { get; private set; }
-
         private const int BaseExperienceRequirement = 15; // Base experience for first level
         private const int TempArmorIncrease = 2;       //Temp modifiers
         private const int TempHPIncrease = 5;
