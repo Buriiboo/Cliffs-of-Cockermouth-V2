@@ -118,7 +118,6 @@ namespace Game
             }
             else
             {
-
                 HaveItem = true;
                 hero.Armor+=5;
                 hero.Damage+=5;
@@ -137,9 +136,6 @@ namespace Game
                 hero.Heroabilities.Remove(abilityToRemove);
             }
         }
-
-
-
 
     }
     public class PlateofChaos : Gear

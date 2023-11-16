@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public abstract class Abilities
+    public abstract class Abilities                             //Abstract Class för vi använder inte detta.
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public double Power { get; set; }
         public int Turns { get; set; }
-        public abstract void UseAbility(Character target);
+        public abstract void UseAbility(Character target);     //Sätt Metoden
 
 
         public Abilities(string name, string description, double power, int turns)
@@ -26,7 +26,7 @@ namespace Game
 
     }
 
-        public class Fireball : Abilities
+        public class Fireball : Abilities                    //Abilities
     {
         public Fireball(string name, string description, double power, int turns)
             : base(name, description, power, turns)
@@ -34,7 +34,7 @@ namespace Game
             // Any additional initializations specific to Murlock can be done here
         }
 
-        public static Fireball CreateFireball()
+        public static Fireball CreateFireball()             //CreateFireball så vi skapar den
         {
 
             string name = "Fireball";
@@ -44,7 +44,7 @@ namespace Game
 
             return new Fireball(name, description, power, turns);
         }
-        public override void UseAbility(Character target)
+        public override void UseAbility(Character target)  //Använd spell
         {
             Console.WriteLine($"You throw a fireball! Dealing: {this.Power} damage");
             int tmp = (int)this.Power;
