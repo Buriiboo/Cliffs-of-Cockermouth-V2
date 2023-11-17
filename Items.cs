@@ -161,4 +161,38 @@ namespace Game
             // Any additional initializations specific to Murlock can be done here
         }
     }
+    public class Gloves : Gear
+    {
+        public HelmofDoom(string name, string description, bool haveItem, string gearSlot)
+            : base(name, description, haveItem, gearSlot)
+        {
+            // Any additional initializations specific to Murlock can be done here
+        }
+        public override void EquipGear(Hero hero)
+        {
+            if (!HaveItem)
+            {
+                HaveItem = true;
+                hero.Affinity -= 5;
+                hero.MaxHP += 5;
+                hero.Armor += 5;
+                hero.Damage += 5;
+                hero.Heroabilities.Add(new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1));
+            }
+
+        }
+
+        public override void UnEquipGear(Hero hero)
+        {
+            if (HaveItem)
+            {
+                HaveItem = false;
+                hero.Armor -= 5;
+                hero.Damage -= 5;
+                FistofDoom abilityToRemove = new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1);
+                hero.Heroabilities.Remove(abilityToRemove);
+            }
+        }
+    }
+
 }

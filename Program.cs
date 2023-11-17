@@ -28,9 +28,8 @@ class Program
            {
              // new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm"),
                 new HelmofDoom("Hat", "Just an ordernary fisherman hat", false, "Helm"), //man kan använda samma för attla olika typer, de gör samma saker
-                new HelmofDoom("Coat", "Warm fuzzy coat", false, "Torso"),
-                new HelmofDoom("Gloves", "Warm wolf skin gloves", false, "Gloves"),
-                new HelmofDoom("Boots", "War boots", false, "Boots"),
+                new PlateofChaos("Coat", "Warm fuzzy coat", false, "Torso"),
+                
                 new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm"),
                 new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Torso"),
                 new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 5, 15),
