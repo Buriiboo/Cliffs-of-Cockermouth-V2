@@ -164,9 +164,9 @@ namespace Game
             // Any additional initializations specific to Murlock can be done here
         }
     }
-    public class Gloves : Gear
+    public class LeatherGloves : Gear
     {
-        public HelmofDoom(string name, string description, bool haveItem, string gearSlot)
+        public LeatherGloves(string name, string description, bool haveItem, string gearSlot)
             : base(name, description, haveItem, gearSlot)
         {
             // Any additional initializations specific to Murlock can be done here
@@ -176,11 +176,10 @@ namespace Game
             if (!HaveItem)
             {
                 HaveItem = true;
-                hero.Affinity -= 5;
-                hero.MaxHP += 5;
-                hero.Armor += 5;
-                hero.Damage += 5;
-                hero.Heroabilities.Add(new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1));
+                hero.Affinity -= 1;
+                hero.MaxHP += 1;
+                hero.Armor += 1;
+                hero.Damage += 1;
             }
 
         }
@@ -190,12 +189,9 @@ namespace Game
             if (HaveItem)
             {
                 HaveItem = false;
-                hero.Armor -= 5;
-                hero.Damage -= 5;
-                FistofDoom abilityToRemove = new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1);
-                hero.Heroabilities.Remove(abilityToRemove);
+                hero.Armor -= 1;
+                hero.Damage -= 1;
             }
         }
     }
-
 }
