@@ -56,9 +56,9 @@ namespace Game
 
                 if (playerRoomRow == 1 && playerRoomCol == 3 && !currentRoom.IsInitialized)         //Initiera event på en rumsnivå!
                 {
-                    List<Minions> spawnedMinions = Minions.Boss(); ;
+                    List<Minions> spawnedMinions = Minions.Boss(); ;                                
                     GameLogic.BattleEncounter(hero, Minions.Boss());
-                    GameLogic.EndRound(spawnedMinions, allMinions, hero); //How do i make this work?
+                    GameLogic.EndRound(spawnedMinions, allMinions, hero);                           //How do i make this work?
 
                     currentRoom.IsInitialized = true;
                 }

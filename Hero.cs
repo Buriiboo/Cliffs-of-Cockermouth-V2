@@ -13,6 +13,7 @@ namespace Game
         public List<Abilities> Heroabilities;   //Aktiv abilities för spellist.
         public List<Item> inventory;            //Inventory man har.
         public List<Consumable> HeroConsumables;
+        public Dictionary<string, Gear> EquippedGear { get; set; }
         public int Level { get; set; }
         public int Experience { get; private set; }
         private const int BaseExperienceRequirement = 15; // Base experience for first level
@@ -27,9 +28,11 @@ namespace Game
             Name = name;
             Level = level;
             Experience = experience;
+
             Heroabilities = new List<Abilities>();
             inventory = new List<Item>();
             HeroConsumables = new List<Consumable>();
+            EquippedGear = new Dictionary<string, Gear>();
         }
         
         
@@ -179,41 +182,57 @@ namespace Game
                 System.Console.WriteLine("1. Show All Items");
                 System.Console.WriteLine("2. Show Consumable");
                 System.Console.WriteLine("3. Handle Gear");
-                Console.WriteLine("4. Handle Gear");
             //  System.Console.WriteLine("4. Handle Gear");
 
                 int choice= int.Parse(Console.ReadLine());
                 switch(choice){
 
                 case 1:
+                    Console.Clear();
+                    Console.WriteLine("+++All-Items+++");
                     for(int i = 0; i < inventory.Count; i++)
                     {
+                        Console.WriteLine(" ");
                         Console.WriteLine($"{i + 1}: {inventory[i].Name}");
                         Console.WriteLine($" {inventory[i].Description}");
+        
                     }
+                    Console.WriteLine("Press any key to exit");
+                    Console.ReadKey();
                     break;
                 case 2:
+                    Console.Clear();
+                    Console.WriteLine("+++Consumable-Inventory+++");
                     for (int i = 0; i < HeroConsumables.Count; i++)
                     {
-                        Console.WriteLine($"{i + 1}: {HeroConsumables[i].Name}");
+                        Console.WriteLine(" ");
+                        Console.WriteLine($"{i + 1}: {HeroConsumables[i].Name} amount:{HeroConsumables[i].Amount}");
                         Console.WriteLine($" {HeroConsumables[i].Description}");
+                  
                     }
+                    Console.WriteLine("Press any key to exit");    
+                    Console.ReadKey();
                     break;
-                /* case 3:                  Inventory.Gear
-                        
-                        for (int i = 0; i < Inventory.GetType(Gear).Count i++)
-                        {
-                            Console.WriteLine($"{i + 1}: {HeroConsumables[i].Name}");
-                            Console.WriteLine($" {HeroConsumables[i].Description}");
-                        }
-
-                        HandleGear();
+                 case 3:
+                        Console.Clear();
+                        Console.WriteLine("+++Gear-Inventory+++");
+                        for (int i = 0; i < inventory.Count; i++)
+                            if (inventory[i] is Gear gearItem) // This is a type pattern introduced in C# 7.0
+                            {
+                                Console.WriteLine(" ");
+                                Console.WriteLine($"{i + 1}: {gearItem.Name}");
+                                Console.WriteLine($" {gearItem.Description}");
+                       
+                            }
+                    Console.WriteLine("Press any key to exit");    
+                    Console.ReadKey();
+                 
      
                     break;
-                     */
-                case 4:
-                    return;
+                     
+                
                 }
+                break;
 
             
             }
@@ -264,6 +283,20 @@ namespace Game
                 }
             }
  
+        }
+        public void EquipGearFromInventory(string gearName)
+        {
+            Gear gearToEquip = inventory.OfType<Gear>().FirstOrDefault(g => g.Name == gearName);
+            if (gearToEquip != null)
+            {
+                Console.WriteLine($"Equipping: {gearToEquip.Name}");
+                gearToEquip.EquipGear(this);
+                EquippedGear[gearToEquip.GearSlot] = gearToEquip;
+            }
+            else
+            {
+                Console.WriteLine($"Gear not found in inventory: {gearName}");
+            }
         }
 
         public void AddInventory(Item item)

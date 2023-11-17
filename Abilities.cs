@@ -143,8 +143,6 @@ public class TouchOfDeath : Abilities
             int tmp = (int)this.Power;
             target.HP -= tmp;
             Thread.Sleep(200);
-
-
         }
 
 
