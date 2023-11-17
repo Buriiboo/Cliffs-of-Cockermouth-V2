@@ -194,7 +194,7 @@ namespace Game
                         Console.WriteLine($" {inventory[i].Description}");
         
                     }
-                    Console.WriteLine("Pres any key to exit");
+                    Console.WriteLine("Press any key to exit");
                     Console.ReadKey();
                     break;
                 case 2:
@@ -207,7 +207,7 @@ namespace Game
                         Console.WriteLine($" {HeroConsumables[i].Description}");
                   
                     }
-                    Console.WriteLine("Pres any key to exit");    
+                    Console.WriteLine("Press any key to exit");    
                     Console.ReadKey();
                     break;
                  case 3:
@@ -221,7 +221,7 @@ namespace Game
                                 Console.WriteLine($" {gearItem.Description}");
                        
                             }
-                    Console.WriteLine("Pres any key to exit");    
+                    Console.WriteLine("Press any key to exit");    
                     Console.ReadKey();
                  
      

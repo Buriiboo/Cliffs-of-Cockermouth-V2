@@ -15,6 +15,7 @@ class Program
             Console.Write("Choose a name: ");
             string? name = Console.ReadLine();
             Hero hero = new Hero(name, 500,50,3,50,1,1);
+            UI.asciiArt();
 
             hero.Heroabilities.AddRange(new Abilities[]                                                  //Skapa startobjekt
             {
@@ -42,7 +43,7 @@ class Program
             List<Minions> SpawnMinion = Minions.SpawnMinion(allMinions, hero.Level, 3);                  //Sorterar en SpawnMinion 
             List<Minions> Boss = Minions.Boss();
 
-           // GameLogic.MainMenu();                                                                      // Menyun mer UI jsut nu
+            // GameLogic.MainMenu();                                                                      // Menyun mer UI jsut nu
             GameEnvironment gameEnvironment = new GameEnvironment();                                     //Skapa levelförsta environment
             gameEnvironment.RunGame(allMinions, hero);                                                   // Kör Första environment
 
@@ -54,56 +55,3 @@ class Program
 
 }
 
-/*
-
-           while (isRunning == true)
-            {
-                Console.Clear();
-
-                string command = Console.ReadLine();
-
-                if (command.ToLower() == "exit")
-                {
-                    isRunning = false;
-                }
-                else if(playerRow==2&&playerColumn==1){
-                    GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
-                    UI.Secret("The way forward was shut...");
-                    UI.Secret("But on the door there was an inscription and it read thus:");
-                    UI.Secret("Speak the word friend and you may enter.");
-                    GameLogic.SecretScenario(hero);
-                   
-                }
-                else if (playerRow == 2 && playerColumn == 2)
-                {
-                    GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
-                    GameLogic.SecretScenario(hero);
-
-                }
-                else if (playerRow == 0 && playerColumn == 2)
-                {
-                    GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
-                    GameLogic.SecretScenario(hero);
-    
-                }
-                else if (playerRow == 0 && playerColumn == 1)
-                {
-                    GameLogic.BattleEncounter(hero, Minions.Boss());
-
-                    GameLogic.EndRound(Boss, allMinions, hero);
-                }
-                else
-                {
-                    List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, hero.Level, 3);
-                    GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
-
-                    GameLogic.EndRound(spawnedMinions, allMinions, hero);
-                    foreach (var minions in allMinions)
-                    {
-                        System.Console.WriteLine(minions.HP);
-                        Thread.Sleep(200);
-                    }
-    
-                }
-            }
-            */

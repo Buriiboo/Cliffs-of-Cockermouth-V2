@@ -49,6 +49,33 @@ namespace Game
             System.Console.WriteLine("");
         }
 
+        public static void asciiArt( )
+        {
+                        string asciiArt = @"
+                    {}
+                   .--.
+                  /.--.\
+                  |====|
+                  |`::`|
+              .-;`\..../`;-.
+             /  |...::...|  \
+            |   /'''::'''\   |
+            ;--'\   ::   /\--;
+            <__>,>._::_.<,<__>
+            |  |/   ^^   \|  |
+            \::/|        |\::/
+                 \_ || _/
+                 <_ >< _>
+                 |  ||  |
+                 |  ||  |
+                 _\.:||:./_
+                 /____/\____\";
+            System.Console.WriteLine(asciiArt);
+            Console.ReadKey();
+
+        }
+                    
+
     }
 }
     
