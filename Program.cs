@@ -15,7 +15,7 @@ class Program
             Console.Write("Choose a name: ");
             string? name = Console.ReadLine();
             Hero hero = new Hero(name, 500,50,3,50,1,1);
-            UI.asciiArt();
+           
 
             hero.Heroabilities.AddRange(new Abilities[]                                                  //Skapa startobjekt
             {
@@ -26,13 +26,15 @@ class Program
             });
             hero.inventory.AddRange(new Item[]                                                         //Skapa startItems
            {
-               
-                new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",true,"Helm"),
+                new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm"),
+                new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Torso"),
                 new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 5, 15),
                 new WaterPouch("WaterPounch", "Gives you 25hp", 2, 25)
-           });
 
-           hero.HeroConsumables = hero.inventory.OfType<Consumable>().ToList();
+           });
+            UI.asciiArt(hero);
+
+            hero.HeroConsumables = hero.inventory.OfType<Consumable>().ToList();
 
 
             List<Character> characters = Character.GetDefaultCharacters();                               //Skapar en del av karaktärsobjekten vid start

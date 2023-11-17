@@ -40,7 +40,7 @@ namespace Game
  
         }
 
-        public void EquipGear(Hero hero)
+        public virtual void EquipGear(Hero hero)
         {
             if (HaveItem)
             {
@@ -52,7 +52,7 @@ namespace Game
             }
         }
 
-        public void UnEquipGear(Hero hero)
+        public virtual void UnEquipGear(Hero hero)
         {
             if (HaveItem)
             {
@@ -102,24 +102,6 @@ namespace Game
         }
     }
 
-/*
-    public class WaterPouch : Consumable
-    {
-        public int Damage { get; set; }
-        public WaterPouch(string name, string description, int amount, int damage) : base(name, description, amount)
-        {
-            Damage = damage;
-        }
-        public override void UseItem(Character other,Hero hero)
-        {
-            Amount -= 1;
-            int tmp = Damage;
-            hero.HP += tmp;
-        }
-
-    }
-    */
-
     public class Quest
     {
         public string Name { get; set; }
@@ -145,23 +127,21 @@ namespace Game
         {
             // Any additional initializations specific to Murlock can be done here
         }
-        public void EquipGear(Hero hero)
+        public override void EquipGear(Hero hero)
         {
-            if (HaveItem)
-            {
-                Console.WriteLine("You already have one on you!");
-            }
-            else
+            if (!HaveItem)
             {
                 HaveItem = true;
-                hero.Affinity-=5;
-                hero.Armor+=5;
-                hero.Damage+=5;
-                hero.Heroabilities.Add(new FistofDoom("FistOfDoom","Strikes with Chaotic power",50,1));
+                hero.Affinity -= 5;
+                hero.MaxHP += 5;
+                hero.Armor += 5;
+                hero.Damage += 5;
+                hero.Heroabilities.Add(new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1));
             }
+
         }
 
-        public void UnEquipGear(Hero hero)
+        public override void UnEquipGear(Hero hero)
         {
             if (HaveItem)
             {

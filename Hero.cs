@@ -13,6 +13,7 @@ namespace Game
         public List<Abilities> Heroabilities;   //Aktiv abilities för spellist.
         public List<Item> inventory;            //Inventory man har.
         public List<Consumable> HeroConsumables;
+        public Dictionary<string, Gear> EquippedGear { get; set; }
         public int Level { get; set; }
         public int Experience { get; private set; }
         private const int BaseExperienceRequirement = 15; // Base experience for first level
@@ -27,9 +28,11 @@ namespace Game
             Name = name;
             Level = level;
             Experience = experience;
+
             Heroabilities = new List<Abilities>();
             inventory = new List<Item>();
             HeroConsumables = new List<Consumable>();
+            EquippedGear = new Dictionary<string, Gear>();
         }
         
         
@@ -275,6 +278,20 @@ namespace Game
                 }
             }
  
+        }
+        public void EquipGearFromInventory(string gearName)
+        {
+            Gear gearToEquip = inventory.OfType<Gear>().FirstOrDefault(g => g.Name == gearName);
+            if (gearToEquip != null)
+            {
+                Console.WriteLine($"Equipping: {gearToEquip.Name}");
+                gearToEquip.EquipGear(this);
+                EquippedGear[gearToEquip.GearSlot] = gearToEquip;
+            }
+            else
+            {
+                Console.WriteLine($"Gear not found in inventory: {gearName}");
+            }
         }
 
         public void AddInventory(Item item)
