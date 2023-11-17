@@ -27,11 +27,15 @@ class Program
             hero.inventory.AddRange(new Item[]                                                         //Skapa startItems
            {
              // new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm"),
-                new HelmofDoom("Hat", "Just an ordernary fisherman hat", false, "Helm"), //man kan använda samma för attla olika typer, de gör samma saker
-                new PlateofChaos("Coat", "Warm fuzzy coat", false, "Torso"),
-                
+                new LeatherHelm("Leather Hat", "Hat made out of leather", false, "Helm"), //man kan använda samma för attla olika typer, de gör samma saker
+                new LeatherPlate("Leather Shirt", "Shirt made out of leather", false, "Torso"),
+                new LeatherGloves("Leather gloves", "Gloves made out of leather", false, "Gloves"),
+                new LeatherBoots("Leather Boots", "Boots made out of leather", false, "Boots"),
+
                 new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm"),
                 new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Torso"),
+                new GlovesofDoom("GlovesOfDoom", "Gloves helm not for the faint of heart", false, "Gloves"),
+                new BootsofChaos("BootsOfChaos", "The Rightous fear it, the cunning desire it", false, "Boots"),
                 new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 5, 15),
                 new ThrowWeapons("Swamp potion", "Gives out 19 damage", 2, 19),
                 new HealItem("Healing potion", "Gives you 12hp", 3, 12),
