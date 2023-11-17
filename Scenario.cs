@@ -123,7 +123,7 @@ namespace Game
             "Finally an artifact worthy of my splendour!",
             ("Humming intensifies violently", hero =>
             {
-                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm");     //Option 3
+                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helmet");     //Option 3
                 hero.inventory.Add(helm);
                 helm.EquipGear(hero);
                 hero.Affinity -= 10;

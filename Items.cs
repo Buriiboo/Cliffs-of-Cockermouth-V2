@@ -137,7 +137,6 @@ namespace Game
                 hero.Damage += 5;
                 hero.Heroabilities.Add(new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1));
             }
-
         }
 
         public override void UnEquipGear(Hero hero)
@@ -145,6 +144,8 @@ namespace Game
             if (HaveItem)
             {
                 HaveItem = false;
+                hero.Affinity += 5;
+                hero.MaxHP -= 5;
                 hero.Armor -= 5;
                 hero.Damage -= 5;
                 FistofDoom abilityToRemove = new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1);
@@ -153,6 +154,8 @@ namespace Game
         }
 
     }
+
+
     public class PlateofChaos : Gear
     {
         public PlateofChaos(string name, string description, bool haveItem, string gearSlot)

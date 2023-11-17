@@ -239,7 +239,7 @@ namespace Game
                             {
             
                                 Console.WriteLine($"{gearItem.Name}: {gearItem.GearSlot}");
-    
+
                             }
                         }
                         Console.WriteLine(" ");
