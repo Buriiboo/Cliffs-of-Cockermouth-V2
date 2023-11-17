@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace Game
 {
@@ -106,8 +107,10 @@ namespace Game
                     int itemChoice = hero.HandleBattleInventory(hero.HeroConsumables);
                     Consumable selectedItem = hero.HeroConsumables[itemChoice - 1];
 
-                    if(selectedItem is WaterPouch waterPouch){
-                        waterPouch.UseItem(hero);
+                    PropertyInfo healProperty = selectedItem.GetType().GetProperty("Heal");
+                    if (healProperty != null)
+                    {
+                        hero.HeroConsumables[itemChoice - 1].UseItem(hero);
                     }
                     else{
                         int minionIndex4 = SelectMinionToAttack(spawnedMinions);
