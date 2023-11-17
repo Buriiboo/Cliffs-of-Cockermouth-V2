@@ -176,10 +176,8 @@ namespace Game
             if (!HaveItem)
             {
                 HaveItem = true;
-                hero.Affinity -= 1;
-                hero.MaxHP += 1;
+                hero.MaxHP += 5;
                 hero.Armor += 1;
-                hero.Damage += 1;
             }
 
         }
@@ -189,8 +187,9 @@ namespace Game
             if (HaveItem)
             {
                 HaveItem = false;
+                hero.MaxHP -= 5;
                 hero.Armor -= 1;
-                hero.Damage -= 1;
+              
             }
         }
     }
@@ -206,10 +205,8 @@ namespace Game
             if (!HaveItem)
             {
                 HaveItem = true;
-                hero.Affinity -= 1;
-                hero.MaxHP += 1;
-                hero.Armor += 1;
-                hero.Damage += 1;
+                hero.MaxHP += 10;
+                
             }
 
         }
@@ -219,8 +216,7 @@ namespace Game
             if (HaveItem)
             {
                 HaveItem = false;
-                hero.Armor -= 1;
-                hero.Damage -= 1;
+                hero.MaxHP -= 10;
             }
         }
     }
