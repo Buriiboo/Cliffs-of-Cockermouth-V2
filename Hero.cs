@@ -217,6 +217,7 @@ namespace Game
                  case 3:
                         Console.Clear();
                         HandleGear();
+                        asciiArtInventory();
                         break;
                     
                 }
@@ -227,7 +228,8 @@ namespace Game
         }
         public void asciiArtInventory()
         {
-            System.Console.WriteLine($"{MaxHP}");
+            Console.Clear();
+            
             string Helm = EquippedGear.TryGetValue("Helmet", out Gear helmGear) ? $"Equipped: {helmGear.Name}" : "Not Equipped";
             string Torso = EquippedGear.TryGetValue("Torso", out Gear torsoGear) ? $"Equipped: {torsoGear.Name}" : "Not Equipped";
             string Gloves = EquippedGear.TryGetValue("Gloves", out Gear glovesGear) ? $"Equipped: {glovesGear.Name}" : "Not Equipped";
@@ -255,6 +257,7 @@ namespace Game
 
 
             System.Console.WriteLine(asciiArt);
+            System.Console.WriteLine($"{Name}:  MaxHP:{MaxHP} Armor:{Armor} Damage:{Damage} Affinity:{Affinity}");
             Console.ReadKey();
         }
 
@@ -363,11 +366,12 @@ namespace Game
                         Console.WriteLine($"+++{selectedSlot}+++");
                         Console.WriteLine(" ");
 
-                        foreach (Item item in inventory)
+                        for (int index = 0; index < inventory.Count; index++)
                         {
+                            Item item = inventory[index];
                             if (item is Gear gearItem && gearItem.GearSlot == selectedSlot)
                             {
-                                Console.WriteLine($"{gearItem.Name}: Info: {gearItem.Description}");
+                                Console.WriteLine($"{index + 1} {gearItem.Name}: Info: {gearItem.Description}");
                             }
                         }
 
@@ -383,6 +387,7 @@ namespace Game
                                 // Call your EquipGearFromInventory method here to equip the selected gear
                                 EquipGearFromInventory(selectedGear.Name);
                                 Console.WriteLine($"Equipped {selectedGear.Name}.");
+                                Console.ReadKey();
                             }
                         }
                         else
