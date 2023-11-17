@@ -12,11 +12,11 @@ namespace Game
 
         
 
-        public Minions(int hp, double damage, int armor, int affinity, int minionlevel, int experiencegiven)
+        public Minions(int hp, double damage, int armor, int affinity, int minionlevel, int experienceGiven)
             : base(hp, damage, armor, affinity)
         {
             MinionLevel = minionlevel;
-            ExperienceGiven = experiencegiven;
+            ExperienceGiven = experienceGiven;
         }
 
         public static List<Minions> SpawnMinion(List<Minions> allMinions, int heroLevel, int numberToTake)
@@ -538,6 +538,13 @@ namespace Game
 
         }
 
+    }
+    class Goblin : Minions
+    {
+        public Goblin(int hp, double damage, int armor, int affinity, int minionlevel, int experienceGiven) :base(hp, damage, armor, affinity, minionlevel, experienceGiven)
+        {
+            
+        }
     }
 }
 
