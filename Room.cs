@@ -169,8 +169,6 @@ namespace Game
 
                     var scenario = Scenario.Scenario2();
                     scenario.Present(hero);
-
-
                 }
             }
         }

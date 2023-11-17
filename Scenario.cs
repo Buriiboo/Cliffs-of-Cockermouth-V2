@@ -52,7 +52,6 @@ namespace Game
                     }
                 }
 
-                // Use arrow keys to navigate and make a selection
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
                 if ((keyInfo.Key == ConsoleKey.S || keyInfo.Key == ConsoleKey.DownArrow) && selectedIndex < branchKeys.Count - 1)
@@ -139,7 +138,6 @@ namespace Game
                     break;
             }
         }
-
         private void HandleBranch1Effect(Hero hero)
         { 
             Console.WriteLine("Honorable");

@@ -185,32 +185,50 @@ namespace Game
                 switch(choice){
 
                 case 1:
+                    Console.Clear();
+                    Console.WriteLine("+++All-Items+++");
                     for(int i = 0; i < inventory.Count; i++)
                     {
+                        Console.WriteLine(" ");
                         Console.WriteLine($"{i + 1}: {inventory[i].Name}");
                         Console.WriteLine($" {inventory[i].Description}");
+        
                     }
+                    Console.WriteLine("Pres any key to exit");
+                    Console.ReadKey();
                     break;
                 case 2:
+                    Console.Clear();
+                    Console.WriteLine("+++Consumable-Inventory+++");
                     for (int i = 0; i < HeroConsumables.Count; i++)
                     {
-                        Console.WriteLine($"{i + 1}: {HeroConsumables[i].Name}");
+                        Console.WriteLine(" ");
+                        Console.WriteLine($"{i + 1}: {HeroConsumables[i].Name} amount:{HeroConsumables[i].Amount}");
                         Console.WriteLine($" {HeroConsumables[i].Description}");
+                  
                     }
+                    Console.WriteLine("Pres any key to exit");    
+                    Console.ReadKey();
                     break;
-                /* case 3:                  Inventory.Gear
-                        
-                        for (int i = 0; i < Inventory.GetType(Gear).Count i++)
-                        {
-                            Console.WriteLine($"{i + 1}: {HeroConsumables[i].Name}");
-                            Console.WriteLine($" {HeroConsumables[i].Description}");
-                        }
-
-                        HandleGear();
+                 case 3:
+                        Console.Clear();
+                        Console.WriteLine("+++Gear-Inventory+++");
+                        for (int i = 0; i < inventory.Count; i++)
+                            if (inventory[i] is Gear gearItem) // This is a type pattern introduced in C# 7.0
+                            {
+                                Console.WriteLine(" ");
+                                Console.WriteLine($"{i + 1}: {gearItem.Name}");
+                                Console.WriteLine($" {gearItem.Description}");
+                       
+                            }
+                    Console.WriteLine("Pres any key to exit");    
+                    Console.ReadKey();
+                 
      
                     break;
-                     */
+                    
                 }
+                break;
 
             
             }

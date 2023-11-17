@@ -15,16 +15,12 @@ class Program
             Console.Write("Choose a name: ");
             string? name = Console.ReadLine();
             Hero hero = new Hero(name, 500,50,3,50,1,1);
-            
-            
-            
 
             hero.Heroabilities.AddRange(new Abilities[]                                                  //Skapa startobjekt
             {
                 new Fireball("Fireball","A ball of fire",40,1),
                 new IceShard("IceShard","Ice as sharp as a dagger",20,1),
                 new HolyStrike("HolyStrike","a Zealous Strike",30,1)
-                
 
             });
             hero.inventory.AddRange(new Item[]                                                         //Skapa startItems
