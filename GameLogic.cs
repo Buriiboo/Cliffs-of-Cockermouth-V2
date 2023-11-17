@@ -106,7 +106,8 @@ namespace Game
                 case 5:
                     int itemChoice = hero.HandleBattleInventory(hero.HeroConsumables);
                     Consumable selectedItem = hero.HeroConsumables[itemChoice - 1];
-                    if(selectedItem is WaterPouch waterPouch){
+
+                    else if(selectedItem is WaterPouch waterPouch){
                         waterPouch.UseItem(hero);
                     }
                     else{

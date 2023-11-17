@@ -179,6 +179,7 @@ namespace Game
                 System.Console.WriteLine("1. Show All Items");
                 System.Console.WriteLine("2. Show Consumable");
                 System.Console.WriteLine("3. Handle Gear");
+                Console.WriteLine("4. Handle Gear");
             //  System.Console.WriteLine("4. Handle Gear");
 
                 int choice= int.Parse(Console.ReadLine());
@@ -210,6 +211,8 @@ namespace Game
      
                     break;
                      */
+                case 4:
+                    return;
                 }
 
             
@@ -244,7 +247,7 @@ namespace Game
         {
 
             ShowBattleInventory();
-            Console.WriteLine("Choose an ability:");
+            Console.WriteLine("Choose an option:");
             while (true)
             {
                 if (int.TryParse(Console.ReadLine(), out int choice) && choice > 0 && choice <= HeroConsumables.Count)

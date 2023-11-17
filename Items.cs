@@ -40,7 +40,7 @@ namespace Game
  
         }
 
-        public void EquipGear(Hero hero)
+        public void EquipGear()
         {
             if (HaveItem)
             {
@@ -52,7 +52,7 @@ namespace Game
             }
         }
 
-        public void UnEquipGear(Hero hero)
+        public void UnEquipGear()
         {
             if (HaveItem)
             {
