@@ -36,8 +36,10 @@ class Program
                 new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Torso"),
                 new GlovesofDoom("GlovesOfDoom", "Gloves helm not for the faint of heart", false, "Gloves"),
                 new BootsofChaos("BootsOfChaos", "The Rightous fear it, the cunning desire it", false, "Boots"),
+
                 new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 5, 15),
                 new ThrowWeapons("Swamp potion", "Gives out 19 damage", 2, 19),
+                
                 new HealItem("Healing potion", "Gives you 12hp", 3, 12),
                 new HealItem("WaterPounch", "Gives you 25hp", 2, 25)
 
