@@ -92,7 +92,7 @@ namespace Game
             { "Take the water pouch for yourself!",
               ("Despair fills it eyes...", hero => hero.Affinity += 10, "It lets out a growl and perishes") },
             { "Crush the filthy creature...",
-              ("You hear a crack as your foot is planted...", hero => hero.Affinity -= 5, "It lets out a gurgle and perishes...") }
+              ("You hear a crack as your foot is planted...", hero => hero.Affinity -= 10, "It lets out a gurgle and perishes...") }
         };
 
             return new Scenario(
@@ -100,64 +100,45 @@ namespace Game
                 "The figure looks what seems to be a pouch of water just out of reach...",
                 branches);
         }
+
         public static Scenario Scenario2()
         {
             var branches = new Dictionary<string, (string response, Action<Hero> effect, string exitDialogue)>
-    {
-        {"You have no need for pathetic Chaos tainted trinkets...",
-        ("Humming intensifies", hero => hero.Affinity += 10, "It feels disappointed")
+        {
+
+         { "You have no need for pathetic Chaos tainted trinkets...",                                                           
+          ("Humming intensifies", hero => {Console.WriteLine("Honorable");hero.Affinity += 10;},"It feels disappointed")            //Option 1
+         },
+
+        { "This should Sell for a pretty penny..",
+         ("Humming intensifies", hero =>
+            {
+                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm");         //Option 2
+                hero.inventory.Add(helm);
+                Console.WriteLine("It feels pleased");
+            },
+            "It feels pleased")
         },
-        {"This should Sell for a pretty penny..",
-        ("Humming intensifies", hero => hero.Affinity += 0, "It feels pleased")
-        },
-        {"Finally an artifact worthy of my splendour!",
-        ("Humming intensifies violently", hero => hero.Affinity -= 10, "It feels ecstatic!")
+        {
+            "Finally an artifact worthy of my splendour!",
+            ("Humming intensifies violently", hero =>
+            {
+                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm");     //Option 3
+                hero.inventory.Add(helm);
+                helm.EquipGear(hero);
+                hero.Affinity -= 10;
+                Console.WriteLine("You eqiup the Helm..");
+            },
+            "It feels ecstatic!..No..You Feel ecstatic.")
         }
     };
+
             return new Scenario(
                 "It seems to be some sort of shrine... Ontop of it you see a Helm. The helm is pristine, but the surrounding air distorts around it",
                 "One thing is clear, this is no ordinary item and it reeks of Evil",
                 branches);
         }
 
-        public void HandleBranchEffect(string branchChoice, Hero hero)
-        {
-            switch (branchChoice)
-            {
-                case "You have no need for pathetic Chaos tainted trinkets...":
-                    HandleBranch1Effect(hero);
-                    break;
-                case "This should Sell for a pretty penny..":
-                    HandleBranch2Effect(hero);
-                    break;
-                case "Finally an artifact worthy of my splendour!":
-                    HandleBranch3Effect(hero);
-                    break;
-                default:
-                    // Handle unknown branch choice
-                    break;
-            }
-        }
-        private void HandleBranch1Effect(Hero hero)
-        { 
-            Console.WriteLine("Honorable");
-       
-        }
-
-        private void HandleBranch2Effect(Hero hero)
-        {
-            HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm");
-            hero.inventory.Add(helm);
-        }
-
-        private void HandleBranch3Effect(Hero hero)
-        {
-        
-            HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm");
-            hero.inventory.Add(helm);
-
-            helm.EquipGear(hero);
-        }
     }
 
 

@@ -217,15 +217,56 @@ namespace Game
                  case 3:
                         Console.Clear();
                         Console.WriteLine("+++Gear-Inventory+++");
-                        for (int i = 0; i < inventory.Count; i++)
-                            if (inventory[i] is Gear gearItem) // This is a type pattern introduced in C# 7.0
+                        Console.WriteLine(" ");
+                        Console.WriteLine("+++Helmet+++");
+                        Console.WriteLine(" ");
+                        foreach (Item item in inventory)
+                        {
+                            if (item is Gear gearItem && gearItem.GearSlot == "Helmet")
                             {
-                                Console.WriteLine(" ");
-                                Console.WriteLine($"{i + 1}: {gearItem.Name}");
-                                Console.WriteLine($" {gearItem.Description}");
-                       
+            
+                                Console.WriteLine($"{gearItem.Name}: {gearItem.GearSlot}");
+                            //  Console.WriteLine($" {gearItem.Description}");                          Vi kanske vill använda den senare
                             }
-                    System.Console.WriteLine(" ");
+                        }
+                        Console.WriteLine(" ");
+                        Console.WriteLine("+++Torso+++");
+                        Console.WriteLine(" ");
+                        foreach (Item item in inventory)
+                        {
+
+                            if (item is Gear gearItem && gearItem.GearSlot == "Torso")
+                            {
+            
+                                Console.WriteLine($"{gearItem.Name}: {gearItem.GearSlot}");
+    
+                            }
+                        }
+                        Console.WriteLine(" ");
+                        Console.WriteLine("+++Gloves+++");
+                        Console.WriteLine(" ");
+                        foreach (Item item in inventory)
+                        {
+
+                            if (item is Gear gearItem && gearItem.GearSlot == "Gloves")
+                            {
+                                Console.WriteLine($"{gearItem.Name}: {gearItem.GearSlot}");
+                
+                            }
+                        }
+                        Console.WriteLine(" ");
+                        Console.WriteLine("+++Boots+++");
+                        Console.WriteLine(" ");
+                        foreach (Item item in inventory)
+                        {
+                            if (item is Gear gearItem && gearItem.GearSlot == "Boots")
+                            {
+                                Console.WriteLine($"{gearItem.Name}: {gearItem.GearSlot}");
+                               
+                            }
+                        }
+                        Console.WriteLine(" ");
+                        System.Console.WriteLine(" ");
                     Console.WriteLine("Press 1. For Gear or other to exit");
                     int inventoryChoice = int.Parse(Console.ReadLine());
                     if(inventoryChoice==1){
@@ -236,7 +277,6 @@ namespace Game
                     }
                     Console.WriteLine("Press any key to exit");    
                     Console.ReadKey();
-
 
                         break;
                     

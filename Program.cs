@@ -26,7 +26,7 @@ class Program
             });
             hero.inventory.AddRange(new Item[]                                                         //Skapa startItems
            {
-                new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm"),
+             // new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm"),
                 new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Torso"),
                 new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 5, 15),
                 new WaterPouch("WaterPounch", "Gives you 25hp", 2, 25)
