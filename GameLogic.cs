@@ -107,10 +107,8 @@ namespace Game
                     int itemChoice = hero.HandleBattleInventory(hero.HeroConsumables);
                     Consumable selectedItem = hero.HeroConsumables[itemChoice - 1];
 
-                    PropertyInfo healProperty = selectedItem.GetType().GetProperty("Heal");
-                    if (healProperty != null)
-                    {
-                        hero.HeroConsumables[itemChoice - 1].UseItem(hero);
+                    if(selectedItem is HealItem waterPouch){
+                        waterPouch.UseItem(hero);
                     }
                     else{
                         int minionIndex4 = SelectMinionToAttack(spawnedMinions);
