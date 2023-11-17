@@ -107,7 +107,7 @@ namespace Game
                     int itemChoice = hero.HandleBattleInventory(hero.HeroConsumables);
                     Consumable selectedItem = hero.HeroConsumables[itemChoice - 1];
                     if(selectedItem is WaterPouch waterPouch){
-                            waterPouch.UseItem(hero);
+                        waterPouch.UseItem(hero);
                     }
                     else{
                         int minionIndex4 = SelectMinionToAttack(spawnedMinions);
