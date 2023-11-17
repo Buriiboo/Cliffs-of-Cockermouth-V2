@@ -225,7 +225,8 @@ namespace Game
                                 Console.WriteLine($" {gearItem.Description}");
                        
                             }
-
+                    System.Console.WriteLine(" ");
+                    Console.WriteLine("Press 1. For Gear or other to exit");
                     int inventoryChoice = int.Parse(Console.ReadLine());
                     if(inventoryChoice==1){
 
