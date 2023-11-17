@@ -32,7 +32,6 @@ class Program
                 new WaterPouch("WaterPounch", "Gives you 25hp", 2, 25)
 
            });
-            UI.asciiArt(hero);
 
             hero.HeroConsumables = hero.inventory.OfType<Consumable>().ToList();
 

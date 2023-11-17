@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 
@@ -224,11 +225,19 @@ namespace Game
                                 Console.WriteLine($" {gearItem.Description}");
                        
                             }
+
+                    int inventoryChoice = int.Parse(Console.ReadLine());
+                    if(inventoryChoice==1){
+
+                        asciiArtInventory();
+                        break;
+        
+                    }
                     Console.WriteLine("Press any key to exit");    
                     Console.ReadKey();
-                 
-     
-                    break;
+
+
+                        break;
                     
                 }
                 break;
@@ -236,6 +245,40 @@ namespace Game
             
             }
         }
+        public void asciiArtInventory()
+        {
+            EquipGearFromInventory("HelmOfDoom");
+            System.Console.WriteLine($"{MaxHP}");
+            string helm = EquippedGear.TryGetValue("Helm", out Gear helmGear) ? helmGear.Name : "None";
+            string Torso = "Plate";
+            string Gloves = "Fist";
+            string Boots = "Greaves";
+
+            string asciiArt = @$"
+                <>
+               .--.
+              /.--.\            Helmet:{helm}
+              |====|
+              |`::`|
+          .-;`\..../`;-.
+         /  |...::...|  \       Torso:{Torso}
+        |   /'''::'''\   |
+        ;--'\   ::   /\--;
+        <__>,>._::_.<,<__>
+        |  |/   ^^   \|  |
+        \::/|        |\::/      Gloves:{Gloves}
+             \_ || _/
+             <_ >< _>
+             |  ||  |
+             |  ||  |
+             _\.:||:./_         Boots:{Boots}
+             /____/\____\";
+
+
+            System.Console.WriteLine(asciiArt);
+            Console.ReadKey();
+        }
+
 
         public void ShowBattleInventory()
         {

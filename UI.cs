@@ -49,40 +49,7 @@ namespace Game
             System.Console.WriteLine("");
         }
 
-        public static void asciiArt(Hero hero)
-        {
-            hero.EquipGearFromInventory("HelmOfDoom");
-            System.Console.WriteLine($"{hero.MaxHP}");
-            string helm = hero.EquippedGear.TryGetValue("Helm", out Gear helmGear) ? helmGear.Name : "None";
-            string Torso = "Plate";
-            string Gloves = "Fist";
-            string Boots = "Greaves";
-
-            string asciiArt = @$"
-                <>
-               .--.
-              /.--.\            Helmet:{helm}
-              |====|
-              |`::`|
-          .-;`\..../`;-.
-         /  |...::...|  \       Torso:{Torso}
-        |   /'''::'''\   |
-        ;--'\   ::   /\--;
-        <__>,>._::_.<,<__>
-        |  |/   ^^   \|  |
-        \::/|        |\::/      Gloves:{Gloves}
-             \_ || _/
-             <_ >< _>
-             |  ||  |
-             |  ||  |
-             _\.:||:./_         Boots:{Boots}
-             /____/\____\";
-
         
-            System.Console.WriteLine(asciiArt);
-            Console.ReadKey();
-        }
-
 
     }
 }
