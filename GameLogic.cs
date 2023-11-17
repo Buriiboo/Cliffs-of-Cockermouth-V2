@@ -16,12 +16,10 @@ namespace Game
             while (hero.HP > 0 && spawnedMinions.Any(minion=>minion.HP>0))
             {
                 Console.Clear();
-                bool run = true;
-                while(run){
                 UI.BattleUI(hero, spawnedMinions);
                 //Player turn
-                PlayerTurn(hero,spawnedMinions, run);
-                }
+                PlayerTurn(hero,spawnedMinions);
+                
                 foreach (var minion in spawnedMinions)
                 {
                     if(minion.HP>0){
@@ -63,7 +61,7 @@ namespace Game
         }
 
 
-        public static void PlayerTurn(Hero hero, List<Minions> spawnedMinions, bool run)
+        public static void PlayerTurn(Hero hero, List<Minions> spawnedMinions)
         {
             
             int choice = GetValidChoice(1, 6);
@@ -106,10 +104,6 @@ namespace Game
                     break;
                 case 5:
                     int itemChoice = hero.HandleBattleInventory(hero.HeroConsumables);
-                    if(itemChoice == hero.HeroConsumables.Count + 1){
-                        run = false;
-                        return;
-                    }
                     Consumable selectedItem = hero.HeroConsumables[itemChoice - 1];
 
                     if(selectedItem is WaterPouch waterPouch){

@@ -287,7 +287,6 @@ namespace Game
                 Console.WriteLine($"{i + 1}: {HeroConsumables[i].Name} Amount:{HeroConsumables[i].Amount}");
                
             }
-            Console.WriteLine($"{HeroConsumables.Count + 1}: Exit");
         }
         public void HandelInventory(Character other, Hero hero)    //Gör om den till passiv/Gear och kopiera en liknade mixad med denna + Spellbook för battle version
         {
@@ -313,8 +312,6 @@ namespace Game
             while (true)
             {
                 int.TryParse(Console.ReadLine(), out int choice);
-                if(choice == HeroConsumables.Count + 1)
-                    return choice;
                 if (choice > 0 && choice <= HeroConsumables.Count)
                 {
                     return choice;
