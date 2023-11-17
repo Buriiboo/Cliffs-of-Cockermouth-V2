@@ -216,68 +216,7 @@ namespace Game
                     break;
                  case 3:
                         Console.Clear();
-                        Console.WriteLine("+++Gear-Inventory+++");
-                        Console.WriteLine(" ");
-                        Console.WriteLine("+++Helmet+++");
-                        Console.WriteLine(" ");
-                        foreach (Item item in inventory)
-                        {
-                            if (item is Gear gearItem && gearItem.GearSlot == "Helmet")
-                            {
-            
-                                Console.WriteLine($"{gearItem.Name}: {gearItem.GearSlot}");
-                            //  Console.WriteLine($" {gearItem.Description}");                          Vi kanske vill använda den senare
-                            }
-                        }
-                        Console.WriteLine(" ");
-                        Console.WriteLine("+++Torso+++");
-                        Console.WriteLine(" ");
-                        foreach (Item item in inventory)
-                        {
-
-                            if (item is Gear gearItem && gearItem.GearSlot == "Torso")
-                            {
-            
-                                Console.WriteLine($"{gearItem.Name}: {gearItem.GearSlot}");
-
-                            }
-                        }
-                        Console.WriteLine(" ");
-                        Console.WriteLine("+++Gloves+++");
-                        Console.WriteLine(" ");
-                        foreach (Item item in inventory)
-                        {
-
-                            if (item is Gear gearItem && gearItem.GearSlot == "Gloves")
-                            {
-                                Console.WriteLine($"{gearItem.Name}: {gearItem.GearSlot}");
-                
-                            }
-                        }
-                        Console.WriteLine(" ");
-                        Console.WriteLine("+++Boots+++");
-                        Console.WriteLine(" ");
-                        foreach (Item item in inventory)
-                        {
-                            if (item is Gear gearItem && gearItem.GearSlot == "Boots")
-                            {
-                                Console.WriteLine($"{gearItem.Name}: {gearItem.GearSlot}");
-                               
-                            }
-                        }
-                        Console.WriteLine(" ");
-                        System.Console.WriteLine(" ");
-                    Console.WriteLine("Press 1. For Gear or other to exit");
-                    int inventoryChoice = int.Parse(Console.ReadLine());
-                    if(inventoryChoice==1){
-
-                        asciiArtInventory();
-                        break;
-        
-                    }
-                    Console.WriteLine("Press any key to exit");    
-                    Console.ReadKey();
-
+                        HandleGear();
                         break;
                     
                 }
@@ -378,6 +317,105 @@ namespace Game
                 Console.WriteLine($"Gear not found in inventory: {gearName}");
             }
         }
+
+        public void HandleGear(){
+            Console.Clear();
+            Console.WriteLine("+++Gear-Inventory Menu+++");
+            Console.WriteLine("Choose a gear slot to view:");
+
+            Console.WriteLine("1. Helmet");
+            Console.WriteLine("2. Torso");
+            Console.WriteLine("3. Gloves");
+            Console.WriteLine("4. Boots");
+            Console.WriteLine("5. Return");
+
+            int gearSlotChoice = int.Parse(Console.ReadLine());
+
+            switch (gearSlotChoice)
+            {
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine("+++Helmet+++");
+                    Console.WriteLine(" ");
+                    foreach (Item item in inventory)
+                    {
+                        if (item is Gear gearItem && gearItem.GearSlot == "Helmet")
+                        {
+
+                            Console.WriteLine($"{gearItem.Name}: {gearItem.GearSlot}");
+                            //  Console.WriteLine($" {gearItem.Description}");                          Vi kanske vill använda den senare
+                        }
+                    }
+                    Console.WriteLine(" ");
+                    break;
+                case 2:
+                    Console.WriteLine("+++Torso+++");
+                    Console.WriteLine(" ");
+                    foreach (Item item in inventory)
+                    {
+
+                        if (item is Gear gearItem && gearItem.GearSlot == "Torso")
+                        {
+
+                            Console.WriteLine($"{gearItem.Name}: {gearItem.GearSlot}");
+
+                        }
+                    }
+                    Console.WriteLine(" ");
+                    break;
+                case 3:
+                    Console.WriteLine("+++Gloves+++");
+                    Console.WriteLine(" ");
+                    foreach (Item item in inventory)
+                    {
+                        if (item is Gear gearItem && gearItem.GearSlot == "Gloves")
+                        {
+                            Console.WriteLine($"{gearItem.Name}: {gearItem.GearSlot}");
+                        }
+                    }
+                    Console.WriteLine(" ");
+                    break;
+                case 4:
+                    Console.WriteLine("+++Boots+++");
+                    Console.WriteLine(" ");
+                    foreach (Item item in inventory)
+                    {
+                        if (item is Gear gearItem && gearItem.GearSlot == "Boots")
+                        {
+                            Console.WriteLine($"{gearItem.Name}: {gearItem.GearSlot}");
+                        }
+                    }
+                    Console.WriteLine(" ");
+                    break;
+                case 5:
+                    break;
+                default:
+                    // Handle invalid choice
+                    break;
+            }
+
+            // Prompt the player to choose an item to equip
+            Console.WriteLine("Choose an item to equip (enter item number) or press any key to exit:");
+            if (int.TryParse(Console.ReadLine(), out int itemChoice) && itemChoice >= 1 && itemChoice <= inventory.Count)
+            {
+                Item selectedItem = inventory[itemChoice - 1];
+                if (selectedItem is Gear selectedGear)
+                {
+                    // Call your EquipGearFromInventory method here to equip the selected gear
+                 //   EquipGearFromInventory(selectedGear);
+                    Console.WriteLine($"Equipped {selectedGear.Name}.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid choice or item not found.");
+            }
+
+
+
+        }
+
+
 
         public void AddInventory(Item item)
         {
