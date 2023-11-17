@@ -84,10 +84,10 @@ namespace Game
         }
 
     }
-    public class WaterPouch : Consumable
+    public class HealItem : Consumable
     {
         public int Heal {get; set;}
-        public WaterPouch(string name, string description, int amount, int heal) : base(name, description, amount)
+        public HealItem(string name, string description, int amount, int heal) : base(name, description, amount)
         {
             Heal = heal;
         }
@@ -98,7 +98,6 @@ namespace Game
                 hero.HP += Heal;
             }
             Amount -= 1;
-            
         }
     }
 
