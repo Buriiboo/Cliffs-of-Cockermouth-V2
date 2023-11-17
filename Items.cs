@@ -164,6 +164,67 @@ namespace Game
             // Any additional initializations specific to Murlock can be done here
         }
     }
+    
+    public class LeatherHelm : Gear
+    {
+        public LeatherHelm(string name, string description, bool haveItem, string gearSlot)
+            : base(name, description, haveItem, gearSlot)
+        {
+            // Any additional initializations specific to Murlock can be done here
+        }
+        public override void EquipGear(Hero hero)
+        {
+            if (!HaveItem)
+            {
+                HaveItem = true;
+                hero.Affinity -= 1;
+                hero.MaxHP += 1;
+                hero.Armor += 1;
+                hero.Damage += 1;
+            }
+
+        }
+
+        public override void UnEquipGear(Hero hero)
+        {
+            if (HaveItem)
+            {
+                HaveItem = false;
+                hero.Armor -= 1;
+                hero.Damage -= 1;
+            }
+        }
+    }
+    public class LeatherPlate : Gear
+    {
+        public LeatherPlate(string name, string description, bool haveItem, string gearSlot)
+            : base(name, description, haveItem, gearSlot)
+        {
+            // Any additional initializations specific to Murlock can be done here
+        }
+        public override void EquipGear(Hero hero)
+        {
+            if (!HaveItem)
+            {
+                HaveItem = true;
+                hero.Affinity -= 1;
+                hero.MaxHP += 1;
+                hero.Armor += 1;
+                hero.Damage += 1;
+            }
+
+        }
+
+        public override void UnEquipGear(Hero hero)
+        {
+            if (HaveItem)
+            {
+                HaveItem = false;
+                hero.Armor -= 1;
+                hero.Damage -= 1;
+            }
+        }
+    }
     public class LeatherGloves : Gear
     {
         public LeatherGloves(string name, string description, bool haveItem, string gearSlot)
