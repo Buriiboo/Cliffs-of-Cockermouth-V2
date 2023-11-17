@@ -107,7 +107,7 @@ namespace Game
                     int itemChoice = hero.HandleBattleInventory(hero.HeroConsumables);
                     Consumable selectedItem = hero.HeroConsumables[itemChoice - 1];
 
-                    else if(selectedItem is WaterPouch waterPouch){
+                    if(selectedItem is WaterPouch waterPouch){
                         waterPouch.UseItem(hero);
                     }
                     else{
