@@ -182,8 +182,8 @@ namespace Game
                 System.Console.WriteLine("+++Inventory+++");
                 System.Console.WriteLine("1. Show All Items");
                 System.Console.WriteLine("2. Show Consumable");
-                System.Console.WriteLine("3. Handle Gear");
-            //  System.Console.WriteLine("4. Handle Gear");
+                System.Console.WriteLine("3. Equip Gear");
+                System.Console.WriteLine("4. Unequip Gear");
 
                 int choice= int.Parse(Console.ReadLine());
                 switch(choice){
@@ -220,6 +220,10 @@ namespace Game
                         HandleGear();
                
                         break;
+                case 4:
+                        Console.Clear();
+                        UnequipGear();
+                break;
                     
                 }
                 break;
@@ -321,6 +325,23 @@ namespace Game
                 Console.WriteLine($"Gear not found in inventory: {gearName}");
             }
         }
+        public void UnequipGearFromInventory(string gearName)
+        {
+            Gear gearToUnequip = EquippedGear.Values.FirstOrDefault(g => g.Name == gearName);
+            if (gearToUnequip != null)
+            {
+                Console.WriteLine($"Unequipping: {gearToUnequip.Name}");
+                gearToUnequip.UnEquipGear(this);
+                EquippedGear.Remove(gearToUnequip.GearSlot);
+                // Add the unequipped gear back to the inventory
+                inventory.Add(gearToUnequip);
+            }
+            else
+            {
+                Console.WriteLine($"Gear not found in equipped slots: {gearName}");
+            }
+        }
+
 
         public void HandleGear()
         {
@@ -413,6 +434,71 @@ namespace Game
                                 Console.Clear();
                                 break;
                             }
+                        }
+                    }
+                }
+            }
+        }
+
+        public void UnequipGear()
+        {
+            Console.Clear();
+
+            string[] equippedSlots = { "Helmet", "Torso", "Gloves", "Boots", "Return" };
+            int selectedSlotIndex = 0;
+
+            while (true)
+            {
+                // Display equipped slots with the selected slot highlighted
+                Console.Clear();
+                Console.WriteLine("+++Unequip-Inventory Menu+++");
+                for (int i = 0; i < equippedSlots.Length; i++)
+                {
+                    if (i == selectedSlotIndex)
+                    {
+                        Console.WriteLine($"--> {equippedSlots[i]}"); // Highlight the selected slot
+                    }
+                    else
+                    {
+                        Console.WriteLine($"    {equippedSlots[i]}");
+                    }
+                }
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true); // Read a key press without displaying it
+                                                                // Handle arrow key navigation for equipped slots
+                if (keyInfo.Key == ConsoleKey.UpArrow && selectedSlotIndex > 0)
+                {
+                    selectedSlotIndex--;
+                }
+                else if (keyInfo.Key == ConsoleKey.DownArrow && selectedSlotIndex < equippedSlots.Length - 1)
+                {
+                    selectedSlotIndex++;
+                }
+                else if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    // When the Enter key is pressed, handle the selected equipped slot
+                    string selectedSlot = equippedSlots[selectedSlotIndex];
+                    if (selectedSlot == "Return")
+                    {
+                        break; // Exit the menu if "Return" is selected
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"+++Unequip {selectedSlot}+++");
+                        Console.WriteLine(" ");
+
+                        if (EquippedGear.ContainsKey(selectedSlot))
+                        {
+                            Gear equippedGear = EquippedGear[selectedSlot];
+                            Console.WriteLine($"Unequipped {equippedGear.Name}");
+                            // Call your UnequipGearFromInventory method here to unequip the selected gear
+                            UnequipGearFromInventory(equippedGear.Name);
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No gear equipped in {selectedSlot}");
+                            Console.ReadKey();
                         }
                     }
                 }
