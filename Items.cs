@@ -20,8 +20,8 @@ namespace Game
         {
             return new List<Item>
             {
-                new HelmofDoom("HelmOfDoom","Heavy helm not for the faint of heart",true,"Helm"),
-                new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",true,"Helm")
+                new HelmofDoom("HelmOfDoom","Heavy helm not for the faint of heart",true,"Helm","Blue"),
+                new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",true,"Helm","Blue")
             };
         }
 
@@ -31,13 +31,15 @@ namespace Game
     {
         public string GearSlot { get; set; }
         public bool HaveItem { get; set; }
+        public string Color { get; set; } // Add a Color property specific to Gear
+
         public override void UseItem(Character other){}
-        public Gear(string name, string description, bool haveItem, string gearSlot)
+        public Gear(string name, string description, bool haveItem, string gearSlot, string color)
             : base(name, description) 
         {
             GearSlot = gearSlot;
             HaveItem = haveItem;
- 
+            Color = color;
         }
 
         public virtual void EquipGear(Hero hero)
@@ -57,6 +59,39 @@ namespace Game
             if (HaveItem)
             {
                 HaveItem = false;
+            }
+        }
+        public static void SetConsoleColor(string color)
+        {
+            switch (color.ToLower())
+            {
+                case "black":
+                    Console.ForegroundColor = ConsoleColor.Black;
+                    break;
+                case "red":
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    break;
+                case "green":
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    break;
+                case "yellow":
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    break;
+                case "blue":
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    break;
+                case "magenta":
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    break;
+                case "cyan":
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    break;
+                case "white":
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
+                default:
+                    Console.ResetColor();
+                    break;
             }
         }
     }
@@ -101,6 +136,7 @@ namespace Game
         }
     }
 
+/*
     public class Quest
     {
         public string Name { get; set; }
@@ -117,12 +153,12 @@ namespace Game
 
         }
     }
-
+*/
 
     public class HelmofDoom : Gear
     {
-        public HelmofDoom(string name, string description, bool haveItem, string gearSlot)
-            : base(name, description, haveItem, gearSlot)
+        public HelmofDoom(string name, string description, bool haveItem, string gearSlot, string color)
+            : base(name, description, haveItem, gearSlot, color)
         {
             // Any additional initializations specific to Murlock can be done here
         }
@@ -136,6 +172,9 @@ namespace Game
                 hero.Armor += 5;
                 hero.Damage += 5;
                 hero.Heroabilities.Add(new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1));
+                SetConsoleColor(Color);
+                Console.WriteLine($"Equipped {Name}"); // Display the gear item's name in its specified color
+                Console.ResetColor();
             }
         }
 
@@ -158,16 +197,16 @@ namespace Game
 
     public class PlateofChaos : Gear
     {
-        public PlateofChaos(string name, string description, bool haveItem, string gearSlot)
-            : base(name, description, haveItem, gearSlot)
+        public PlateofChaos(string name, string description, bool haveItem, string gearSlot, string color)
+            : base(name, description, haveItem, gearSlot, color)
         {
             // Any additional initializations specific to Murlock can be done here
         }
     }
     public class GlovesofDoom : Gear
     {
-        public GlovesofDoom(string name, string description, bool haveItem, string gearSlot)
-            : base(name, description, haveItem, gearSlot)
+        public GlovesofDoom(string name, string description, bool haveItem, string gearSlot, string color)
+            : base(name, description, haveItem, gearSlot, color)
         {
             // Any additional initializations specific to Murlock can be done here
         }
@@ -201,8 +240,8 @@ namespace Game
     }
     public class BootsofChaos : Gear
     {
-        public BootsofChaos(string name, string description, bool haveItem, string gearSlot)
-            : base(name, description, haveItem, gearSlot)
+        public BootsofChaos(string name, string description, bool haveItem, string gearSlot, string color)
+            : base(name, description, haveItem, gearSlot, color)
         {
             // Any additional initializations specific to Murlock can be done here
         }
@@ -237,8 +276,8 @@ namespace Game
     
     public class LeatherHelm : Gear
     {
-        public LeatherHelm(string name, string description, bool haveItem, string gearSlot)
-            : base(name, description, haveItem, gearSlot)
+        public LeatherHelm(string name, string description, bool haveItem, string gearSlot, string color)
+            : base(name, description, haveItem, gearSlot,color)
         {
             // Any additional initializations specific to Murlock can be done here
         }
@@ -267,8 +306,8 @@ namespace Game
     }
     public class LeatherPlate : Gear
     {
-        public LeatherPlate(string name, string description, bool haveItem, string gearSlot)
-            : base(name, description, haveItem, gearSlot)
+        public LeatherPlate(string name, string description, bool haveItem, string gearSlot, string color)
+            : base(name, description, haveItem, gearSlot, color)
         {
             // Any additional initializations specific to Murlock can be done here
         }
@@ -297,8 +336,8 @@ namespace Game
     }
     public class LeatherGloves : Gear
     {
-        public LeatherGloves(string name, string description, bool haveItem, string gearSlot)
-            : base(name, description, haveItem, gearSlot)
+        public LeatherGloves(string name, string description, bool haveItem, string gearSlot, string color)
+            : base(name, description, haveItem, gearSlot, color)
         {
             // Any additional initializations specific to Murlock can be done here
         }
@@ -326,8 +365,8 @@ namespace Game
     }
     public class LeatherBoots : Gear
     {
-        public LeatherBoots(string name, string description, bool haveItem, string gearSlot)
-            : base(name, description, haveItem, gearSlot)
+        public LeatherBoots(string name, string description, bool haveItem, string gearSlot, string color)
+            : base(name, description, haveItem, gearSlot,color)
         {
             // Any additional initializations specific to Murlock can be done here
         }
@@ -350,6 +389,9 @@ namespace Game
                 hero.MaxHP -= 10;
             }
         }
+      
     }
+
+    
     
 }

@@ -113,7 +113,7 @@ namespace Game
         { "This should Sell for a pretty penny..",
          ("Humming intensifies", hero =>
             {
-                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm");         //Option 2
+                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm","Blue");         //Option 2
                 hero.inventory.Add(helm);
                 Console.WriteLine("It feels pleased");
             },
@@ -123,7 +123,7 @@ namespace Game
             "Finally an artifact worthy of my splendour!",
             ("Humming intensifies violently", hero =>
             {
-                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helmet");     //Option 3
+                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helmet","Blue");     //Option 3
                 hero.inventory.Add(helm);
                 helm.EquipGear(hero);
                 hero.Affinity -= 10;
