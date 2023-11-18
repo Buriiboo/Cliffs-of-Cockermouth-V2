@@ -367,11 +367,11 @@ namespace Game
                 }
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true); 
                                                                 
-                if (keyInfo.Key == ConsoleKey.UpArrow && selectedSlotIndex > 0)
+                if (keyInfo.Key == ConsoleKey.W || keyInfo.Key == ConsoleKey.UpArrow && selectedSlotIndex > 0)
                 {
                     selectedSlotIndex--;
                 }
-                else if (keyInfo.Key == ConsoleKey.DownArrow && selectedSlotIndex < gearSlots.Length - 1)
+                else if (keyInfo.Key == ConsoleKey.S || keyInfo.Key == ConsoleKey.DownArrow && selectedSlotIndex < gearSlots.Length - 1)
                 {
                     selectedSlotIndex++;
                 }
@@ -465,11 +465,11 @@ namespace Game
                 }
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true); // Read a key press without displaying it
                                                                 // Handle arrow key navigation for equipped slots
-                if (keyInfo.Key == ConsoleKey.UpArrow && selectedSlotIndex > 0)
+                if (keyInfo.Key == ConsoleKey.W || keyInfo.Key == ConsoleKey.UpArrow && selectedSlotIndex > 0)
                 {
                     selectedSlotIndex--;
                 }
-                else if (keyInfo.Key == ConsoleKey.DownArrow && selectedSlotIndex < equippedSlots.Length - 1)
+                else if (keyInfo.Key == ConsoleKey.S || keyInfo.Key == ConsoleKey.DownArrow && selectedSlotIndex < equippedSlots.Length - 1)
                 {
                     selectedSlotIndex++;
                 }
