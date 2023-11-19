@@ -10,6 +10,13 @@ namespace Game
 
         public static void BattleUI(Hero hero, List<Minions> spawnedMinions)
         {
+            foreach (var minion in spawnedMinions)
+            {
+                if (minion.HP < 0)
+                {
+                    minion.HP = 0;
+                }
+            }
 
             Console.Clear();
             {

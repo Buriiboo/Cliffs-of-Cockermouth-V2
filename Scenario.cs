@@ -27,8 +27,10 @@ namespace Game
             var descriptionLength = Description;
             for (int i = 0;i< descriptionLength.Length; i++){
                 Console.Write(descriptionLength[i]);
-                Thread.Sleep(25);
+                Thread.Sleep(10);
             }
+            System.Console.WriteLine("");
+            System.Console.WriteLine("Press any key:");
             Console.ReadKey();
 
 
@@ -74,13 +76,15 @@ namespace Game
             int currentHeroAffinity = hero.Affinity;
 
             Console.WriteLine(selectedBranch.response);
-            Thread.Sleep(2000);
+            System.Console.WriteLine("Press any key:");
+            Console.ReadKey();
             Console.WriteLine(selectedBranch.exitDialogue);
-            Thread.Sleep(1000);
             selectedBranch.effect(hero);
+            System.Console.WriteLine("");
             System.Console.WriteLine($"Hero Affinity change:{hero.Affinity- currentHeroAffinity}");
-            Thread.Sleep(1000);
             System.Console.WriteLine($"Hero Affinity Currently:{hero.Affinity}");
+            System.Console.WriteLine($"");
+            System.Console.WriteLine("Press any key:");
             Console.ReadKey();
         }
         public static Scenario Scenario1()
@@ -125,16 +129,16 @@ namespace Game
             {
                 HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helmet","Blue");     //Option 3
                 hero.inventory.Add(helm);
-                helm.EquipGear(hero);
+                hero.EquipGearFromInventory(helm.Name);
                 hero.Affinity -= 10;
-                Console.WriteLine("You eqiup the Helm..");
+                Console.ReadKey();
             },
             "It feels ecstatic!..No..You Feel ecstatic.")
         }
     };
 
             return new Scenario(
-                "It seems to be some sort of shrine... Ontop of it you see a Helm. The helm is pristine, but the surrounding air distorts around it",
+                "Ah its a Chaos shrine... Ontop of it you see a Helm. The helm is pristine, but the surrounding air distorts around it",
                 "One thing is clear, this is no ordinary item and it reeks of Evil",
                 branches);
         }
@@ -155,9 +159,92 @@ namespace Game
                 "When you walk closer, a little sign appears.",
                 branches);
         }
+        public static Scenario Scenario3()
+        {
+            var branches = new Dictionary<string, (string response, Action<Hero> effect, string exitDialogue)>
+        {
+
+         { "What am i doing... I need to abandon this path.. I shall.",
+          ("The Shrine pulsates violently... and shrieks, it won't let you go that easily", hero =>
+            {
+                hero.Affinity += 10;
+                hero.HP = hero.HP/2;
+
+            },"The shrine sucks half of your life essensce out of you")            //Option 1
+         },
+
+        { "Hmm, Why not? Might come in handy",
+         ("Humming intensifies", hero =>
+            {
+
+                PlateofChaos Torso = new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Torso","Purple");
+                hero.inventory.Add(Torso);
+                hero.Affinity -= 2;                          //Option 2
+            },
+            "It feels pleased")
+        },
+        {
+            "You belong to me..",
+            ("Humming intensifies violently", hero =>
+            {
+                PlateofChaos Torso = new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Torso","Purple");     //Option 3
+                hero.inventory.Add(Torso);
+                Torso.EquipGear(hero);
+                hero.Affinity -= 10;
+                hero.HP += 100;
+                Console.ReadKey();
+
+            },
+            "Oh, i feel it.. I become.. More.")
+        }
+    };
+
+            return new Scenario(
+                "Ah the Chaos shrine finds me worthy..... Is that an armor materializing ? ",
+                "One thing is clear, this is no ordinary item and it smells sweeter than last time..",
+                branches);
+        }
+        public static Scenario Scenario4()                              //Murlock
+        {
+            var branches = new Dictionary<string, (string response, Action<Hero> effect, string exitDialogue)>
+        {
+            { "Use your arcane ability to force the chaotic taint to recede",
+              ("The Murlock looks at you stunned and crouches next to your feet in a worshiping manner", hero =>
+            {
+              HealItem Flask = new HealItem("MurlockFlask", "Heals for 50HP", 999, 50);
+              hero.inventory.Add(Flask);
+              hero.HeroConsumables.Add(Flask);
+              hero.Affinity += 10;                        
+            },
+            "It produces a flask seemingly from nowhere.. and gives it to you *mrglwglwlg ") },
+
+            { "Greedy Chaos, i want a tasste too...",
+              ("It desperately attacks you to protect its offspring but is sliced in two with ease", hero =>
+            {
+              HealItem MurlockEgg = new HealItem("MurlockEgg", "Heals for 50HP", 5, 125);
+              hero.inventory.Add(MurlockEgg);
+              hero.HeroConsumables.Add(MurlockEgg);
+
+            }, "You add 5 Murlock eggs to your inventory") },
+
+            { "Silly creature nesting here... Your eggs belong to Chaos",
+              ("The Murlock is minced into managable pieces for the chaos taint to consume", hero => hero.Affinity -= 10, "You leave the rest to its fate") }
+        };
+
+            return new Scenario(
+                "You spot a Murlock, it doesn't seem to be hostile and tries to communicate with you..*mrglwglwlg",
+                "You spot a clutch of eggs and etheral Chaotic tendrils moving towards the eggs. One of the eggs have already subcumbed to the corruption being consumed in a dark goo",
+                branches);
+        }
 
     }
 
 
 }
+    
+
+
+
+
+
 

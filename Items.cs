@@ -132,7 +132,7 @@ namespace Game
             {
                 hero.HP += Heal;
             }
-            Amount -= 1;
+            Amount -= 0;
         }
     }
 
@@ -155,6 +155,25 @@ namespace Game
     }
 */
 
+    /*
+        public class Quest
+        {
+            public string Name { get; set; }
+            public string Description { get; set; }
+            public bool HaveItem { get; set; }
+            public Quest(string name, string description, bool haveItem)
+            {
+                Name = name;
+                Description = description;
+                HaveItem = haveItem;
+            }
+            public void ShowQuest()
+            {
+
+            }
+        }
+    */
+
     public class HelmofDoom : Gear
     {
         public HelmofDoom(string name, string description, bool haveItem, string gearSlot, string color)
@@ -167,28 +186,28 @@ namespace Game
             if (!HaveItem)
             {
                 HaveItem = true;
-                hero.Affinity -= 5;
-                hero.MaxHP += 5;
-                hero.Armor += 5;
+                hero.Affinity -= 2;
+                hero.MaxHP += 25;
+                hero.Armor += 2;
                 hero.Damage += 5;
                 hero.Heroabilities.Add(new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1));
                 SetConsoleColor(Color);
                 Console.WriteLine($"Equipped {Name}"); // Display the gear item's name in its specified color
                 Console.ResetColor();
             }
+      
         }
 
         public override void UnEquipGear(Hero hero)
         {
             if (HaveItem)
             {
-                HaveItem = false;
-                hero.Affinity += 5;
-                hero.MaxHP -= 5;
-                hero.Armor -= 5;
+                HaveItem = true;
+                hero.Affinity += 2;
+                hero.MaxHP -= 25;
+                hero.Armor -= 2;
                 hero.Damage -= 5;
-                FistofDoom abilityToRemove = new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1);
-                hero.Heroabilities.Remove(abilityToRemove);
+
             }
         }
 
@@ -203,6 +222,9 @@ namespace Game
             // Any additional initializations specific to Murlock can be done here
         }
     }
+    
+
+
     public class GlovesofDoom : Gear
     {
         public GlovesofDoom(string name, string description, bool haveItem, string gearSlot, string color)
@@ -215,11 +237,13 @@ namespace Game
             if (!HaveItem)
             {
                 HaveItem = true;
-                hero.Affinity -= 5;
-                hero.MaxHP += 5;
-                hero.Armor += 5;
-                hero.Damage += 5;
+                hero.Affinity -= 2;
+                hero.Armor += 1;
+                hero.Damage += 15;
                 hero.Heroabilities.Add(new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1));
+                SetConsoleColor(Color);
+                Console.WriteLine($"Equipped {Name}"); // Display the gear item's name in its specified color
+                Console.ResetColor();
             }
         }
 
@@ -228,10 +252,9 @@ namespace Game
             if (HaveItem)
             {
                 HaveItem = false;
-                hero.Affinity += 5;
-                hero.MaxHP -= 5;
-                hero.Armor -= 5;
-                hero.Damage -= 5;
+                hero.Affinity += 2;
+                hero.Armor -= 1;
+                hero.Damage -= 15;
                 FistofDoom abilityToRemove = new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1);
                 hero.Heroabilities.Remove(abilityToRemove);
             }
@@ -250,11 +273,13 @@ namespace Game
             if (!HaveItem)
             {
                 HaveItem = true;
-                hero.Affinity -= 5;
-                hero.MaxHP += 5;
-                hero.Armor += 5;
-                hero.Damage += 5;
-                hero.Heroabilities.Add(new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1));
+                hero.Affinity -= 2;
+                hero.MaxHP += 15;
+                hero.Armor += 1;
+                hero.Damage += 10;
+                SetConsoleColor(Color);
+                Console.WriteLine($"Equipped {Name}"); // Display the gear item's name in its specified color
+                Console.ResetColor();
             }
         }
 
@@ -263,12 +288,10 @@ namespace Game
             if (HaveItem)
             {
                 HaveItem = false;
-                hero.Affinity += 5;
-                hero.MaxHP -= 5;
-                hero.Armor -= 5;
-                hero.Damage -= 5;
-                FistofDoom abilityToRemove = new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1);
-                hero.Heroabilities.Remove(abilityToRemove);
+                hero.Affinity += 2;
+                hero.MaxHP -= 15;
+                hero.Armor -= 1;
+                hero.Damage -= 10;
             }
         }
 
