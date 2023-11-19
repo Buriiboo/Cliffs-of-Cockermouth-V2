@@ -27,8 +27,10 @@ namespace Game
             var descriptionLength = Description;
             for (int i = 0;i< descriptionLength.Length; i++){
                 Console.Write(descriptionLength[i]);
-                Thread.Sleep(25);
+                Thread.Sleep(10);
             }
+            System.Console.WriteLine("");
+            System.Console.WriteLine("Press any key:");
             Console.ReadKey();
 
 
@@ -74,13 +76,15 @@ namespace Game
             int currentHeroAffinity = hero.Affinity;
 
             Console.WriteLine(selectedBranch.response);
-            Thread.Sleep(2000);
+            System.Console.WriteLine("Press any key:");
+            Console.ReadKey();
             Console.WriteLine(selectedBranch.exitDialogue);
-            Thread.Sleep(1000);
             selectedBranch.effect(hero);
+            System.Console.WriteLine("");
             System.Console.WriteLine($"Hero Affinity change:{hero.Affinity- currentHeroAffinity}");
-            Thread.Sleep(1000);
             System.Console.WriteLine($"Hero Affinity Currently:{hero.Affinity}");
+            System.Console.WriteLine($"");
+            System.Console.WriteLine("Press any key:");
             Console.ReadKey();
         }
         public static Scenario Scenario1()
