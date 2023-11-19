@@ -55,7 +55,15 @@ namespace Game
                     ShowInventory();
                     Console.WriteLine($"Choose an item for 5 affinity or {merchantInv.Count + 1} to exit");
                     if(int.TryParse(Console.ReadLine(), out int indexChoice) && indexChoice > 0 && indexChoice <= merchantInv.Count){
-                        hero.AddInventory(merchantInv[indexChoice - 1]);
+                        Item selectedItem = merchantInv[indexChoice - 1];
+                        var existingItem = hero.Inventory().FirstOrDefault(item => item.Name == selectedItem.Name);
+
+                        if (existingItem != null && existingItem is Consumable consumable)
+                        {
+                            consumable.Amount += 1;
+                        }
+                        else
+                            hero.AddInventory(merchantInv[indexChoice - 1]);
                         hero.Affinity -= 5;
                         return;
                     }
