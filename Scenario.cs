@@ -187,6 +187,38 @@ namespace Game
                 "One thing is clear, this is no ordinary item and it smells sweeter than last time..",
                 branches);
         }
+        public static Scenario Scenario4()                              //Murlock
+        {
+            var branches = new Dictionary<string, (string response, Action<Hero> effect, string exitDialogue)>
+        {
+            { "Use your arcane ability to force the chaotic taint to recede",
+              ("The Murlock looks at you stunned and crouches next to your feet in a worshiping manner", hero =>
+            {
+              HealItem Flask = new HealItem("MurlockFlask", "Heals for 50HP", 999, 50);
+              hero.inventory.Add(Flask);
+              hero.HeroConsumables.Add(Flask);
+              hero.Affinity += 10;                        
+            },
+            "It produces a flask seemingly from nowhere.. and gives it to you *mrglwglwlg ") },
+
+            { "Greedy Chaos, i want a tasste too...",
+              ("It desperately attacks you to protect its offspring but is sliced in two with ease", hero =>
+            {
+              HealItem MurlockEgg = new HealItem("MurlockEgg", "Heals for 50HP", 5, 125);
+              hero.inventory.Add(MurlockEgg);
+              hero.HeroConsumables.Add(MurlockEgg);
+
+            }, "You add 5 Murlock eggs to your inventory") },
+
+            { "Silly creature nesting here... Your eggs belong to Chaos",
+              ("The Murlock is minced into managable pieces for the chaos taint to consume", hero => hero.Affinity -= 10, "You leave the rest to its fate") }
+        };
+
+            return new Scenario(
+                "You spot a Murlock, it doesn't seem to be hostile and tries to communicate with you..*mrglwglwlg",
+                "You spot a clutch of eggs and etheral Chaotic tendrils moving towards the eggs. One of the eggs have already subcumbed to the corruption being consumed in a dark goo",
+                branches);
+        }
 
     }
 

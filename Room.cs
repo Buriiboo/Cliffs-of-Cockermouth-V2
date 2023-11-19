@@ -29,11 +29,11 @@ namespace Game
             //Lägg till en bool för varje nytt scenario som skapas. Inte alla scenarios skall ha bool såsom en Merchant där kan man interagera flera gånger, eller en secret/quest där
             // Lägg gärna Boolsen i kronologisk ordning baserat på interaktionsflödet i ett rum.
             scenarioActivationStatus.Add(false); // Scenario 1    Ingång till Cliffs
-            scenarioActivationStatus.Add(false); // Scenario 2    Murlock Encounter
+            scenarioActivationStatus.Add(false); // Scenario 2    Murlock Encounter Minions
             scenarioActivationStatus.Add(false); // Scenario 3    ChaosArtifact 1
             scenarioActivationStatus.Add(false); // Scenario 4    ChaosArtifact 2
-            scenarioActivationStatus.Add(false); // Scenario 5    Murlock Encounter 
-
+            scenarioActivationStatus.Add(false); // Scenario 5    Murlock Encounter Minons
+            scenarioActivationStatus.Add(false); // Scenario 6    Murlock Encounter Dilemma
         }
 
 
@@ -44,11 +44,11 @@ namespace Game
             {
                 Layout = new int[,] {
                 { 1, 1, 1, 1, 1, 1, 1 },
-                { 1, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 0, 9, 1 },
+                { 1, 0, 1, 1, 1, 1, 1 },
                 { 1, 0, 0, 0, 0, 0, 0 },
-                { 1, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 1, 1, 0, 0, 0, 1 },
+                { 1, 2, 0, 0, 0, 0, 1 },
                 { 1, 1, 1, 0, 1, 1, 1 }};
             }
             if (playerRoomRow == 2 && playerRoomCol == 1)
@@ -166,7 +166,7 @@ namespace Game
             if (playerRoomRow == 3 && playerRoomCol == 1)
             {
               
-                if (PlayerRow == 2 && PlayerColumn == 1 && scenarioActivationStatus[0] == true)         //Tillfälligt true för att testa funktioner förbio
+                if (PlayerRow == 2 && PlayerColumn == 1 && scenarioActivationStatus[0] == false)         //Tillfälligt true för att testa funktioner förbio
                 {
 
                     var scenario = Scenario.Scenario1();
@@ -174,7 +174,7 @@ namespace Game
                     scenarioActivationStatus[0] = true;
 
                 }
-                if (PlayerRow == 2 && PlayerColumn == 2 && scenarioActivationStatus[1] == true)  //Tillfälligt true för att testa funktioner förbio
+                if (PlayerRow == 2 && PlayerColumn == 2 && scenarioActivationStatus[1] == false)  //Tillfälligt true för att testa funktioner förbio
                 {
                    
 
@@ -196,6 +196,8 @@ namespace Game
                 }
 
                 }
+
+
             if (playerRoomRow == 2 && playerRoomCol == 1)
             {
 
@@ -226,13 +228,35 @@ namespace Game
                     GameLogic.EndRound(spawnedMinions, allMinions, hero);
                     scenarioActivationStatus[4] = true;
                 }
+            }
 
+            if (playerRoomRow == 1 && playerRoomCol == 1)
+            {
+              
+                if (PlayerRow == 5 && PlayerColumn == 2 && scenarioActivationStatus[5] == false)         //Tillfälligt true för att testa funktioner förbio
+                {
 
+                    var scenario = Scenario.Scenario4();
+                    scenario.Present(hero);
+                    scenarioActivationStatus[5] = true;
 
                 }
-            if (playerRoomRow == 2 && playerRoomCol == 2)
+               
+
+            }
+
+            if (playerRoomRow == 1 && playerRoomCol == 1)
+            {
+                if (playerRoomRow == 5 && playerRoomCol == 2 && scenarioActivationStatus[4] == false)
             {
 
+                    var scenario = Scenario.Scenario1();
+                    scenario.Present(hero);
+                    scenarioActivationStatus[4] = true;
+
+                }
+            }
+            if (playerRoomRow == 2 && playerRoomCol == 2){
                 if (PlayerRow == 4 && PlayerColumn == 3)
                 {
 
@@ -258,6 +282,7 @@ namespace Game
                     }
                     else
                     {
+                        System.Console.WriteLine("");
                         System.Console.WriteLine("The Arena find you unworthy...Choose your path and reutrn.");
                         System.Console.WriteLine("Press any key:");
                         Console.ReadKey();
@@ -265,7 +290,8 @@ namespace Game
                     }
                 }
             }
-            }
+        }
+           
 
         public bool IsWallWithOpening(int row, int col)
         {

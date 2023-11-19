@@ -132,28 +132,31 @@ namespace Game
             {
                 hero.HP += Heal;
             }
-            Amount -= 1;
+            Amount -= 0;
         }
     }
 
-/*
-    public class Quest
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public bool HaveItem { get; set; }
-        public Quest(string name, string description, bool haveItem)
-        {
-            Name = name;
-            Description = description;
-            HaveItem = haveItem;
-        }
-        public void ShowQuest()
-        {
 
+
+
+    /*
+        public class Quest
+        {
+            public string Name { get; set; }
+            public string Description { get; set; }
+            public bool HaveItem { get; set; }
+            public Quest(string name, string description, bool haveItem)
+            {
+                Name = name;
+                Description = description;
+                HaveItem = haveItem;
+            }
+            public void ShowQuest()
+            {
+
+            }
         }
-    }
-*/
+    */
 
     public class HelmofDoom : Gear
     {
