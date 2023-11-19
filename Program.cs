@@ -15,7 +15,7 @@ class Program
             Console.Write("Choose a name: ");
             string? name = Console.ReadLine();
             Hero hero = new Hero(name, 500,50,3,50,1,1);
-           
+
 
             hero.Heroabilities.AddRange(new Abilities[]                                                  //Skapa startobjekt
             {

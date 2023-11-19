@@ -8,6 +8,7 @@ namespace Game
 {
     public class Room
     {
+        private List<bool> scenarioActivationStatus = new List<bool>();         //ANvänd dessa bools för att säkerställa att scenarios i rummen inte aktiveras om och om igen.
         public int[,] Layout { get; private set; }
         public int PlayerRow { get; set; }
         public int PlayerColumn { get; set; }
@@ -15,12 +16,24 @@ namespace Game
 
         public Room(int playerRoomRow, int playerRoomCol)
         {
+
             InitializeLayout(playerRoomRow, playerRoomCol);
+            InitializeScenarioActivationStatus();
             PlayerRow = 5; // Starting position
             PlayerColumn = 1;
             IsInitialized = false;
 
         }
+        private void InitializeScenarioActivationStatus()
+        {
+            //Lägg till en bool för varje nytt scenario som skapas. Inte alla scenarios skall ha bool såsom en Merchant där kan man interagera flera gånger, eller en secret/quest där
+            // Lägg gärna Boolsen i kronologisk ordning baserat på interaktionsflödet i ett rum.
+            scenarioActivationStatus.Add(false); // Scenario 1
+            scenarioActivationStatus.Add(false); // Scenario 2
+            scenarioActivationStatus.Add(false);
+
+        }
+
 
         public void InitializeLayout(int playerRoomRow, int playerRoomCol)   //Välj Layout för ert rum
         {
@@ -40,10 +53,10 @@ namespace Game
             {
                 Layout = new int[,] {
                 { 1, 1, 1, 0, 1, 1, 1 },
-                { 1, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 9, 1, 0, 0, 0, 1 },
+                { 1, 0, 1, 0, 0, 0, 1 },
                 { 1, 0, 0, 0, 0, 0, 0 },
-                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 1, 1, 1, 1, 1 },
                 { 1, 0, 0, 0, 0, 0, 1 },
                 { 1, 1, 1, 0, 1, 1, 1 }};
             }
@@ -54,8 +67,8 @@ namespace Game
                 { 1, 1, 1, 0, 0, 0, 1 },
                 { 1, 0, 0, 0, 0, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0 },
-                { 1, 0, 1, 0, 0, 0, 1 },
-                { 1, 0, 1, 0, 2, 0, 1 },
+                { 1, 0, 1, 0, 1, 1, 1 },
+                { 1, 0, 1, 0, 0, 2, 1 },
                 { 1, 1, 1, 1, 1, 1, 1 }};
             }
             if (playerRoomRow == 1 && playerRoomCol == 2)
@@ -142,33 +155,42 @@ namespace Game
             checkForScenario(playerRoomRow, playerRoomCol, hero, allMinions);
         }
 
-
+        
         public void checkForScenario(int playerRoomRow, int playerRoomCol, Hero hero, List<Minions> allMinions)
         {
+           
 
             //First Room
             if (playerRoomRow == 3 && playerRoomCol == 1)
             {
               
-                if (PlayerRow == 2 && PlayerColumn == 1) 
+                if (PlayerRow == 2 && PlayerColumn == 1 && scenarioActivationStatus[0] == false) 
                 {
 
                     var scenario = Scenario.Scenario1();
                     scenario.Present(hero);
+                    scenarioActivationStatus[0] = true;
+
                 }
-                if (PlayerRow == 2 && PlayerColumn == 2) 
+                if (PlayerRow == 2 && PlayerColumn == 2 && scenarioActivationStatus[1] == false) 
                 {
+                   
+
                     UI.ShowRollowingMessage("It seems that the entrance to the cliffs is guarded...");
                     UI.ShowRollowingMessage("The feeble amphibiants swarm you...");
+                    Console.ReadKey();
                     List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, hero.Level, 3);
                     GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
                     GameLogic.EndRound(spawnedMinions, allMinions, hero);
+                    scenarioActivationStatus[1] = true;
                 }
-                if (PlayerRow == 5 && PlayerColumn == 3 || PlayerRow == 4 && PlayerColumn == 4 || PlayerRow == 5 && PlayerColumn == 5)
+                if (PlayerRow == 5 && PlayerColumn == 4 && scenarioActivationStatus[2] == false)
                 {
+               
 
                     var scenario = Scenario.Scenario2();
                     scenario.Present(hero);
+                    scenarioActivationStatus[2] = true;
                 }
             }
         }
@@ -211,6 +233,10 @@ namespace Game
                     else if (Layout[row, col] == 2)
                     {
                         Console.Write("O "); // Merchant
+                    }
+                    else if (Layout[row, col] == 9)
+                    {
+                        Console.Write("S "); // Merchant
                     }
                     else
                     {
