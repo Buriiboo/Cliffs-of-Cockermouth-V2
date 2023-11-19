@@ -19,8 +19,8 @@ namespace Game
         {
             return new List<Consumable>
             {
-                new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 2, 15),
-                new ThrowWeapons("Swamp potion", "Gives out 19 damage", 3, 19),
+                new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 1, 15),
+                new ThrowWeapons("Swamp potion", "Gives out 19 damage", 1, 19),
                 new HealItem("WaterPounch", "Gives you 25hp", 1, 25)
 
             };
@@ -55,7 +55,15 @@ namespace Game
                     ShowInventory();
                     Console.WriteLine($"Choose an item for 5 affinity or {merchantInv.Count + 1} to exit");
                     if(int.TryParse(Console.ReadLine(), out int indexChoice) && indexChoice > 0 && indexChoice <= merchantInv.Count){
-                        hero.AddBattleInventory(merchantInv[indexChoice - 1]);
+                        Item selectedItem = merchantInv[indexChoice - 1];
+                        var existingItem = hero.Inventory().FirstOrDefault(item => item.Name == selectedItem.Name);
+
+                        if (existingItem != null && existingItem is Consumable consumable)
+                        {
+                            consumable.Amount += 1;
+                        }
+                        else
+                            hero.AddInventory(merchantInv[indexChoice - 1]);
                         hero.Affinity -= 5;
                         return;
                     }
@@ -67,11 +75,12 @@ namespace Game
                     
                 case "s": 
                     Console.WriteLine("What whould you like to sell?");
-                    hero.ShowBattleInventory();
+                    hero.ShowInventory();
                     int itemIndex = int.Parse(Console.ReadLine());
                     Consumable itemToSell = hero.HeroConsumables[itemIndex - 1];
-                    hero.RemoveBattleInventory(itemToSell); // Antag att det finns en metod som tar bort föremålet från hjältens inventarie
+                    hero.RemoveInventory(itemToSell); // Antag att det finns en metod som tar bort föremålet från hjältens inventarie
                     merchantInv.Add(itemToSell);
+                    hero.Affinity += 5;
                     break;
             }
         }

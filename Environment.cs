@@ -24,6 +24,8 @@ namespace Game
             bool isRunning = true;
             while (isRunning)
             {
+                hero.HeroConsumables = hero.inventory.OfType<Consumable>().ToList();
+                hero.EquippedGear = new Dictionary<string, Gear>();
                 Console.Clear();
                 Console.WriteLine($"Current room: {playerRoomRow},{playerRoomCol}");
                 currentRoom.Print();
