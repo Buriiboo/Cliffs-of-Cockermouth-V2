@@ -32,6 +32,7 @@ namespace Game
             scenarioActivationStatus.Add(false); // Scenario 2    Murlock Encounter
             scenarioActivationStatus.Add(false); // Scenario 3    ChaosArtifact 1
             scenarioActivationStatus.Add(false); // Scenario 4    ChaosArtifact 2
+            scenarioActivationStatus.Add(false); // Scenario 5    Murlock Encounter 
 
         }
 
@@ -99,9 +100,9 @@ namespace Game
                 Layout = new int[,] {
                 { 1, 1, 1, 0, 1, 1, 1 },
                 { 1, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 1 },
-                { 0, 0, 0, 0, 0, 0, 0 },
-                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 1, 1, 1, 0, 1 },
+                { 0, 0, 1, 8, 1, 0, 0 },
+                { 1, 0, 1, 0, 1, 0, 1 },
                 { 1, 0, 0, 0, 0, 0, 1 },
                 { 1, 1, 1, 0, 1, 1, 1 }};
             }
@@ -205,8 +206,7 @@ namespace Game
                     {
                         var scenario = Scenario.Scenario3();
                         scenario.Present(hero);
-                        System.Console.WriteLine("TestACtivation");
-                        System.Console.WriteLine("Press any key:");
+
                         Console.ReadKey();
                         scenarioActivationStatus[3] = true;
                     }
@@ -217,9 +217,55 @@ namespace Game
                         Console.ReadKey();
                     }
                 }
+                if (PlayerRow == 3 && PlayerColumn == 3 && scenarioActivationStatus[4] == false)
+                {
+                    UI.ShowRollowingMessage("The way is blocked. But not for long...");
+                    Console.ReadKey();
+                    List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, hero.Level, 3);
+                    GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
+                    GameLogic.EndRound(spawnedMinions, allMinions, hero);
+                    scenarioActivationStatus[4] = true;
+                }
 
+
+
+                }
+            if (playerRoomRow == 2 && playerRoomCol == 2)
+            {
+
+                if (PlayerRow == 4 && PlayerColumn == 3)
+                {
+
+                    if (hero.Affinity < 40)
+                    {
+                        UI.ShowRollowingMessage("The Arena sense your Chaotic ways...");            //Unique Affinity encounters
+                        Console.ReadKey();
+                        List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, hero.Level, 3);
+                        GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
+                        GameLogic.EndRound(spawnedMinions, allMinions, hero);
+                        hero.Affinity-=2;
+
+                    }
+                    if (hero.Affinity >60)
+                    {
+                        UI.ShowRollowingMessage("The path of the Rightous rewards..");              //Unique Affinity encounters
+                        Console.ReadKey();
+                        List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, hero.Level, 3);
+                        GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
+                        GameLogic.EndRound(spawnedMinions, allMinions, hero);
+                        hero.Affinity += 2;
+
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("The Arena find you unworthy...Choose your path and reutrn.");
+                        System.Console.WriteLine("Press any key:");
+                        Console.ReadKey();
+
+                    }
+                }
             }
-        }
+            }
 
         public bool IsWallWithOpening(int row, int col)
         {
@@ -263,6 +309,10 @@ namespace Game
                     else if (Layout[row, col] == 9)
                     {
                         Console.Write("C "); // ChaosShrine
+                    }
+                    else if (Layout[row, col] == 8)
+                    {
+                        Console.Write("A "); // ChaosShrine
                     }
                     else
                     {

@@ -262,7 +262,7 @@ namespace Game
 
 
             System.Console.WriteLine(asciiArt);
-            System.Console.WriteLine($"{Name}:  MaxHP:{MaxHP} Armor:{Armor} Damage:{Damage} Affinity:{Affinity}");
+            System.Console.WriteLine($"{Name}:  MaxHP:{MaxHP} Armor:{Armor} Damage:{Damage} Affinity:{Affinity} Active sets: None");
             System.Console.Write("Press any key to enter Inventory:");
             Console.ReadKey();
         }
