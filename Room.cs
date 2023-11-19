@@ -34,6 +34,7 @@ namespace Game
             scenarioActivationStatus.Add(false); // Scenario 4    ChaosArtifact 2
             scenarioActivationStatus.Add(false); // Scenario 5    Murlock Encounter Minons
             scenarioActivationStatus.Add(false); // Scenario 6    Murlock Encounter Dilemma
+            scenarioActivationStatus.Add(false); // Scenario 7    Merchant interaction
         }
 
 
@@ -233,7 +234,7 @@ namespace Game
             if (playerRoomRow == 1 && playerRoomCol == 1)
             {
               
-                if (PlayerRow == 5 && PlayerColumn == 2 && scenarioActivationStatus[5] == false)         //Tillfälligt true för att testa funktioner förbio
+                if (PlayerRow == 5 && PlayerColumn == 2 && scenarioActivationStatus[5] == false)        
                 {
 
                     var scenario = Scenario.Scenario4();
@@ -290,11 +291,12 @@ namespace Game
                     }
                 }
             }
-            else if(playerRoomRow == 3 && playerRoomCol == 3){
+            if(playerRoomRow == 3 && playerRoomCol == 3){
                 if(PlayerRow == 5 && PlayerColumn == 4 || PlayerRow == 4 && PlayerColumn == 5){
                     Merchant merchant = Character.GetDefaultCharacters().OfType<Merchant>().FirstOrDefault();
-                    var scenario = Scenario.Scenario7(hero, merchant);
+                    var scenario = Scenario.Scenario5(hero, merchant);
                     scenario.Present(hero);
+                  
                 }
             }
         }

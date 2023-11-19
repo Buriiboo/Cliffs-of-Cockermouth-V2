@@ -142,23 +142,7 @@ namespace Game
                 "One thing is clear, this is no ordinary item and it reeks of Evil",
                 branches);
         }
-        public static Scenario Scenario7(Hero hero, Merchant merchant)
-        {
-            var branches = new Dictionary<string, (string response, Action<Hero> effect, string exitDialogue)>
-        {
-            { "See if something handy is for sale",
-              ($"Hi! finally sommeone comes to visit!", hero => merchant.MerchantMenuUI(hero), "Let's see what we got! Do you want to [B]uy or [S]ell?") },
-            { "Leave the house",
-              ("You decide not to look into the house", hero => {/*ingen interaction*/}, "You walk away") },
-            { "Go in and talk to the clerk",
-              ("You ask what this little house is", hero => hero.Affinity += 10, "You find of that it is the merchant's little shop") }
-        };
 
-            return new Scenario(
-                "In the distance is a little cabin",
-                "When you walk closer, a little sign appears.",
-                branches);
-        }
         public static Scenario Scenario3()
         {
             var branches = new Dictionary<string, (string response, Action<Hero> effect, string exitDialogue)>
@@ -234,6 +218,26 @@ namespace Game
             return new Scenario(
                 "You spot a Murlock, it doesn't seem to be hostile and tries to communicate with you..*mrglwglwlg",
                 "You spot a clutch of eggs and etheral Chaotic tendrils moving towards the eggs. One of the eggs have already subcumbed to the corruption being consumed in a dark goo",
+                branches);
+        }
+
+
+
+        public static Scenario Scenario5(Hero hero, Merchant merchant)
+        {
+            var branches = new Dictionary<string, (string response, Action<Hero> effect, string exitDialogue)>
+        {
+            { "See if something handy is for sale",
+              ($"Hi! finally sommeone comes to visit!", hero => merchant.MerchantMenuUI(hero), "Let's see what we got! Do you want to [B]uy or [S]ell?") },
+            { "Leave the house",
+              ("You decide not to look into the house", hero => {/*ingen interaction*/}, "You walk away") },
+            { "Go in and talk to the clerk",
+              ("You ask what this little house is", hero => hero.Affinity += 10, "You find of that it is the merchant's little shop") }
+        };
+
+            return new Scenario(
+                "In the distance is a little cabin",
+                "When you walk closer, a little sign appears.",
                 branches);
         }
 
