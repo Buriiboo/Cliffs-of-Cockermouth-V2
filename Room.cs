@@ -35,6 +35,7 @@ namespace Game
             scenarioActivationStatus.Add(false); // Scenario 5    Murlock Encounter Minons
             scenarioActivationStatus.Add(false); // Scenario 6    Murlock Encounter Dilemma
             scenarioActivationStatus.Add(false); // Scenario 7    Merchant interaction
+            
         }
 
 
@@ -257,6 +258,8 @@ namespace Game
 
                 }
             }
+
+          
             if (playerRoomRow == 2 && playerRoomCol == 2){
                 if (PlayerRow == 4 && PlayerColumn == 3)
                 {

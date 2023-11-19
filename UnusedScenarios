@@ -1,0 +1,17 @@
+      public static Scenario Scenario8()
+        {
+            var branches = new Dictionary<string, (string response, Action<Hero> effect, string exitDialogue)>
+        {
+            { "Dig up the childs body and give it a proper burial",
+              ("You buried the child and feel a sense of peace", hero => hero.Affinity += 15, "You feel a lump in your chest...") },
+            { "Leave the child to rot",
+              ("You leave nature to it's course. Ashes to ashes...", hero => hero.Affinity += 0, "You hear sobbing as you walk away...") },
+            { "Take a rib as a souvenir",
+              ("Ah- a bone from an innocent child. There is strong magic in this. -CRACK- ... You crush the brittle bone in your hand", hero => hero.Affinity -= 10, "It seems you do not know your own strenght. You tell yourself, there'll be more chances for artifacts... ") }
+        };
+
+            return new Scenario(
+                "You find yourself amoungst a grizzly scene of gore and vicera, the smell of blood and death is overwhelming",
+                "You suddenly hear a a faint whimpering, you look around and find the source of the whimpers hiding beneath a pile of corpses. \nYou plunge your hands into the mound of remains and find the body of a small child. The corpse show signs of active decay. \nThis child died at least a week ago...",
+                branches);
+        }
