@@ -40,6 +40,9 @@ namespace Game
                 Murlock.CreateBruiser(),
                 Murlock.CreateBruiser(),
                 Murlock.CreateEliteBruiser(),
+                ChaosDemon.CreateChaosDemon(),
+                ChaosImp.CreateChaosImp(),
+                ChaosImp.CreateChaosImp(),
                 new Merchant("Merchant", 500, 5, 500, 500),
 
             };

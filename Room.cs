@@ -35,6 +35,7 @@ namespace Game
             scenarioActivationStatus.Add(false); // Scenario 5    Murlock Encounter Minons
             scenarioActivationStatus.Add(false); // Scenario 6    Murlock Encounter Dilemma
             scenarioActivationStatus.Add(false); // Scenario 7    Merchant interaction
+            scenarioActivationStatus.Add(false); // Scenario 8    ChaosArtifact 3 + Demon Spawn
         }
 
 
@@ -137,7 +138,7 @@ namespace Game
                 { 1, 0, 0, 0, 1, 1, 1 },
                 { 0, 0, 0, 0, 0, 0, 1 },
                 { 1, 1, 0, 1, 0, 0, 1 },
-                { 1, 0, 0, 1, 0, 0, 1 },
+                { 1, 0, 0, 1, 0, 2, 1 },
                 { 1, 1, 1, 1, 1, 1, 1 }};
             }
 
@@ -242,21 +243,42 @@ namespace Game
                     scenarioActivationStatus[5] = true;
 
                 }
-               
 
-            }
+                if (PlayerRow == 1 && PlayerColumn == 1 && scenarioActivationStatus[7] == true)
+                {
 
-            if (playerRoomRow == 1 && playerRoomCol == 1)
-            {
-                if (playerRoomRow == 5 && playerRoomCol == 2 && scenarioActivationStatus[4] == false)
-            {
+                    UI.Demon();
+                    UI.ShowRollowingMessage("Silly creature, you are not worthy of these gifts...");
+                    System.Console.WriteLine("Press any key:");
+                    Console.ReadKey();
 
-                    var scenario = Scenario.Scenario1();
-                    scenario.Present(hero);
-                    scenarioActivationStatus[4] = true;
+                    List<Minions> spawnedMinions = Minions.Demon();
+                    GameLogic.BattleEncounter(hero, Minions.Demon());
+                    GameLogic.EndRound(spawnedMinions, allMinions, hero);
 
                 }
+                if (PlayerRow == 1 && PlayerColumn == 4 && scenarioActivationStatus[7] == false)
+                {
+
+                    if (hero.Affinity < 30)
+                    {
+                        var scenario = Scenario.Scenario6();
+                        scenario.Present(hero);
+
+                        Console.ReadKey();
+                        scenarioActivationStatus[7] = true;
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("The Chaos Shrine seems to be dormant, you get the feeling it finds you unworthy...");
+                        System.Console.WriteLine("Press any key:");
+                        Console.ReadKey();
+                    }
+                }
+
+
             }
+
             if (playerRoomRow == 2 && playerRoomCol == 2){
                 if (PlayerRow == 4 && PlayerColumn == 3)
                 {
@@ -339,7 +361,7 @@ namespace Game
                     }
                     else if (Layout[row, col] == 2)
                     {
-                        Console.Write("O "); // Merchant
+                        Console.Write("M "); // Merchant
                     }
                     else if (Layout[row, col] == 9)
                     {

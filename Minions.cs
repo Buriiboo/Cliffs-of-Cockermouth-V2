@@ -96,7 +96,7 @@ namespace Game
             HP = MaxHP;
         }
 
-               public static List<Minions> SpawnMinion(List<Minions> allMinions, int heroLevel, int numberToTake)
+        public static List<Minions> SpawnMinion(List<Minions> allMinions, int heroLevel, int numberToTake)
         {
             List<Minions> spawnedMinions = new List<Minions>();
             Random rng = new Random();
@@ -125,11 +125,28 @@ namespace Game
             // Add two MurlockEliteBruisers.
             for (int i = 0; i < 2; i++)
             {
-                Minions MurlockEliteBruiser = Murlock.CreateEliteBruiser();
+                Murlock MurlockEliteBruiser = Murlock.CreateEliteBruiser();
                 bossGroup.Add(MurlockEliteBruiser);
             }
 
             return bossGroup;
+        }
+        public static List<Minions> Demon()
+        {
+            List<Minions> Demon = new List<Minions>();
+
+            // Add one MurlockKing.
+            ChaosDemon ChaosDemon = ChaosDemon.CreateChaosDemon();
+            Demon.Add(ChaosDemon);
+            for (int i = 0; i < 2; i++)
+            {
+                ChaosImp chaosImpInstance = ChaosImp.CreateChaosImp();
+                Demon.Add(chaosImpInstance);
+            }
+
+
+
+            return Demon;
         }
 
 
@@ -774,11 +791,202 @@ namespace Game
 
 
 
+        }
+    public class ChaosDemon : Minions, ICustomEffect
+    {
+        public bool HasSecondaryEffect { get; set; }
+
+        public ChaosDemon(int hp, double damage, int armor, int affinity, int minionlevel, int experiencegiven)
+                : base(hp, damage, armor, affinity, minionlevel, experiencegiven)
+        {
+            HasSecondaryEffect = true;
+        }
+
+        public string GetEffectMessage(Minions minion)
+        {
+   
+                return $"{minion.Name} ";
+    
+        }
+        public void ApplyEffect(Minions minion, Hero hero)
+        {
+            if (HP == HP / 4)
+            {
+                ChaoticDemise();
+            }
+            SoulSteal();
+
+        }
+        public int SoulSteal()
+        {
+            int damageDealt = 25;
+            HP += 25;
+            return damageDealt;
+        }
+        public int ChaoticDemise()
+        {
+            if (HP == MaxHP/4) // Check if the Goblin's current HP is at maxHP
+            {
+                int damageDealt = 50;
+                HP -= 50;
+                return damageDealt;
+            }
+            else
+            {
+                HasSecondaryEffect = false;
+                return 0; // No dagger thrown if HP is not at maxHP
+            }
+        }
+
+        public override int Attack(Character target)
+        {
+            int damageDealt = 0;
+
+            if (CustomAction != null)
+            {
+                damageDealt = CustomAction(target);
+            }
+            else
+            {
+                double effectiveDamage = this.Damage - target.Armor;
+                if (effectiveDamage < 0)
+                {
+                    effectiveDamage = 0;
+                }
+                if (target.HP - effectiveDamage < 0)
+                {
+                    effectiveDamage = target.HP;
+                    target.HP = 0;
+                }
+                else
+                {
+                    target.HP -= (int)effectiveDamage;
+                }
+
+                if (HasSecondaryEffect)
+                {
+                    // Apply the secondary effect here
+                    ApplySecondaryEffect(target);
+                }
+
+                damageDealt = (int)effectiveDamage;
+            }
+
+            return damageDealt;
+        }
+        public static ChaosDemon CreateChaosDemon()
+        {
+            // Predefined stats for MurlockBruiser
+            int hp = 200;
+            double damage = 15;
+            int armor = 0;
+            int affinity = 0;
+            int minionLevel = 10;
+            int experienceGiven = 100;
+
+            // Return a new instance of MurlockBruiser with the predefined stats
+            return new ChaosDemon(hp, damage, armor, affinity, minionLevel, experienceGiven);
+        }
+
 
     }
-    
-}
 
+    public class ChaosImp : Minions, ICustomEffect
+    {
+        public bool HasSecondaryEffect { get; set; }
+
+        public ChaosImp(int hp, double damage, int armor, int affinity, int minionlevel, int experiencegiven)
+                : base(hp, damage, armor, affinity, minionlevel, experiencegiven)
+        {
+            HasSecondaryEffect = true;
+        }
+
+        public string GetEffectMessage(Minions minion)
+        {
+           
+            return $"{minion.Name} Uses Chaotic Demise Its destructions means nothing.. Dealing 50 damage";
+       
+        }
+        public void ApplyEffect(Minions minion, Hero hero)
+        {
+   
+            ChaoticDemiseImp();
+        }
+
+        public int ChaoticDemiseImp()
+        {
+            if (HP == MaxHP) // Check if the Goblin's current HP is at maxHP
+            {
+                int damageDealt = 50;
+                HP -= 50;
+                return damageDealt;
+            }
+            else
+            {
+                HasSecondaryEffect = false;
+                return 0; // No dagger thrown if HP is not at maxHP
+            }
+        }
+
+        public override int Attack(Character target)
+        {
+            int damageDealt = 0;
+
+            if (CustomAction != null)
+            {
+                damageDealt = CustomAction(target);
+            }
+            else
+            {
+                double effectiveDamage = this.Damage - target.Armor;
+                if (effectiveDamage < 0)
+                {
+                    effectiveDamage = 0;
+                }
+                if (target.HP - effectiveDamage < 0)
+                {
+                    effectiveDamage = target.HP;
+                    target.HP = 0;
+                }
+                else
+                {
+                    target.HP -= (int)effectiveDamage;
+                }
+
+                if (HasSecondaryEffect)
+                {
+                    // Apply the secondary effect here
+                    ApplySecondaryEffect(target);
+                }
+
+                damageDealt = (int)effectiveDamage;
+            }
+
+            return damageDealt;
+
+        }
+        public static ChaosImp CreateChaosImp()
+        {
+            // Predefined stats for MurlockBruiser
+            int hp = 25;
+            double damage = 10;
+            int armor = 0;
+            int affinity = 0;
+            int minionLevel = 5;
+            int experienceGiven = 10;
+
+            // Return a new instance of MurlockBruiser with the predefined stats
+            return new ChaosImp(hp, damage, armor, affinity, minionLevel, experienceGiven);
+        }
+
+
+
+
+
+
+    }
+
+}
 
 
 

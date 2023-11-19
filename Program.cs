@@ -53,6 +53,7 @@ class Program
             
             List<Minions> SpawnMinion = Minions.SpawnMinion(allMinions, hero.Level, 3);                  //Sorterar en SpawnMinion 
             List<Minions> Boss = Minions.Boss();
+            List<Minions> Demon = Minions.Demon();
 
             // GameLogic.MainMenu();                                                                      // Menyun mer UI jsut nu
             GameEnvironment gameEnvironment = new GameEnvironment();                                     //Skapa levelförsta environment

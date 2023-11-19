@@ -58,7 +58,7 @@ namespace Game
                 {
                     List<Minions> spawnedMinions = Minions.Boss(); ;                                
                     GameLogic.BattleEncounter(hero, Minions.Boss());
-                    GameLogic.EndRound(spawnedMinions, allMinions, hero);                           //How do i make this work?
+                    GameLogic.EndRound(spawnedMinions, allMinions, hero);                          
 
                     currentRoom.IsInitialized = true;
                 }

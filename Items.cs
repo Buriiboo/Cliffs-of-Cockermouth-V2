@@ -80,7 +80,7 @@ namespace Game
                 case "blue":
                     Console.ForegroundColor = ConsoleColor.Blue;
                     break;
-                case "magenta":
+                case "Magenta":
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     break;
                 case "cyan":

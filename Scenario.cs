@@ -94,7 +94,7 @@ namespace Game
             { "Give the Water pouch to the creature",
               ("It gulps the water eagerly", hero => hero.Affinity += 5, "It lets out a growl and perishes") },
             { "Take the water pouch for yourself!",
-              ("Despair fills it eyes...", hero => hero.Affinity += 10, "It lets out a growl and perishes") },
+              ("Despair fills it eyes...", hero => hero.Affinity -= 2, "It lets out a growl and perishes") },
             { "Crush the filthy creature...",
               ("You hear a crack as your foot is planted...", hero => hero.Affinity -= 10, "It lets out a gurgle and perishes...") }
         };
@@ -117,7 +117,7 @@ namespace Game
         { "This should Sell for a pretty penny..",
          ("Humming intensifies", hero =>
             {
-                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm","Blue");         //Option 2
+                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm","Purple");         //Option 2
                 hero.inventory.Add(helm);
                 Console.WriteLine("It feels pleased");
             },
@@ -127,7 +127,7 @@ namespace Game
             "Finally an artifact worthy of my splendour!",
             ("Humming intensifies violently", hero =>
             {
-                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helmet","Blue");     //Option 3
+                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helmet","Purple");     //Option 3
                 hero.inventory.Add(helm);
                 hero.EquipGearFromInventory(helm.Name);
                 hero.Affinity -= 10;
@@ -174,8 +174,8 @@ namespace Game
                 PlateofChaos Torso = new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Torso","Purple");     //Option 3
                 hero.inventory.Add(Torso);
                 Torso.EquipGear(hero);
-                hero.Affinity -= 10;
-                hero.HP += 100;
+                hero.Affinity -= 5;
+                hero.HP += 25;
                 Console.ReadKey();
 
             },
@@ -238,6 +238,52 @@ namespace Game
             return new Scenario(
                 "In the distance is a little cabin",
                 "When you walk closer, a little sign appears.",
+                branches);
+        }
+
+        public static Scenario Scenario6()
+        {
+            var branches = new Dictionary<string, (string response, Action<Hero> effect, string exitDialogue)>
+        {
+
+         { "What am i doing... I need to abandon this path.. I shall.",
+          ("The Shrine pulsates violently... and shrieks, it won't let you go that easily", hero =>
+            {
+                hero.Affinity += 10;
+                hero.HP = hero.HP/2;
+
+            },"The shrine sucks half of your life essensce out of you")            //Option 1
+         },
+
+        { "These trinkets smell like free coins to me!",
+         ("Humming intensifies", hero =>
+            {
+
+                GlovesofDoom Gloves = new GlovesofDoom("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Gloves","Purple");     //Option 3
+                hero.inventory.Add(Gloves);
+                hero.Affinity -= 2;                          //Option 2
+            },
+            "It feels pleased")
+        },
+        {
+            "You belong to me..",
+            ("Humming intensifies violently", hero =>
+            {
+                GlovesofDoom Gloves = new GlovesofDoom("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Gloves","Purple");     //Option 3
+                hero.inventory.Add(Gloves);
+                Gloves.EquipGear(hero);
+                hero.Affinity -= 5;
+                hero.Damage += 10;
+                Console.ReadKey();
+
+            },
+            "Oh, i feel it.. I become.. More.")
+        }
+    };
+
+            return new Scenario(
+                "Another shrine Hmmm? ",
+                "This one feels different...",
                 branches);
         }
 
