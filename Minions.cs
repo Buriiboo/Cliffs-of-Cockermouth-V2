@@ -3,14 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
+/*<<<<<Hur man lägger till en Minion med Secondary Effect>>>>>>>>>
+Steg 1. Skapa Layouten för minionen precis som vilken annan Minion som helst.
+Steg 2. Lägg in denna public class MurlockWorker : Murlock, ICustomEffect <--------
+    {
+        public bool HasSecondaryEffect { get; set; }
+        {
+            HasSecondaryEffect = true;
+        }
+Steg 3.
+        Lägg till följande metoder(Man kan skippa den sista men för readability behåll den gärna.)
+
+        public string GetEffectMessage(Minions minion)              Skriv effekten av Secondary så den syns i battle log
+        public void ApplyEffect(Minions minion, Hero hero)          Conditions för när den triggas av Secondary på Fienden
+        public int ThrowSpearMurlock()                              Metoden och logiken för effekten.
+
+
+*/
+
 namespace Game
 {
+    public interface ICustomEffect                                                  //CustomEffecty
+    {
+        void ApplyEffect(Minions minion, Hero hero);
+        string GetEffectMessage(Minions minion);
+    }
+
+
+    public delegate int MinionAction(Character target);     //Vi testar ny funktionalitet för minionactions.
+
     public class Minions : Character
     {
         public int MinionLevel{get;set;}
         public int ExperienceGiven{get;set;}
+        public MinionAction CustomAction { get; set; }
+        public bool HasSecondaryEffect { get; set; } // Add this property
 
-        
 
         public Minions(int hp, double damage, int armor, int affinity, int minionlevel, int experienceGiven)
             : base(hp, damage, armor, affinity)
@@ -19,7 +48,55 @@ namespace Game
             ExperienceGiven = experienceGiven;
         }
 
-        public static List<Minions> SpawnMinion(List<Minions> allMinions, int heroLevel, int numberToTake)
+ 
+
+        public virtual int Attack(Character target)
+        {
+            int damageDealt = 0;
+
+            if (CustomAction != null)
+            {
+                damageDealt = CustomAction(target);
+            }
+            else
+            {
+                double effectiveDamage = this.Damage - target.Armor;
+                if (effectiveDamage < 0)
+                {
+                    effectiveDamage = 0;
+                }
+                if (target.HP - effectiveDamage < 0)
+                {
+                    effectiveDamage = target.HP;
+                    target.HP = 0;
+                }
+                else
+                {
+                    target.HP -= (int)effectiveDamage;
+                }
+
+                if (HasSecondaryEffect)
+                {
+                    // Apply the secondary effect here
+                    ApplySecondaryEffect(target);
+                }
+
+                damageDealt = (int)effectiveDamage;
+            }
+
+            return damageDealt;
+        }
+        public virtual void ApplySecondaryEffect(Character target)
+        {
+             
+        }
+
+        public void RestoreHP()
+        {
+            HP = MaxHP;
+        }
+
+               public static List<Minions> SpawnMinion(List<Minions> allMinions, int heroLevel, int numberToTake)
         {
             List<Minions> spawnedMinions = new List<Minions>();
             Random rng = new Random();
@@ -55,30 +132,6 @@ namespace Game
             return bossGroup;
         }
 
-
-        public int Attack(Character target)
-        {
-            double effectiveDamage = this.Damage - target.Armor;
-            if (effectiveDamage < 0)
-            {
-                effectiveDamage = 0;
-            }
-            if (target.HP - effectiveDamage < 0)
-            {
-                effectiveDamage = target.HP;
-                target.HP = 0;
-            }
-            else
-            {
-                target.HP -= (int)effectiveDamage;
-            }
-            return (int)effectiveDamage;
-        }
-
-        public void RestoreHP()
-        {
-            HP = MaxHP;
-        }
 
     }
 
@@ -152,16 +205,90 @@ namespace Game
 
     }
 
-    public class MurlockWorker : Murlock
+    public class MurlockWorker : Murlock, ICustomEffect
     {
 
+        public bool HasSecondaryEffect { get; set; }
         public MurlockWorker(int hp, double damage, int armor, int affinity, int minionlevel, int experiencegiven)
             : base(hp, damage, armor, affinity, minionlevel, experiencegiven)
         {
+            HasSecondaryEffect = true;
 
         }
+        public string GetEffectMessage(Minions minion)
+        {
+            if (HP == MaxHP) // Check if the MurlockWorker's current HP is at maxHP
+            {
+                return $"{minion.Name} Throws a dagger at the hero for 25 Damage!.";
+            }
+            else
+            {
+                HasSecondaryEffect = false;
+                return string.Empty; // No effect message if HP is not at maxHP
+            }
+        }
+        public void ApplyEffect(Minions minion, Hero hero)
+        {
+            if (HP == MaxHP) // Check if the MurlockWorker's current HP is at maxHP
+            {
+                ThrowSpearMurlock();
+                // Implement the custom effect logic here
+                // You can access the properties of `minion` and `hero` to apply the effect
+            }
 
-        // MurlockBruiser-specific initialization, if any
+        }
+        public int ThrowSpearMurlock()
+        {
+            if (HP == MaxHP)
+            {
+                int damageDealt = 5;
+                return damageDealt;
+            }
+            else
+            {
+                HasSecondaryEffect = false;
+                return 0; // No dagger thrown if HP is not at maxHP
+            }
+        }
+
+        public override int Attack(Character target)
+        {
+            int damageDealt = 0;
+
+            if (CustomAction != null)
+            {
+                damageDealt = CustomAction(target);
+            }
+            else
+            {
+                double effectiveDamage = this.Damage - target.Armor;
+                if (effectiveDamage < 0)
+                {
+                    effectiveDamage = 0;
+                }
+                if (target.HP - effectiveDamage < 0)
+                {
+                    effectiveDamage = target.HP;
+                    target.HP = 0;
+                }
+                else
+                {
+                    target.HP -= (int)effectiveDamage;
+                }
+
+                if (HasSecondaryEffect)
+                {
+                    // Apply the secondary effect here
+                    ApplySecondaryEffect(target);
+                }
+
+                damageDealt = (int)effectiveDamage;
+            }
+
+            return damageDealt;
+        }
+
+
     }
 
     public class MurlockBruiser : Murlock
@@ -173,7 +300,6 @@ namespace Game
 
         }
 
-        // MurlockBruiser-specific initialization, if any
     }
 
     public class MurlockEliteBruiser : Murlock
@@ -185,7 +311,7 @@ namespace Game
 
         }
 
-        // MurlockBruiser-specific initialization, if any
+
     }
 
     public class MurlockKing : Murlock
@@ -313,7 +439,7 @@ namespace Game
 
         }
 
-        
+    
     }
 
     public class UndeadBruiser : Undead
@@ -337,7 +463,6 @@ namespace Game
 
         }
 
-        
     }
 
     public class SkeletonKing : Undead
@@ -539,13 +664,119 @@ namespace Game
         }
 
     }
-    class Goblin : Minions
+
+
+    public class Goblin : Minions
     {
-        public Goblin(int hp, double damage, int armor, int affinity, int minionlevel, int experienceGiven) :base(hp, damage, armor, affinity, minionlevel, experienceGiven)
+        public Goblin(int hp, double damage, int armor, int affinity, int minionLevel, int experienceGiven)
+            : base(hp, damage, armor, affinity, minionLevel, experienceGiven)
         {
-            
+            // Any additional initializations specific to Murlock can be done here
         }
+
+
+        public static GoblinWarrior CreateGoblinWarrior()
+        {
+            // Predefined stats for MurlockBruiser
+            int hp = 45;
+            double damage = 15;
+            int armor = 0;
+            int affinity = 20;
+            int minionLevel = 6;
+            int experienceGiven = 20;
+
+            // Return a new instance of MurlockBruiser with the predefined stats
+            return new GoblinWarrior(hp, damage, armor, affinity, minionLevel, experienceGiven);
+        }
+
+
     }
+
+        public class GoblinWarrior : Goblin, ICustomEffect
+    {
+        public bool HasSecondaryEffect { get; set; }
+
+        public GoblinWarrior(int hp, double damage, int armor, int affinity, int minionlevel, int experiencegiven)
+                : base(hp, damage, armor, affinity, minionlevel, experiencegiven)
+            {
+             HasSecondaryEffect = true;
+            }
+
+        public string GetEffectMessage(Minions minion)
+        {
+            if (HP == MaxHP) // Check if the MurlockWorker's current HP is at maxHP
+            {
+                return $"{minion.Name} Throws a dagger at the hero for 25 Damage!.";
+            }
+            else
+            {
+                HasSecondaryEffect = false;
+                return string.Empty; // No effect message if HP is not at maxHP
+            }
+        }
+        public void ApplyEffect(Minions minion, Hero hero)
+        {
+            ThrowDagger();
+            // Implement the custom effect logic here
+            // You can access the properties of `minion` and `hero` to apply the effect
+        }
+        public int ThrowDagger()
+        {
+            if (HP == MaxHP) // Check if the Goblin's current HP is at maxHP
+            {
+                int damageDealt = 25;
+                ; // Subtract 10 from the Goblin's HP
+                return damageDealt;
+            }
+            else
+            {
+                HasSecondaryEffect = false;
+                return 0; // No dagger thrown if HP is not at maxHP
+            }
+        }
+
+        public override int Attack(Character target)
+        {
+            int damageDealt = 0;
+
+            if (CustomAction != null)
+            {
+                damageDealt = CustomAction(target);
+            }
+            else
+            {
+                double effectiveDamage = this.Damage - target.Armor;
+                if (effectiveDamage < 0)
+                {
+                    effectiveDamage = 0;
+                }
+                if (target.HP - effectiveDamage < 0)
+                {
+                    effectiveDamage = target.HP;
+                    target.HP = 0;
+                }
+                else
+                {
+                    target.HP -= (int)effectiveDamage;
+                }
+
+                if (HasSecondaryEffect)
+                {
+                    // Apply the secondary effect here
+                    ApplySecondaryEffect(target);
+                }
+
+                damageDealt = (int)effectiveDamage;
+            }
+
+            return damageDealt;
+        }
+
+
+
+
+    }
+    
 }
 
 

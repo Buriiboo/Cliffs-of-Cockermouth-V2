@@ -182,8 +182,8 @@ namespace Game
                 System.Console.WriteLine("+++Inventory+++");
                 System.Console.WriteLine("1. Show All Items");
                 System.Console.WriteLine("2. Show Consumable");
-                System.Console.WriteLine("3. Handle Gear");
-            //  System.Console.WriteLine("4. Handle Gear");
+                System.Console.WriteLine("3. Equip Gear");
+                System.Console.WriteLine("4. Unequip Gear");
 
                 int choice= int.Parse(Console.ReadLine());
                 switch(choice){
@@ -216,8 +216,14 @@ namespace Game
                     break;
                  case 3:
                         Console.Clear();
+                        asciiArtInventory();
                         HandleGear();
+               
                         break;
+                case 4:
+                        Console.Clear();
+                        UnequipGear();
+                break;
                     
                 }
                 break;
@@ -227,8 +233,9 @@ namespace Game
         }
         public void asciiArtInventory()
         {
-            System.Console.WriteLine($"{MaxHP}");
-            string Helm = EquippedGear.TryGetValue("Helmet", out Gear helmGear) ? $"Equipped: {helmGear.Name}" : "Not Equipped";
+            Console.Clear();
+                               
+            string Helm = EquippedGear.TryGetValue("Helmet", out Gear helmGear) ? $"Equipped: {helmGear.Name}" : "Not Equipped";     //TRYGETVALUE Så jävla nice asså
             string Torso = EquippedGear.TryGetValue("Torso", out Gear torsoGear) ? $"Equipped: {torsoGear.Name}" : "Not Equipped";
             string Gloves = EquippedGear.TryGetValue("Gloves", out Gear glovesGear) ? $"Equipped: {glovesGear.Name}" : "Not Equipped";
             string Boots = EquippedGear.TryGetValue("Boots", out Gear bootsGear) ? $"Equipped: {bootsGear.Name}" : "Not Equipped";
@@ -255,6 +262,8 @@ namespace Game
 
 
             System.Console.WriteLine(asciiArt);
+            System.Console.WriteLine($"{Name}:  MaxHP:{MaxHP} Armor:{Armor} Damage:{Damage} Affinity:{Affinity}");
+            System.Console.Write("Press any key to enter Inventory:");
             Console.ReadKey();
         }
 
@@ -316,46 +325,63 @@ namespace Game
                 Console.WriteLine($"Gear not found in inventory: {gearName}");
             }
         }
+        public void UnequipGearFromInventory(string gearName)
+        {
+            Gear gearToUnequip = EquippedGear.Values.FirstOrDefault(g => g.Name == gearName);
+            if (gearToUnequip != null)
+            {
+                Console.WriteLine($"Unequipping: {gearToUnequip.Name}");
+                gearToUnequip.UnEquipGear(this);
+                EquippedGear.Remove(gearToUnequip.GearSlot);
+                // Add the unequipped gear back to the inventory
+                inventory.Add(gearToUnequip);
+            }
+            else
+            {
+                Console.WriteLine($"Gear not found in equipped slots: {gearName}");
+            }
+        }
 
-        public void HandleGear(){
+
+        public void HandleGear()
+        {
             Console.Clear();
 
             string[] gearSlots = { "Helmet", "Torso", "Gloves", "Boots", "Return" };
-            int selectedSlotIndex = 0; 
+            int selectedSlotIndex = 0;
 
             while (true)
             {
-                // Display gear slots with the selected slot highlighted
                 Console.Clear();
                 Console.WriteLine("+++Gear-Inventory Menu+++");
                 for (int i = 0; i < gearSlots.Length; i++)
                 {
                     if (i == selectedSlotIndex)
                     {
-                        Console.WriteLine($"--> {gearSlots[i]}"); // Highlight the selected slot
+                        Console.WriteLine($"--> {gearSlots[i]}"); 
                     }
                     else
                     {
                         Console.WriteLine($"    {gearSlots[i]}");
                     }
                 }
-                ConsoleKeyInfo keyInfo = Console.ReadKey(true); // Read a key press without displaying it
-                // Handle arrow key navigation
-                if (keyInfo.Key == ConsoleKey.UpArrow && selectedSlotIndex > 0)
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true); 
+                                                                
+                if (keyInfo.Key == ConsoleKey.W || keyInfo.Key == ConsoleKey.UpArrow && selectedSlotIndex > 0)
                 {
                     selectedSlotIndex--;
                 }
-                else if (keyInfo.Key == ConsoleKey.DownArrow && selectedSlotIndex < gearSlots.Length - 1)
+                else if (keyInfo.Key == ConsoleKey.S || keyInfo.Key == ConsoleKey.DownArrow && selectedSlotIndex < gearSlots.Length - 1)
                 {
                     selectedSlotIndex++;
                 }
                 else if (keyInfo.Key == ConsoleKey.Enter)
                 {
-                    // When the Enter key is pressed, handle the selected gear slot
+    
                     string selectedSlot = gearSlots[selectedSlotIndex];
                     if (selectedSlot == "Return")
                     {
-                        break; // Exit the menu if "Return" is selected
+                        break; 
                     }
                     else
                     {
@@ -363,37 +389,120 @@ namespace Game
                         Console.WriteLine($"+++{selectedSlot}+++");
                         Console.WriteLine(" ");
 
-                        foreach (Item item in inventory)
-                        {
-                            if (item is Gear gearItem && gearItem.GearSlot == selectedSlot)
-                            {
-                                Console.WriteLine($"{gearItem.Name}: Info: {gearItem.Description}");
-                            }
-                        }
+                        List<Gear> gearItems = inventory.OfType<Gear>().Where(gearItem => gearItem.GearSlot == selectedSlot).ToList();
+                        int selectedIndex = 0;
 
-                        Console.WriteLine(" ");
-
-                        // Prompt the player to choose an item to equip
-                        Console.WriteLine("Choose an item to equip (enter item number) or press any key to go back:");
-                        if (int.TryParse(Console.ReadLine(), out int itemChoice) && itemChoice >= 1 && itemChoice <= inventory.Count)
-                        {
-                            Item selectedItem = inventory[itemChoice - 1];
-                            if (selectedItem is Gear selectedGear)
-                            {
-                                // Call your EquipGearFromInventory method here to equip the selected gear
-                                EquipGearFromInventory(selectedGear.Name);
-                                Console.WriteLine($"Equipped {selectedGear.Name}.");
-                            }
-                        }
-                        else
+                        while (true)
                         {
                             Console.Clear();
+                            Console.WriteLine($"+++{selectedSlot}+++");
+                            for (int i = 0; i < gearItems.Count; i++)
+                            {
+                                if (i == selectedIndex)
+                                {  
+                                    Console.WriteLine($"--> {gearItems[i].Name}: Info: {gearItems[i].Description}");
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"    {gearItems[i].Name}: Info: {gearItems[i].Description}");
+                                }
+                            }
+                            Console.WriteLine(" ");
+
+                            ConsoleKeyInfo itemKeyInfo = Console.ReadKey(true);
+                            if (itemKeyInfo.Key == ConsoleKey.UpArrow && selectedIndex > 0)
+                            {
+                                selectedIndex--;
+                            }
+                            else if (itemKeyInfo.Key == ConsoleKey.DownArrow && selectedIndex < gearItems.Count - 1)
+                            {
+                                selectedIndex++;
+                            }
+                            else if (itemKeyInfo.Key == ConsoleKey.Enter)
+                            {
+                                if (selectedIndex >= 0 && selectedIndex < gearItems.Count)
+                                {
+                                    Gear selectedGear = gearItems[selectedIndex];
+                                    EquipGearFromInventory(selectedGear.Name);
+                                    Console.WriteLine($"Equipped {selectedGear.Name}.");
+                                    Console.ReadKey();
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                break;
+                            }
                         }
                     }
                 }
             }
+        }
 
+        public void UnequipGear()
+        {
+            Console.Clear();
 
+            string[] equippedSlots = { "Helmet", "Torso", "Gloves", "Boots", "Return" };
+            int selectedSlotIndex = 0;
+
+            while (true)
+            {
+                // Display equipped slots with the selected slot highlighted
+                Console.Clear();
+                Console.WriteLine("+++Unequip-Inventory Menu+++");
+                for (int i = 0; i < equippedSlots.Length; i++)
+                {
+                    if (i == selectedSlotIndex)
+                    {
+                        Console.WriteLine($"--> {equippedSlots[i]}"); // Highlight the selected slot
+                    }
+                    else
+                    {
+                        Console.WriteLine($"    {equippedSlots[i]}");
+                    }
+                }
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true); // Read a key press without displaying it
+                                                                // Handle arrow key navigation for equipped slots
+                if (keyInfo.Key == ConsoleKey.W || keyInfo.Key == ConsoleKey.UpArrow && selectedSlotIndex > 0)
+                {
+                    selectedSlotIndex--;
+                }
+                else if (keyInfo.Key == ConsoleKey.S || keyInfo.Key == ConsoleKey.DownArrow && selectedSlotIndex < equippedSlots.Length - 1)
+                {
+                    selectedSlotIndex++;
+                }
+                else if (keyInfo.Key == ConsoleKey.Enter)
+                {
+                    // When the Enter key is pressed, handle the selected equipped slot
+                    string selectedSlot = equippedSlots[selectedSlotIndex];
+                    if (selectedSlot == "Return")
+                    {
+                        break; // Exit the menu if "Return" is selected
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine($"+++Unequip {selectedSlot}+++");
+                        Console.WriteLine(" ");
+
+                        if (EquippedGear.ContainsKey(selectedSlot))
+                        {
+                            Gear equippedGear = EquippedGear[selectedSlot];
+                            Console.WriteLine($"Unequipped {equippedGear.Name}");
+                            // Call your UnequipGearFromInventory method here to unequip the selected gear
+                            UnequipGearFromInventory(equippedGear.Name);
+                            Console.ReadKey();
+                        }
+                        else
+                        {
+                            Console.WriteLine($"No gear equipped in {selectedSlot}");
+                            Console.ReadKey();
+                        }
+                    }
+                }
+            }
         }
 
 
@@ -404,6 +513,14 @@ namespace Game
         public void RemoveInventory(Item item)
         {
             inventory.Remove(item);
+        }
+        public void AddBattleInventory(Consumable consumable)
+        {
+            HeroConsumables.Add(consumable);
+        }
+        public void RemoveBattleInventory(Consumable consumable)
+        {
+            HeroConsumables.Remove(consumable);
         }
     }
 }

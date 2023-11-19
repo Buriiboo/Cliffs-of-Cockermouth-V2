@@ -26,20 +26,18 @@ class Program
             });
             hero.inventory.AddRange(new Item[]                                                         //Skapa startItems
            {
-             // new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm"),
-                new LeatherHelm("Leather Hat", "Hat made out of leather", false, "Helm"), //man kan använda samma för attla olika typer, de gör samma saker
-                new LeatherPlate("Leather Shirt", "Shirt made out of leather", false, "Torso"),
-                new LeatherGloves("Leather gloves", "Gloves made out of leather", false, "Gloves"),
-                new LeatherBoots("Leather Boots", "Boots made out of leather", false, "Boots"),
+                new LeatherHelm("Leather Hat", "Hat made out of leather", false, "Helmet","yellow"), //man kan använda samma för attla olika typer, de gör samma saker
+                new LeatherPlate("Leather Shirt", "Shirt made out of leather", false, "Torso","yellow"),
+                new LeatherGloves("Leather gloves", "Gloves made out of leather", false, "Gloves","yellow"),
+                new LeatherBoots("Leather Boots", "Boots made out of leather", false, "Boots","yellow"),
 
-                new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm"),
-                new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Torso"),
-                new GlovesofDoom("GlovesOfDoom", "Gloves helm not for the faint of heart", false, "Gloves"),
-                new BootsofChaos("BootsOfChaos", "The Rightous fear it, the cunning desire it", false, "Boots"),
+                new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helmet","Purple"),
+                new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Torso","Blue"),
+                new GlovesofDoom("GlovesOfDoom", "Gloves helm not for the faint of heart", false, "Gloves","Blue"),
+                new BootsofChaos("BootsOfChaos", "The Rightous fear it, the cunning desire it", false, "Boots","Blue"),
 
                 new ThrowWeapons("Throwing Knife", "Silent throw that catches the enemy of guard", 5, 15),
                 new ThrowWeapons("Swamp potion", "Gives out 19 damage", 2, 19),
-                
                 new HealItem("Healing potion", "Gives you 12hp", 3, 12),
                 new HealItem("WaterPounch", "Gives you 25hp", 2, 25)
 

@@ -113,7 +113,7 @@ namespace Game
         { "This should Sell for a pretty penny..",
          ("Humming intensifies", hero =>
             {
-                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm");         //Option 2
+                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helm","Blue");         //Option 2
                 hero.inventory.Add(helm);
                 Console.WriteLine("It feels pleased");
             },
@@ -123,7 +123,7 @@ namespace Game
             "Finally an artifact worthy of my splendour!",
             ("Humming intensifies violently", hero =>
             {
-                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helmet");     //Option 3
+                HelmofDoom helm = new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helmet","Blue");     //Option 3
                 hero.inventory.Add(helm);
                 helm.EquipGear(hero);
                 hero.Affinity -= 10;
@@ -136,6 +136,23 @@ namespace Game
             return new Scenario(
                 "It seems to be some sort of shrine... Ontop of it you see a Helm. The helm is pristine, but the surrounding air distorts around it",
                 "One thing is clear, this is no ordinary item and it reeks of Evil",
+                branches);
+        }
+        public static Scenario Scenario7(Hero hero, Merchant merchant)
+        {
+            var branches = new Dictionary<string, (string response, Action<Hero> effect, string exitDialogue)>
+        {
+            { "See if something handy is for sale",
+              ($"Hi! finally sommeone comes to visit!", hero => merchant.MerchantMenuUI(hero), "Let's see what we got! Do you want to [B]uy or [S]ell?") },
+            { "Leave the house",
+              ("You decide not to look into the house", hero => {/*ingen interaction*/}, "You walk away") },
+            { "Go in and talk to the clerk",
+              ("You ask what this little house is", hero => hero.Affinity += 10, "You find of that it is the merchant's little shop") }
+        };
+
+            return new Scenario(
+                "In the distance is a little cabin",
+                "When you walk closer, a little sign appears.",
                 branches);
         }
 

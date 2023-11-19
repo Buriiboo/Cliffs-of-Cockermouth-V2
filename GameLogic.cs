@@ -6,6 +6,8 @@ using System.Reflection;
 
 namespace Game
 {
+
+
     public class GameLogic
     {
 
@@ -23,9 +25,19 @@ namespace Game
                 
                 foreach (var minion in spawnedMinions)
                 {
-                    if(minion.HP>0){
-                    int damageDealt = minion.Attack(hero);
-                    UI.ShowDamageMessage($"{minion.Name} attacks Hero and deals {damageDealt} damage.");
+                    if (minion.HP > 0)
+                    {
+                        if (minion is ICustomEffect customEffectMinion)
+                        {
+
+                            
+                            customEffectMinion.ApplyEffect(minion, hero);
+                            string effectMessage = customEffectMinion.GetEffectMessage(minion); 
+                            UI.ShowDamageMessage(effectMessage);        
+                        }
+
+                        int damageDealt = minion.Attack(hero); // Attack as before
+                        UI.ShowDamageMessage($"{minion.Name} attacks Hero and deals {damageDealt} damage.");
                     }
                 }
     

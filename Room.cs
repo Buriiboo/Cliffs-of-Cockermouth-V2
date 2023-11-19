@@ -118,10 +118,10 @@ namespace Game
                 Layout = new int[,] {
                 { 1, 1, 1, 0, 1, 1, 1 },
                 { 1, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 0, 0, 1, 1, 1 },
                 { 0, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 1 },
+                { 1, 1, 0, 1, 0, 0, 1 },
+                { 1, 0, 0, 1, 0, 0, 1 },
                 { 1, 1, 1, 1, 1, 1, 1 }};
             }
 
@@ -168,6 +168,13 @@ namespace Game
                 {
 
                     var scenario = Scenario.Scenario2();
+                    scenario.Present(hero);
+                }
+            }
+            else if(playerRoomRow == 3 && playerRoomCol == 3){
+                if(PlayerRow == 5 && PlayerColumn == 4 || PlayerRow == 4 && PlayerColumn == 5){
+                    Merchant merchant = Character.GetDefaultCharacters().OfType<Merchant>().FirstOrDefault();
+                    var scenario = Scenario.Scenario7(hero, merchant);
                     scenario.Present(hero);
                 }
             }

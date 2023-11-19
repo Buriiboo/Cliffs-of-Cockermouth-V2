@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,6 +40,7 @@ namespace Game
                 Murlock.CreateBruiser(),
                 Murlock.CreateBruiser(),
                 Murlock.CreateEliteBruiser(),
+                new Merchant("Merchant", 500, 5, 500, 500),
 
             };
         }
