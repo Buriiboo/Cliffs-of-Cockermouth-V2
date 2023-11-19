@@ -28,9 +28,10 @@ namespace Game
         {
             //Lägg till en bool för varje nytt scenario som skapas. Inte alla scenarios skall ha bool såsom en Merchant där kan man interagera flera gånger, eller en secret/quest där
             // Lägg gärna Boolsen i kronologisk ordning baserat på interaktionsflödet i ett rum.
-            scenarioActivationStatus.Add(false); // Scenario 1
-            scenarioActivationStatus.Add(false); // Scenario 2
-            scenarioActivationStatus.Add(false);
+            scenarioActivationStatus.Add(false); // Scenario 1    Ingång till Cliffs
+            scenarioActivationStatus.Add(false); // Scenario 2    Murlock Encounter
+            scenarioActivationStatus.Add(false); // Scenario 3    ChaosArtifact 1
+            scenarioActivationStatus.Add(false); // Scenario 4    ChaosArtifact 2
 
         }
 
@@ -192,6 +193,31 @@ namespace Game
                     scenario.Present(hero);
                     scenarioActivationStatus[2] = true;
                 }
+
+                }
+            if (playerRoomRow == 2 && playerRoomCol == 1)
+            {
+
+                if (PlayerRow == 2 && PlayerColumn == 1 && scenarioActivationStatus[3] == false)
+                {
+
+                    if (hero.Affinity < 30)
+                    {
+                        var scenario = Scenario.Scenario3();
+                        scenario.Present(hero);
+                        System.Console.WriteLine("TestACtivation");
+                        System.Console.WriteLine("Press any key:");
+                        Console.ReadKey();
+                        scenarioActivationStatus[3] = true;
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("The Chaos Shrine seems to be dormant, you get the feeling it finds you unworthy...");
+                        System.Console.WriteLine("Press any key:");
+                        Console.ReadKey();
+                    }
+                }
+
             }
         }
 

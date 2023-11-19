@@ -31,8 +31,8 @@ class Program
                 new LeatherGloves("Leather gloves", "Gloves made out of leather", false, "Gloves","yellow"),
                 new LeatherBoots("Leather Boots", "Boots made out of leather", false, "Boots","yellow"),
 
-                new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helmet","Purple"),
-                new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Torso","Blue"),
+            // new HelmofDoom("HelmOfDoom", "Heavy helm not for the faint of heart", false, "Helmet","Purple"),                         Lagd i Scenario
+            //    new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Torso","Purple"),               Lagd i Scenario
                 new GlovesofDoom("GlovesOfDoom", "Gloves helm not for the faint of heart", false, "Gloves","Blue"),
                 new BootsofChaos("BootsOfChaos", "The Rightous fear it, the cunning desire it", false, "Boots","Blue"),
 

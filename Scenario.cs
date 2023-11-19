@@ -131,15 +131,60 @@ namespace Game
                 hero.inventory.Add(helm);
                 helm.EquipGear(hero);
                 hero.Affinity -= 10;
-                Console.WriteLine("You eqiup the Helm..");
+                Console.ReadKey();
             },
             "It feels ecstatic!..No..You Feel ecstatic.")
         }
     };
 
             return new Scenario(
-                "It seems to be some sort of shrine... Ontop of it you see a Helm. The helm is pristine, but the surrounding air distorts around it",
+                "Ah its a Chaos shrine... Ontop of it you see a Helm. The helm is pristine, but the surrounding air distorts around it",
                 "One thing is clear, this is no ordinary item and it reeks of Evil",
+                branches);
+        }
+        public static Scenario Scenario3()
+        {
+            var branches = new Dictionary<string, (string response, Action<Hero> effect, string exitDialogue)>
+        {
+
+         { "What am i doing... I need to abandon this path.. I shall.",
+          ("The Shrine pulsates violently... and shrieks, it won't let you go that easily", hero =>
+            {
+                hero.Affinity += 10;
+                hero.HP = hero.HP/2;
+
+            },"The shrine sucks half of your life essensce out of you")            //Option 1
+         },
+
+        { "Hmm, Why not? Might come in handy",
+         ("Humming intensifies", hero =>
+            {
+
+                PlateofChaos Torso = new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Torso","Purple");
+                hero.inventory.Add(Torso);
+                hero.Affinity -= 2;                          //Option 2
+            },
+            "It feels pleased")
+        },
+        {
+            "You belong to me..",
+            ("Humming intensifies violently", hero =>
+            {
+                PlateofChaos Torso = new PlateofChaos("PlateofChaos","The Rightous fear it, the cunning desire it ",false,"Torso","Purple");     //Option 3
+                hero.inventory.Add(Torso);
+                Torso.EquipGear(hero);
+                hero.Affinity -= 10;
+                hero.HP += 100;
+                Console.ReadKey();
+
+            },
+            "Oh, i feel it.. I become.. More.")
+        }
+    };
+
+            return new Scenario(
+                "Ah the Chaos shrine finds me worthy..... Is that an armor materializing ? ",
+                "One thing is clear, this is no ordinary item and it smells sweeter than last time..",
                 branches);
         }
 
@@ -147,4 +192,10 @@ namespace Game
 
 
 }
+    
+
+
+
+
+
 
