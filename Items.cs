@@ -171,9 +171,12 @@ namespace Game
                 hero.MaxHP += 25;
                 hero.Armor += 2;
                 hero.Damage += 5;
+                SetConsoleColor(Color);
                 Console.WriteLine($"Equipped {Name}"); // Display the gear item's name in its specified color
                 Console.ResetColor();
+
             }
+      
         }
 
         public override void UnEquipGear(Hero hero)
@@ -207,6 +210,9 @@ namespace Game
                 hero.Affinity -= 2;
                 hero.MaxHP += 75;
                 hero.Armor += 5;
+                SetConsoleColor(Color);
+                Console.WriteLine($"Equipped {Name}"); // Display the gear item's name in its specified color
+                Console.ResetColor();
             }
         }
 
@@ -239,6 +245,9 @@ namespace Game
                 hero.Armor += 1;
                 hero.Damage += 15;
                 hero.Heroabilities.Add(new FistofDoom("FistOfDoom", "Strikes with Chaotic power", 50, 1));
+                SetConsoleColor(Color);
+                Console.WriteLine($"Equipped {Name}"); // Display the gear item's name in its specified color
+                Console.ResetColor();
             }
         }
 
@@ -272,6 +281,7 @@ namespace Game
                 hero.MaxHP += 15;
                 hero.Armor += 1;
                 hero.Damage += 10;
+                SetConsoleColor(Color);
                 Console.WriteLine($"Equipped {Name}"); // Display the gear item's name in its specified color
                 Console.ResetColor();
             }

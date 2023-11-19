@@ -69,7 +69,7 @@ namespace Game
                 { 1, 0, 0, 0, 0, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0 },
                 { 1, 0, 1, 0, 1, 1, 1 },
-                { 1, 0, 1, 0, 0, 2, 1 },
+                { 1, 0, 1, 0, 0, 9, 1 },
                 { 1, 1, 1, 1, 1, 1, 1 }};
             }
             if (playerRoomRow == 1 && playerRoomCol == 2)
@@ -165,7 +165,7 @@ namespace Game
             if (playerRoomRow == 3 && playerRoomCol == 1)
             {
               
-                if (PlayerRow == 2 && PlayerColumn == 1 && scenarioActivationStatus[0] == false) 
+                if (PlayerRow == 2 && PlayerColumn == 1 && scenarioActivationStatus[0] == true)         //Tillfälligt true för att testa funktioner förbio
                 {
 
                     var scenario = Scenario.Scenario1();
@@ -173,7 +173,7 @@ namespace Game
                     scenarioActivationStatus[0] = true;
 
                 }
-                if (PlayerRow == 2 && PlayerColumn == 2 && scenarioActivationStatus[1] == false) 
+                if (PlayerRow == 2 && PlayerColumn == 2 && scenarioActivationStatus[1] == true)  //Tillfälligt true för att testa funktioner förbio
                 {
                    
 
@@ -262,7 +262,7 @@ namespace Game
                     }
                     else if (Layout[row, col] == 9)
                     {
-                        Console.Write("S "); // Merchant
+                        Console.Write("C "); // ChaosShrine
                     }
                     else
                     {
