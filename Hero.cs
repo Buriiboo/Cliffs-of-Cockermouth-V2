@@ -145,45 +145,73 @@ namespace Game
 
         private void CheckForLevelUp()  //Level upChecker
         {
-            while (Experience >= ExperienceRequiredForLevel(Level))
+            if (Experience >= ExperienceRequiredForLevel(Level))
             {
                 System.Console.WriteLine($"Current Experience: {Experience}, ExperienceRequiredForLevel({Level}): {ExperienceRequiredForLevel(Level)}");
                 LevelUp();
             }
         }
 
-        public void LevelUp()   //Level up funktion
+        public void LevelUp()
         {
-
-            int tmpHP = HP;
+            int tmpHP = MaxHP, tmpArmor = Armor, SkillPoints = 5;
             double tmpDamage = Damage;
-            int tmpArmor = Armor;
 
+            Console.Clear();
+            Console.WriteLine("Level up!");
 
-            int SkillPoints = 5;
-            while (SkillPoints!=0){
+            while (SkillPoints > 0)
+            {
+                Console.Clear();
+                Console.WriteLine("------------------------------------------------------------------------------------------");
+                System.Console.WriteLine($"Skillpoints remaining: {SkillPoints}");
+                System.Console.WriteLine("1. Increase HP by 5" );
+                System.Console.WriteLine($"                                  Increased by: {MaxHP - tmpHP}");
+                System.Console.WriteLine("2. Increase Damage by 2");
+                System.Console.WriteLine($"                                  Increased by: {Damage - tmpDamage}");
+                System.Console.WriteLine("3. Increase Armor by 1");
+                System.Console.WriteLine($"                                  Increased by: {Armor - tmpArmor}");
 
-               
-            // Each skill point increase HP by 5, Damage by 2 and armor by 1 and one can select how one wish to spend their skill points.
-            System.Console.WriteLine($"Skillpoints remaining:{SkillPoints}");
-            System.Console.WriteLine("What would you like to increase?");
-            System.Console.WriteLine("1.Increase HP by 5" + $"Increased by:{HP-tmpHP}");
-            System.Console.WriteLine("2.Increase Damage by 2" + $"Increased by:{Damage-tmpDamage}");
-            System.Console.WriteLine("3.Increase Armor by 1" + $"Increased by:{Armor- tmpArmor}");
-            int SkillpointChoice = int.Parse(Console.ReadLine()); 
-            if(SkillpointChoice==1){
-            HP += 5; SkillPoints--;
-            }
-            if(SkillpointChoice==2){
-            Damage += 2;SkillPoints--;
-            }
-            if(SkillpointChoice==3){
-            Armor += 1;SkillPoints--;
-            }
+                Console.WriteLine("\n------------------------------------------------------------------------------------------");
 
+                int SkillpointChoice;
+                if (int.TryParse(Console.ReadLine(), out SkillpointChoice) && SkillpointChoice >= 1 && SkillpointChoice <= 3)
+                {
+                    switch (SkillpointChoice)
+                    {
+                        case 1:
+                            MaxHP += 5;
+                            SkillPoints--;
+                            break;
+                        case 2:
+                            Damage += 2;
+                            SkillPoints--;
+                            break;
+                        case 3:
+                            Armor += 1;
+                            SkillPoints--;
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Enter a number between 1 and 3!");
+                }
+                if (SkillPoints == 0)
+                {
+                    
+                    break; // Exit the loop when SkillPoints becomes zero
+                }
             }
+            Console.WriteLine("--------Current hero stats-------");
+            Console.WriteLine($"MaxHP: {MaxHP}");
+            Console.WriteLine($"Damage: {Damage}");
+            Console.WriteLine($"Armor: {Armor}");
+            Console.WriteLine("Press any key");
+            Console.ReadKey();
 
         }
+
 
         private int ExperienceRequiredForLevel(int level)
         {
