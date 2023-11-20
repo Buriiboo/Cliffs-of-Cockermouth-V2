@@ -55,7 +55,7 @@ namespace Game
             switch(choice){
                 case "b":
                     ShowInventory();
-                    Console.WriteLine($"Choose an item for 5 affinity or {merchantInv.Count + 1} to exit");
+                    Console.WriteLine($"Choose a item for 5 affinity or {merchantInv.Count + 1} to exit");
                     if(int.TryParse(Console.ReadLine(), out int indexChoice) && indexChoice > 0 && indexChoice <= merchantInv.Count){
                         Item selectedItem = merchantInv[indexChoice - 1];
                         var existingItem = hero.Inventory().FirstOrDefault(item => item.Name == selectedItem.Name);
@@ -72,11 +72,11 @@ namespace Game
                     else if(indexChoice == merchantInv.Count + 1)
                         return;
                     else
-                        Console.WriteLine("Choose an valid option");
+                        Console.WriteLine("Choose a valid option");
                     break;
                     
                 case "s": 
-                    Console.WriteLine("What whould you like to sell?");
+                    Console.WriteLine("What do you like to sell?");
                     hero.ShowInventory();
                     int itemIndex = int.Parse(Console.ReadLine());
                     Consumable itemToSell = hero.HeroConsumables[itemIndex - 1];

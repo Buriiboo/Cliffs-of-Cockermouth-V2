@@ -8,16 +8,10 @@ using System.Reflection;
 
 namespace Game
 {
-
-
     public class GameLogic
     {
-
-
         public static void BattleEncounter(Hero hero, List<Minions> spawnedMinions)
         {
-
-        
             while (hero.HP > 0 && spawnedMinions.Any(minion=>minion.HP>0))
             {
                 Console.Clear();
@@ -31,8 +25,6 @@ namespace Game
                     {
                         if (minion is ICustomEffect customEffectMinion)
                         {
-
-                            
                             customEffectMinion.ApplyEffect(minion, hero);
                             string effectMessage = customEffectMinion.GetEffectMessage(minion); 
                             UI.ShowDamageMessage(effectMessage);        
@@ -42,7 +34,6 @@ namespace Game
                         UI.ShowDamageMessage($"{minion.Name} attacks Hero and deals {damageDealt} damage.");
                     }
                 }
-    
             }
 
 
@@ -61,7 +52,6 @@ namespace Game
 
         public static void SecretScenario(Hero hero)
         {
-      
                 System.Console.WriteLine("What is your answer?");
                 string answer = Console.ReadLine()?.ToLower();
                 if (answer == "melon")
@@ -70,15 +60,12 @@ namespace Game
                     hero.Affinity += 5;
                     System.Console.WriteLine($"New affinity: {hero.Affinity}!");
                 }
-                  
             Console.ReadKey();
-
         }
 
 
         public static void PlayerTurn(Hero hero, List<Minions> spawnedMinions)
         {
-            
             int choice = GetValidChoice(1, 6);
 
             switch(choice)
@@ -104,32 +91,28 @@ namespace Game
                     break;
 
                 case 4:
-                    
                     int abilityChoice = hero.SpellList(hero.Heroabilities);
                     int minionIndex3 = SelectMinionToAttack
                     (spawnedMinions);
                    
-
                     // Check if the selected minion index is within the bounds of the spawnedMinions list
                     if (minionIndex3 >= 0)
                     {
                         hero.Heroabilities[abilityChoice-1].UseAbility(spawnedMinions[minionIndex3]);
                     }
-                    
                     break;
+                    
                 case 5:
                     int itemChoice = hero.HandleBattleInventory(hero.HeroConsumables);
                     Consumable selectedItem = hero.HeroConsumables[itemChoice - 1];
 
-                    if(selectedItem is HealItem waterPouch){
+                    if(selectedItem is HealItem waterPouch)
                         waterPouch.UseItem(hero);
-                    }
+                    
                     else{
                         int minionIndex4 = SelectMinionToAttack(spawnedMinions);
                         if (minionIndex4 >= 0)
-                        {
                             hero.HeroConsumables[itemChoice - 1].UseItem(spawnedMinions[minionIndex4]);
-                        }
                     }
                     break;
 
@@ -151,7 +134,6 @@ namespace Game
 
         public static void EndRound(List<Minions> spawnedMinions, List<Minions> allMinions,Hero hero)
         {
-
             //Experience + restore minion
             int totalExperience = 0;
             foreach (var minion in spawnedMinions)
@@ -165,9 +147,8 @@ namespace Game
             
             int experienceGained = totalExperience;
    
-                hero.AddExperience(experienceGained);
+            hero.AddExperience(experienceGained);
          
-
             // Spawn new minions
             List<Minions> newMinions = Minions.SpawnMinion(allMinions, hero.Level, 3);
             spawnedMinions.AddRange(newMinions);
@@ -217,24 +198,25 @@ namespace Game
                         System.Console.WriteLine("Starting new game!");
                         Hero hero = Hero.CreateHero();
                         Thread.Sleep(1000);
-                        
                         runMain = false;
                         break;
+
                     case "2":
                         System.Console.WriteLine("Under construction!");
                         Thread.Sleep(1000);
                         //load game
                         break;
+
                     case "3":
                         System.Console.WriteLine("Under construction!");
                         Thread.Sleep(1000);
                         break;
+
                     case "4":
                         System.Console.WriteLine("Exiting Menu");
                         Thread.Sleep(1000);
                         runMain = false;
                         break;
-
                 }
             }
         }
