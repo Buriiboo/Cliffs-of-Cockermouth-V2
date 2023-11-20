@@ -154,16 +154,34 @@ namespace Game
 
         public void LevelUp()   //Level up funktion
         {
-            Level++;   
 
-            // Adjust attributes based on the leveling-up logic
-            HP += 50;
-            Damage += 10;
-            Armor += 2;
-            
+            int tmpHP = HP;
+            double tmpDamage = Damage;
+            int tmpArmor = Armor;
 
-            Console.WriteLine($"{Name} leveled up to level {Level}!");
-            Console.WriteLine($"HP: {HP}, Damage: {Damage}, Armor: {Armor}");      
+
+            int SkillPoints = 5;
+            while (SkillPoints!=0){
+
+               
+            // Each skill point increase HP by 5, Damage by 2 and armor by 1 and one can select how one wish to spend their skill points.
+            System.Console.WriteLine($"Skillpoints remaining:{SkillPoints}");
+            System.Console.WriteLine("What would you like to increase?");
+            System.Console.WriteLine("1.Increase HP by 5" + $"Increased by:{HP-tmpHP}");
+            System.Console.WriteLine("2.Increase Damage by 2" + $"Increased by:{Damage-tmpDamage}");
+            System.Console.WriteLine("3.Increase Armor by 1" + $"Increased by:{Armor- tmpArmor}");
+            int SkillpointChoice = int.Parse(Console.ReadLine()); 
+            if(SkillpointChoice==1){
+            HP += 5; SkillPoints--;
+            }
+            if(SkillpointChoice==2){
+            Damage += 2;SkillPoints--;
+            }
+            if(SkillpointChoice==3){
+            Armor += 1;SkillPoints--;
+            }
+
+            }
 
         }
 
