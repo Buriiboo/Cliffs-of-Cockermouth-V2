@@ -297,9 +297,9 @@ namespace Game
                     {
                         UI.ShowRollowingMessage("The path of the Rightous rewards..");              //Unique Affinity encounters
                         Console.ReadKey();
-                        List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, hero.Level, 3);
+                        List<Minions> spawnedMinions = Minions.SpawnMinion(allMinions, hero.Level, 3); //tar listan minions och drar 3 utifrån vad för level på hero
                         GameLogic.BattleEncounter(hero, Minions.SpawnMinion(allMinions, hero.Level, 3));
-                        GameLogic.EndRound(spawnedMinions, allMinions, hero);
+                        GameLogic.EndRound(spawnedMinions, allMinions, hero); // visar hur mycket xp man får vilken level man är och återupplivar minions
                         hero.Affinity += 2;
 
                     }
@@ -316,8 +316,8 @@ namespace Game
             if(playerRoomRow == 3 && playerRoomCol == 3){
                 if(PlayerRow == 5 && PlayerColumn == 4 || PlayerRow == 4 && PlayerColumn == 5){
                     Merchant merchant = Character.GetDefaultCharacters().OfType<Merchant>().FirstOrDefault();
-                    var scenario = Scenario.Scenario5(hero, merchant);
-                    scenario.Present(hero);
+                    var scenario = Scenario.Scenario5(hero, merchant); //skapar ett encounter med merchant
+                    scenario.Present(hero); //startar set senario
                   
                 }
             }
