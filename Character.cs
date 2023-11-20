@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
+//Character är Föräldraklassen till Minions,Friendlies och Hero
+
 namespace Game
 {
     public class Character

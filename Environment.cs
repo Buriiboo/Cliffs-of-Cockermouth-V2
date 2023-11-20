@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+//GameEnvironment är där spelet befinner sig, den har kontroll över rörelsen i rummen, hur man transitionar från ett rumm til ett annat och kan också få scenarios tillagda som sker direkt när man kommer in i ett rum.
+
 namespace Game
 {
     public class GameEnvironment

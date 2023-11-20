@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 
+//Item klassen använder två olika sorts items. Consumable och Gear. Gear är item som kan man equippa medans Consumable är något man använder med ett set amounts i battle t.ex
+
 namespace Game
 {
     public abstract class Item
@@ -80,8 +82,8 @@ namespace Game
                 case "blue":
                     Console.ForegroundColor = ConsoleColor.Blue;
                     break;
-                case "Magenta":
-                    Console.ForegroundColor = ConsoleColor.Magenta;
+                case "Purple":
+                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     break;
                 case "cyan":
                     Console.ForegroundColor = ConsoleColor.Cyan;

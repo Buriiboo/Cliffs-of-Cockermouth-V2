@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+//Merchant klassen som har ett inventory man kan få saker från under rätt föurtsättningar
+
 namespace Game
 {
     public class Merchant : Character

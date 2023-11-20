@@ -4,7 +4,7 @@ using System.Dynamic;
 using System.Linq;
 using Microsoft.VisualBasic;
 
-
+//Kör bara main loop och initierar saker.
 
 namespace Game
 {
@@ -14,7 +14,7 @@ class Program
     {
             Console.Write("Choose a name: ");
             string? name = Console.ReadLine();
-            Hero hero = new Hero(name, 500,50,3,50,1,1);
+            Hero hero = new Hero(name, 250,50,3,50,1,1);
 
 
             hero.Heroabilities.AddRange(new Abilities[]                                                  //Skapa startobjekt

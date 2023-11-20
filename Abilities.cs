@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 namespace Game;
 
+// Här inne skapas abilities, de använder bara attributet Power och resten utförs i en metod och det är metoden som är central för varje spell.
+
 public abstract class Abilities                             //Abstract Class för vi använder inte detta.
 {
     public string Name { get; set; }
@@ -148,3 +150,4 @@ public class TouchOfDeath : Abilities
 
 
     }
+

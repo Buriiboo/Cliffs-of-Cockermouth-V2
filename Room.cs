@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
+//Room innehåller innehållet av vad som finns i room och vart i rummet saker sker samt conditions när och om saker sker, den lägger också ut en layout på rummet så att man kan navigera på den designerade ytan.
+
 namespace Game
 {
     public class Room

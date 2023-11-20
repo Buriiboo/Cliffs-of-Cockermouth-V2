@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
+
+//Scenario är ett dictionary for att bygga scenarios som följer en denna formlulan 1. Beskrivning på scenario vid första anblick 2.val för spelaren för hur den vill bemöta situationen 3.Reaktionen från objektet som interagerades med och 4. Konsekvenserna av sagd beslut 5. ExitDialog.
+
 namespace Game
 {
     public class Scenario

@@ -6,6 +6,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 
 
+//Den största och mest välutvecklade klassen vi har där Hero sitter i fokus, här så finns allt som påverkar hjälten som behöver finnas i hero, men tyvärr också kod som kanske skulle funnits i Items eller GameLogic också då det bara blev lättare att sätta det nära.
+
 namespace Game
 {
     public class Hero : Character

@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+//Minionklassen håller alla fiender och de är ganska många och omtumlande, borde definitivt delat upp dem i sina egna klasser
+
+
+
+
 
 /*<<<<<Hur man lägger till en Minion med Secondary Effect>>>>>>>>>
 Steg 1. Skapa Layouten för minionen precis som vilken annan Minion som helst.

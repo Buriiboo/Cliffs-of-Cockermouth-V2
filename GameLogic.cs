@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
 
+//Spellogiken som håller primärt battle logik, samt encounter logik, endbattleencounter logik och battles overlag.
+
 namespace Game
 {
 
@@ -131,14 +133,6 @@ namespace Game
                     }
                     break;
 
-                    //Steg 1.  Öppna Listan med Consumables.
-                    //Steg 2.  Välja item från Consumable listan.
-                    //Steg 3.  Ta indexet från ConsumableListan och lägg in i en Variebel. 
-                    //int ConsumableChoice = HandelInventoryBattles()
-                    //Steg 4.  Välj Fiende att attackera. Ta indexet från Från Minions och lägg in i en Variebel. 
-                    //int minionIndex4 = SelectMinionToAttack(spawnedMinions);
-                    //Steg 5.  Använd Consumable metoden för Indexet i Spells på Indexet för Minons.
-                    //hero.inventory[ConsumableChoice-1].UseItem(spawnedMinions[minionIndex3]);
 
             }
 
