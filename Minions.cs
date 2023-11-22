@@ -241,7 +241,7 @@ namespace Game
         {
             if (HP == MaxHP) // Check if the MurlockWorker's current HP is at maxHP
             {
-                return $"{minion.Name} Throws a dagger at the hero for 25 Damage!.";
+                return $"{minion.Name} Throws a dagger at the hero for 5 Damage!.";
             }
             else
             {
@@ -253,7 +253,7 @@ namespace Game
         {
             if (HP == MaxHP) // Check if the MurlockWorker's current HP is at maxHP
             {
-                ThrowSpearMurlock();
+                hero.HP-= ThrowSpearMurlock();
                 // Implement the custom effect logic here
                 // You can access the properties of `minion` and `hero` to apply the effect
             }
@@ -263,7 +263,7 @@ namespace Game
         {
             if (HP == MaxHP)
             {
-                int damageDealt = 5;
+                int damageDealt = 60;
                 return damageDealt;
             }
             else
@@ -390,23 +390,15 @@ namespace Game
         public Undead(int hp, double damage, int armor, int affinity, int minionLevel, int experienceGiven)
             : base(hp, damage, armor, affinity, minionLevel, experienceGiven)
         {
-            // Any additional initializations specific to Murlock can be done here
+            hp = 90;
+            damage = 15;
+            armor = 0;
+            affinity = 2;
+            minionLevel = 1;
+            experienceGiven = 5;
+
         }
 
-
-        public static UndeadWorker CreateWorker()
-        {
-          
-            int hp = 35;
-            double damage = 10;
-            int armor = 0;
-            int affinity = 2;
-            int minionLevel = 1;
-            int experienceGiven = 5;
-
-          
-            return new UndeadWorker(hp, damage, armor, affinity, minionLevel, experienceGiven);
-        }
 
         public static UndeadBruiser CreateBruiser()
         {
